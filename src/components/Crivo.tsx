@@ -47,7 +47,7 @@ export function Crivo() {
   const [filtro, setFiltro] = useState<LenteId | "todas">("todas");
   const [historico, setHistorico] = useState<AnaliseLocal[]>([]);
   const [erro, setErro] = useState<string | null>(null);
-  const [carregando, setCarregando] = useState(true);
+  const [carregando, setCarregando] = useState(false);
   const [arrastando, setArrastando] = useState(false);
   const [menuAberto, setMenuAberto] = useState(false);
   const execucao = useRef(0);
@@ -141,11 +141,11 @@ export function Crivo() {
     history.replaceState(null, "", "/");
   }, [cancelarGeracao]);
 
-  // Primeira visita: abre um exemplo (ou o indicado na URL), como um arquivo de demonstração.
+  // Abre no upload. Um link com ?exemplo=<id> continua abrindo direto naquele exemplo.
   useEffect(() => {
     setHistorico(lerHistorico());
-    const pedido = new URLSearchParams(location.search).get("exemplo");
-    abrirExemplo(EXEMPLOS.find((e) => e.id === pedido) ?? EXEMPLOS[0]);
+    const pedido = EXEMPLOS.find((e) => e.id === new URLSearchParams(location.search).get("exemplo"));
+    if (pedido) abrirExemplo(pedido);
   }, [abrirExemplo]);
 
   const receberArquivo = useCallback(async (arquivo: File | undefined | null) => {
