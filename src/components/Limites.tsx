@@ -1,7 +1,7 @@
 import { LENTES_INFO } from "@/lib/lentes";
 import { LENTES, type LenteId, type RespostaLente } from "@/lib/schema";
 import { CheckCircleIcon, CircleHalfIcon, XCircleIcon } from "@phosphor-icons/react";
-import { IconeLente } from "./ui";
+import { corLente, IconeLente } from "./ui";
 
 export function Limites({ respostas }: { respostas: Partial<Record<LenteId, RespostaLente>> }) {
   const grupos = LENTES.map((l) => ({ l, itens: respostas[l]?.resultado.fora_do_alcance ?? [] })).filter(
@@ -19,8 +19,8 @@ export function Limites({ respostas }: { respostas: Partial<Record<LenteId, Resp
         ) : (
           <div className="mt-4 space-y-6">
             {grupos.map(({ l, itens }) => (
-              <div key={l}>
-                <p className="flex items-center gap-1.5 text-[13px] font-medium text-tinta">
+              <div key={l} className="border-l-2 pl-3" style={{ borderColor: corLente(l).cor }}>
+                <p className="flex items-center gap-1.5 text-[13px] font-semibold" style={{ color: corLente(l).cor }}>
                   <IconeLente lente={l} size={15} />
                   {LENTES_INFO[l].nome}
                 </p>

@@ -27,7 +27,7 @@ import {
   type EstadoLente,
   type EstadoSintese,
 } from "./tipos";
-import { IconeLente } from "./ui";
+import { corLente, IconeLente } from "./ui";
 
 function Ajuda() {
   return (
@@ -260,12 +260,10 @@ export function Inspetor(props: {
             const s = lentes[l];
             return (
               <li key={l} className="flex min-w-0 items-center gap-2 text-[12px]">
-                <IconeLente
-                  lente={l}
-                  size={15}
-                  className={s.estado === "rodando" ? "pulso shrink-0 text-acento" : s.estado === "erro" ? "shrink-0 text-erro" : "shrink-0 text-tinta-3"}
-                />
-                <span className="truncate text-tinta-2">{LENTES_INFO[l].nome.split(" ")[0]}</span>
+                <IconeLente lente={l} size={15} colorido className={`shrink-0 ${s.estado === "rodando" ? "pulso" : ""}`} />
+                <span className="truncate font-medium" style={{ color: corLente(l).cor }}>
+                  {LENTES_INFO[l].nome.split(" ")[0]}
+                </span>
                 <span className="num ml-auto shrink-0 text-tinta-3">
                   {s.estado === "rodando" && formatarSeg(agora - (s.inicio ?? agora))}
                   {s.estado === "ok" && s.resp!.resultado.achados.length}
@@ -326,20 +324,25 @@ export function Inspetor(props: {
         {aba === "achados" && (
           <div>
             <div role="group" aria-label="Filtrar por lente" className="flex flex-wrap gap-1">
-              {(["todas", ...LENTES] as const).map((f) => (
-                <button
-                  key={f}
-                  type="button"
-                  aria-pressed={props.filtro === f}
-                  onClick={() => props.onFiltro(f)}
-                  className={`inline-flex items-center gap-1 rounded-controle px-2 py-1 text-[12px] transition-colors ${
-                    props.filtro === f ? "bg-tinta font-medium text-fundo" : "bg-superficie-2 text-tinta-2 hover:text-tinta"
-                  }`}
-                >
-                  {f !== "todas" && <IconeLente lente={f} size={13} />}
-                  {f === "todas" ? "Todas" : LENTES_INFO[f].nome.split(" ")[0]}
-                </button>
-              ))}
+              {(["todas", ...LENTES] as const).map((f) => {
+                const on = props.filtro === f;
+                const c = f === "todas" ? null : corLente(f);
+                return (
+                  <button
+                    key={f}
+                    type="button"
+                    aria-pressed={on}
+                    onClick={() => props.onFiltro(f)}
+                    className={`inline-flex items-center gap-1 rounded-controle px-2 py-1 text-[12px] font-medium transition-colors ${
+                      on && !c ? "bg-tinta text-fundo" : !c ? "bg-superficie-2 text-tinta-2 hover:text-tinta" : ""
+                    }`}
+                    style={c ? (on ? { background: c.cor, color: c.sobre } : { background: c.fundo, color: c.cor }) : undefined}
+                  >
+                    {f !== "todas" && <IconeLente lente={f} size={13} />}
+                    {f === "todas" ? "Todas" : LENTES_INFO[f].nome.split(" ")[0]}
+                  </button>
+                );
+              })}
             </div>
 
             {comErro.length > 0 && (

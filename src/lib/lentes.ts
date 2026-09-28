@@ -5,7 +5,6 @@ export type Lente = {
   nome: string;
   curto: string;
   descricao: string;
-  cor: string;
   foco: string;
 };
 
@@ -15,7 +14,6 @@ export const LENTES_INFO: Record<LenteId, Lente> = {
     nome: "Usabilidade",
     curto: "USA",
     descricao: "As 10 heurísticas de Nielsen: status, controle, consistência, prevenção de erro, reconhecimento.",
-    cor: "#2F5BEA",
     foco: `Avalie a tela com as 10 heurísticas de Nielsen. Procure: falta de status do sistema, ações destrutivas sem saída,
 inconsistência de padrões, ausência de prevenção de erro, dependência de memória em vez de reconhecimento,
 mensagens de erro vagas, rótulos ambíguos e controles que não parecem clicáveis (ou parecem e não são).`,
@@ -25,7 +23,6 @@ mensagens de erro vagas, rótulos ambíguos e controles que não parecem clicáv
     nome: "Acessibilidade",
     curto: "A11Y",
     descricao: "WCAG 2.2 AA: contraste, alvo de toque, cor como único sinal, legibilidade.",
-    cor: "#0E8A5F",
     foco: `Avalie a tela contra a WCAG 2.2 nível AA, no que é observável num print. Procure: contraste de texto abaixo de 4.5:1
 (3:1 para texto grande), alvos de toque menores que 24×24px, informação transmitida só por cor, texto pequeno demais,
 campos sem rótulo visível (placeholder no lugar de label), ícones sem texto e foco/estado não distinguível.
@@ -37,7 +34,6 @@ envolver justamente o texto problemático (bem justa, sem pegar outros elementos
     nome: "Hierarquia & Texto",
     curto: "HIER",
     descricao: "Caminho do olhar, peso visual, clareza da ação principal e UX writing.",
-    cor: "#B4541A",
     foco: `Avalie hierarquia visual e UX writing. Procure: ação principal que não é a mais evidente, elementos secundários
 competindo por atenção, excesso de pesos e tamanhos, agrupamento e espaçamento que confundem, alinhamentos quebrados,
 textos com jargão, voz passiva, termos técnicos, botões com verbos genéricos ("OK", "Enviar") e microcopy que não
@@ -48,7 +44,6 @@ responde à dúvida da pessoa naquele momento.`,
     nome: "Produto & Conversão",
     curto: "PROD",
     descricao: "Clareza de valor, atrito, confiança e onde a pessoa desiste.",
-    cor: "#8A3FD1",
     foco: `Avalie como um product manager olhando o funil. Pergunte: a pessoa entende o que ganha nesta tela? Onde está o atrito
 desnecessário (campos, passos, decisões)? O que gera desconfiança (custos escondidos, falta de prova, termos confusos)?
 Qual o ponto provável de abandono? Para cada achado, deixe claro no campo "problema" qual comportamento de negócio ele

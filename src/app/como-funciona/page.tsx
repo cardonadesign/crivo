@@ -22,10 +22,10 @@ export const metadata: Metadata = {
 };
 
 const LENTES = [
-  { Icone: CursorClickIcon, nome: "Usabilidade", crit: "Heurísticas de Nielsen" },
-  { Icone: EyeIcon, nome: "Acessibilidade", crit: "WCAG 2.2 AA" },
-  { Icone: TextAaIcon, nome: "Hierarquia & Texto", crit: "Peso visual e UX writing" },
-  { Icone: ChartLineUpIcon, nome: "Produto & Conversão", crit: "Atrito, valor e confiança" },
+  { id: "usabilidade", Icone: CursorClickIcon, nome: "Usabilidade", crit: "Heurísticas de Nielsen" },
+  { id: "acessibilidade", Icone: EyeIcon, nome: "Acessibilidade", crit: "WCAG 2.2 AA" },
+  { id: "hierarquia", Icone: TextAaIcon, nome: "Hierarquia & Texto", crit: "Peso visual e UX writing" },
+  { id: "produto", Icone: ChartLineUpIcon, nome: "Produto & Conversão", crit: "Atrito, valor e confiança" },
 ];
 
 function Etapa({ Icone, titulo, texto }: { Icone: typeof BrowserIcon; titulo: string; texto: string }) {
@@ -79,9 +79,9 @@ export default function ComoFunciona() {
                 />
                 <Seta />
                 <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-                  {LENTES.map(({ Icone, nome, crit }) => (
+                  {LENTES.map(({ id, Icone, nome, crit }) => (
                     <div key={nome} className="rounded-painel border border-linha bg-superficie p-3">
-                      <p className="flex items-center gap-1.5 text-[13px] font-semibold">
+                      <p className="flex items-center gap-1.5 text-[13px] font-semibold" style={{ color: `var(--lente-${id})` }}>
                         <Icone size={16} aria-hidden />
                         {nome}
                       </p>

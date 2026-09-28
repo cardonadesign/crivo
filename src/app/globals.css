@@ -22,14 +22,16 @@
   --ok-fundo: #e8f4ed;
   --erro: #b42318;
   --erro-fundo: #fdecea;
-  --sev-critica: #9f2f2d;
-  --sev-critica-fundo: #fdebec;
-  --sev-alta: #8a5300;
-  --sev-alta-fundo: #fbf1dc;
-  --sev-media: #1f5f8f;
-  --sev-media-fundo: #e5f1fb;
-  --sev-baixa: #52525b;
-  --sev-baixa-fundo: #f0f0f2;
+  /* cor categórica por lente: a única cor que codifica categoria */
+  --lente-usabilidade: #0e7490;
+  --lente-usabilidade-fundo: #e6f3f6;
+  --lente-acessibilidade: #c2410c;
+  --lente-acessibilidade-fundo: #fbede6;
+  --lente-hierarquia: #be185d;
+  --lente-hierarquia-fundo: #fae8f0;
+  --lente-produto: #7c3aed;
+  --lente-produto-fundo: #f1ebfd;
+  --sobre-lente: #ffffff;
   --sombra: 0 1px 2px rgb(17 17 19 / 0.04), 0 8px 24px -12px rgb(17 17 19 / 0.12);
   color-scheme: light;
 }
@@ -52,14 +54,15 @@
     --ok-fundo: #112a1c;
     --erro: #f97066;
     --erro-fundo: #2d1513;
-    --sev-critica: #f5a19c;
-    --sev-critica-fundo: #2d1614;
-    --sev-alta: #e8b660;
-    --sev-alta-fundo: #2a2010;
-    --sev-media: #8cc3ee;
-    --sev-media-fundo: #13222f;
-    --sev-baixa: #b4b4bd;
-    --sev-baixa-fundo: #1f1f24;
+    --lente-usabilidade: #5ec4d6;
+    --lente-usabilidade-fundo: #10262b;
+    --lente-acessibilidade: #f4a06e;
+    --lente-acessibilidade-fundo: #2b1a12;
+    --lente-hierarquia: #f07aae;
+    --lente-hierarquia-fundo: #2b1420;
+    --lente-produto: #b69af7;
+    --lente-produto-fundo: #1e1734;
+    --sobre-lente: #0c0c0e;
     --sombra: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -12px rgb(0 0 0 / 0.6);
     color-scheme: dark;
   }

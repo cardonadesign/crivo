@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import type { AchadoNumerado } from "./tipos";
+import { corLente, estiloPin } from "./ui";
 
 export function Visor(props: {
   src: string;
@@ -43,13 +44,14 @@ export function Visor(props: {
         {/* foco: escurece o resto e recorta a região do achado ativo */}
         {selecionado && (
           <div
-            className="pointer-events-none absolute rounded-[3px] outline-2 outline-acento transition-all duration-150"
+            className="pointer-events-none absolute rounded-[3px] outline-2 transition-all duration-150"
             style={{
               left: pct(selecionado.regiao.x, largura),
               top: pct(selecionado.regiao.y, altura),
               width: pct(selecionado.regiao.largura, largura),
               height: pct(selecionado.regiao.altura, altura),
               outlineStyle: "solid",
+              outlineColor: corLente(selecionado.lente).cor,
               boxShadow: "0 0 0 9999px rgb(12 12 14 / 0.38)",
             }}
           />
@@ -57,7 +59,6 @@ export function Visor(props: {
 
         {achados.map((a, i) => {
           const on = ativo === a.n;
-          const contestado = a.verificacao.status === "nao_confirmado";
           const p = pins.get(a.n)!;
           return (
             <motion.button
@@ -72,14 +73,10 @@ export function Visor(props: {
               onFocus={() => props.onAtivar?.(a.n)}
               onBlur={() => props.onAtivar?.(null)}
               onClick={() => props.onSelecionar?.(a.n)}
-              className={`num absolute z-10 -ml-2.5 -mt-2.5 grid h-5 w-5 place-items-center rounded-full text-[10px] font-semibold ring-2 ring-superficie sm:-ml-3 sm:-mt-3 sm:h-6 sm:w-6 sm:text-[11px] ${
-                on
-                  ? "bg-acento text-sobre-acento"
-                  : contestado
-                    ? "border border-tinta-3 bg-superficie text-tinta-3"
-                    : "bg-tinta text-fundo"
+              className={`num absolute -ml-2.5 -mt-2.5 grid h-5 w-5 place-items-center rounded-full text-[10px] font-semibold sm:-ml-3 sm:-mt-3 sm:h-6 sm:w-6 sm:text-[11px] ${
+                on ? "z-20" : "z-10"
               }`}
-              style={{ left: pct(p.x, largura), top: pct(p.y, altura) }}
+              style={{ left: pct(p.x, largura), top: pct(p.y, altura), ...estiloPin(a, on) }}
             >
               {a.n}
             </motion.button>

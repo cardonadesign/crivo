@@ -1,9 +1,10 @@
 "use client";
 
-import type { Sintese } from "@/lib/schema";
-import { UsersThreeIcon, WarningCircleIcon } from "@phosphor-icons/react";
+import { LENTES, type Sintese } from "@/lib/schema";
+import { WarningCircleIcon } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
 import type { AchadoNumerado } from "./tipos";
+import { estiloPin, IconeLente } from "./ui";
 
 const NIVEL = { baixo: 0, medio: 1, alto: 2 } as const;
 const ROTULO = { baixo: "baixo", medio: "médio", alto: "alto" } as const;
@@ -19,7 +20,6 @@ function PinMini({
   onAtivar: (n: number | null) => void;
   onClick?: () => void;
 }) {
-  const contestado = a.verificacao.status === "nao_confirmado";
   return (
     <button
       type="button"
@@ -30,8 +30,9 @@ function PinMini({
       onClick={onClick}
       aria-label={`Achado ${a.n}: ${a.titulo}`}
       className={`num grid h-5 w-5 place-items-center rounded-full text-[10px] font-semibold transition-transform ${
-        ativo ? "scale-110 bg-acento text-sobre-acento" : contestado ? "border border-tinta-3 text-tinta-3" : "bg-tinta text-fundo"
+        ativo ? "scale-110" : ""
       }`}
+      style={estiloPin(a, ativo)}
     >
       {a.n}
     </button>
@@ -148,7 +149,8 @@ export function PainelSintese(props: {
             const relacionados = p.ids
               .map((id) => porN.get(id.replace(/\D/g, "")))
               .filter(Boolean) as AchadoNumerado[];
-            const lentes = new Set(relacionados.map((a) => a.lente)).size;
+            const lentesEnvolvidas = LENTES.filter((l) => relacionados.some((a) => a.lente === l));
+            const lentes = lentesEnvolvidas.length;
             return (
               <motion.li
                 key={i}
@@ -175,8 +177,12 @@ export function PainelSintese(props: {
                       ))}
                     </span>
                     {lentes > 1 && (
-                      <span className="inline-flex items-center gap-1 font-medium text-tinta-2">
-                        <UsersThreeIcon size={14} aria-hidden />
+                      <span className="inline-flex items-center gap-1.5 font-medium text-tinta-2">
+                        <span className="inline-flex items-center gap-0.5">
+                          {lentesEnvolvidas.map((l) => (
+                            <IconeLente key={l} lente={l} size={14} colorido />
+                          ))}
+                        </span>
                         Apontado por {lentes} de 4 lentes
                       </span>
                     )}

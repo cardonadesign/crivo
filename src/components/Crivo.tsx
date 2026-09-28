@@ -329,6 +329,9 @@ export function Crivo() {
           <Canvas
             imagem={imagem}
             achados={visiveis}
+            todos={achados}
+            filtro={filtro}
+            onFiltro={setFiltro}
             ativo={ativo}
             onAtivar={setAtivo}
             onSelecionar={irPara}

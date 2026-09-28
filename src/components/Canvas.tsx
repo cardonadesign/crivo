@@ -1,9 +1,12 @@
 "use client";
 
 import type { ImagemPreparada } from "@/lib/imagem";
+import { LENTES_INFO } from "@/lib/lentes";
+import { LENTES, type LenteId } from "@/lib/schema";
 import { ImageSquareIcon, UploadSimpleIcon } from "@phosphor-icons/react";
 import { useRef } from "react";
 import { BOTAO, type AchadoNumerado } from "./tipos";
+import { corLente, IconeLente } from "./ui";
 import { Visor } from "./Visor";
 
 function EstadoVazio({ erro, onArquivo }: { erro: string | null; onArquivo: (f: File | null | undefined) => void }) {
@@ -40,9 +43,49 @@ function EstadoVazio({ erro, onArquivo }: { erro: string | null; onArquivo: (f: 
   );
 }
 
+/** Legenda de cores das lentes, com contagem. Clicar filtra imagem e lista juntas. */
+function Legenda(props: {
+  todos: AchadoNumerado[];
+  filtro: LenteId | "todas";
+  onFiltro: (f: LenteId | "todas") => void;
+}) {
+  return (
+    <div role="group" aria-label="Filtrar por lente" className="mt-3 flex flex-wrap items-center gap-1.5">
+      {LENTES.map((l) => {
+        const n = props.todos.filter((a) => a.lente === l).length;
+        if (n === 0) return null;
+        const c = corLente(l);
+        const on = props.filtro === l;
+        const apagado = props.filtro !== "todas" && !on;
+        return (
+          <button
+            key={l}
+            type="button"
+            aria-pressed={on}
+            onClick={() => props.onFiltro(on ? "todas" : l)}
+            className="inline-flex items-center gap-1.5 rounded-controle px-2 py-1 text-[12px] font-medium transition-opacity"
+            style={{
+              background: on ? c.cor : c.fundo,
+              color: on ? c.sobre : c.cor,
+              opacity: apagado ? 0.5 : 1,
+            }}
+          >
+            <IconeLente lente={l} size={13} />
+            {LENTES_INFO[l].nome.split(" ")[0]}
+            <span className="num opacity-80">{n}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 export function Canvas(props: {
   imagem: ImagemPreparada | null;
   achados: AchadoNumerado[];
+  todos: AchadoNumerado[];
+  filtro: LenteId | "todas";
+  onFiltro: (f: LenteId | "todas") => void;
   ativo: number | null;
   onAtivar: (n: number | null) => void;
   onSelecionar: (n: number) => void;
@@ -61,7 +104,7 @@ export function Canvas(props: {
   }
   if (!imagem) return <EstadoVazio erro={props.erro} onArquivo={props.onArquivo} />;
 
-  const medidos = achados.filter((a) => a.verificacao.status === "confirmado" || a.verificacao.status === "nao_confirmado");
+  const medidos = props.todos.filter((a) => a.verificacao.status === "confirmado" || a.verificacao.status === "nao_confirmado");
   const confirmados = medidos.filter((a) => a.verificacao.status === "confirmado").length;
   const contestados = medidos.length - confirmados;
   // Cabe na altura da área quando possível; telas altas (mobile) rolam.
@@ -79,6 +122,7 @@ export function Canvas(props: {
           onAtivar={props.onAtivar}
           onSelecionar={props.onSelecionar}
         />
+        {props.todos.length > 0 && <Legenda todos={props.todos} filtro={props.filtro} onFiltro={props.onFiltro} />}
         {medidos.length > 0 && (
           <p className="mt-3 text-[12px] leading-relaxed text-tinta-2">
             <span className="font-medium text-tinta">Verificação por pixel.</span> {medidos.length}{" "}
