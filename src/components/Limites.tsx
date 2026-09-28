@@ -17,7 +17,7 @@ export function Limites({ respostas }: { respostas: Partial<Record<LenteId, Resp
         {grupos.length === 0 ? (
           <p className="mt-2 text-tinta-3">Os limites declarados aparecem aqui quando as lentes terminarem.</p>
         ) : (
-          <div className="mt-4 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+          <div className="mt-4 space-y-6">
             {grupos.map(({ l, itens }) => (
               <div key={l}>
                 <p className="flex items-center gap-1.5 text-[13px] font-medium text-tinta">
@@ -39,21 +39,21 @@ export function Limites({ respostas }: { respostas: Partial<Record<LenteId, Resp
         <h3 id="titulo-selos" className="text-[15px] font-semibold text-tinta">
           Como ler os selos
         </h3>
-        <dl className="mt-4 grid gap-x-4 gap-y-3 sm:grid-cols-[11rem_minmax(0,1fr)]">
+        <dl className="mt-4 space-y-1">
           <dt className="flex items-center gap-1.5 font-medium text-ok">
             <CheckCircleIcon size={16} weight="fill" aria-hidden />
             Confirmado
           </dt>
-          <dd>A IA afirmou contraste insuficiente e a medição nos pixels comprovou (abaixo de 4,5:1, ou 3:1 para texto grande).</dd>
+          <dd className="pb-3 last:pb-0">A IA afirmou contraste insuficiente e a medição nos pixels comprovou (abaixo de 4,5:1, ou 3:1 para texto grande).</dd>
           <dt className="flex items-center gap-1.5 font-medium text-erro">
             <XCircleIcon size={16} weight="fill" aria-hidden />A IA errou
           </dt>
-          <dd>A medição contradisse a afirmação. O achado continua visível, riscado, e perde peso na priorização.</dd>
+          <dd className="pb-3 last:pb-0">A medição contradisse a afirmação. O achado continua visível, riscado, e perde peso na priorização.</dd>
           <dt className="flex items-center gap-1.5 font-medium text-tinta">
             <CircleHalfIcon size={16} aria-hidden />
             Julgamento da IA
           </dt>
-          <dd>Não há como medir só com um print. Vale como hipótese, com a confiança que o próprio modelo declarou.</dd>
+          <dd className="pb-3 last:pb-0">Não há como medir só com um print. Vale como hipótese, com a confiança que o próprio modelo declarou.</dd>
         </dl>
       </section>
 
