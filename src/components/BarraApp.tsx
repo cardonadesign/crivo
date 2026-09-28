@@ -1,7 +1,7 @@
 "use client";
 
 import { SITE } from "@/lib/site";
-import { BookOpenTextIcon, GithubLogoIcon, ListIcon, PlusIcon, XIcon } from "@phosphor-icons/react";
+import { BookOpenTextIcon, GithubLogoIcon, ListIcon, MapTrifoldIcon, PlusIcon, XIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { Logo } from "./Marca";
 import { SeletorTema } from "./SeletorTema";
@@ -43,7 +43,11 @@ export function BarraApp(props: {
         <span className="mr-1.5">
           <SeletorTema />
         </span>
-        <Link href="/como-funciona" className={icone}>
+        <Link href="/roadmap" className={icone} aria-label="Roadmap">
+          <MapTrifoldIcon size={16} aria-hidden />
+          <span className="hidden sm:inline">Roadmap</span>
+        </Link>
+        <Link href="/como-funciona" className={icone} aria-label="Como funciona">
           <BookOpenTextIcon size={16} aria-hidden />
           <span className="hidden sm:inline">Como funciona</span>
         </Link>

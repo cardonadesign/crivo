@@ -1,7 +1,7 @@
 "use client";
 
 import { SITE } from "@/lib/site";
-import { GithubLogoIcon } from "@phosphor-icons/react";
+import { BookOpenTextIcon, GithubLogoIcon, MapTrifoldIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "./Marca";
@@ -10,9 +10,13 @@ import { SeletorTema } from "./SeletorTema";
 export function Cabecalho() {
   const rota = usePathname();
   const link = (ativo: boolean) =>
-    `rounded-controle px-3 py-1.5 transition-colors ${
-      ativo ? "text-tinta" : "text-tinta-2 hover:text-tinta"
+    `inline-flex items-center gap-1.5 rounded-controle px-2 py-1.5 transition-colors sm:px-3 ${
+      ativo ? "font-medium text-tinta" : "text-tinta-2 hover:text-tinta"
     }`;
+  const paginas = [
+    { href: "/roadmap", rotulo: "Roadmap", Icone: MapTrifoldIcon },
+    { href: "/como-funciona", rotulo: "Como funciona", Icone: BookOpenTextIcon },
+  ];
 
   return (
     <header className="sticky top-0 z-30 border-b border-linha bg-fundo/85 backdrop-blur-md">
@@ -24,16 +28,21 @@ export function Cabecalho() {
           <span className="mr-1">
             <SeletorTema />
           </span>
-          <Link
-            href="/como-funciona"
-            className={link(rota === "/como-funciona")}
-            aria-current={rota === "/como-funciona" ? "page" : undefined}
-          >
-            Como funciona
-          </Link>
-          <a href={SITE.repo} target="_blank" rel="noreferrer" className={`${link(false)} inline-flex items-center gap-1.5`}>
+          {paginas.map(({ href, rotulo, Icone }) => (
+            <Link
+              key={href}
+              href={href}
+              className={link(rota === href)}
+              aria-current={rota === href ? "page" : undefined}
+              aria-label={rotulo}
+            >
+              <Icone size={16} aria-hidden />
+              <span className="hidden sm:inline">{rotulo}</span>
+            </Link>
+          ))}
+          <a href={SITE.repo} target="_blank" rel="noreferrer" className={link(false)} aria-label="Código no GitHub">
             <GithubLogoIcon size={16} aria-hidden />
-            Código
+            <span className="hidden sm:inline">Código</span>
           </a>
         </nav>
       </div>

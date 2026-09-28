@@ -96,11 +96,13 @@ Variáveis opcionais: `CRIVO_MODEL` (padrão `claude-opus-5`) e `CRIVO_EFFORT` (
 - Texto sobre foto ou gradiente confunde a extração de cores.
 - Um print é um instante. O Crivo é um ponto de partida para a conversa de design, não substitui teste com pessoas.
 
-## Próximos passos
+## Roadmap
 
-- Medir tamanho de alvo de toque e tamanho de fonte pelos pixels, estendendo a verificação além do contraste
-- Aceitar sequência de telas (fluxo) em vez de uma tela isolada
-- Conjunto de avaliação com telas anotadas por designers, para medir a precisão de cada lente e calibrar os prompts
+O roadmap público fica em [crivo-snowy.vercel.app/roadmap](https://crivo-snowy.vercel.app/roadmap) (fonte: `src/lib/roadmap.ts`). Resumo:
+
+- **Agora:** provar que a crítica procede. Marcar cada achado como "procede" ou "não procede" (meta de 70% de aceitação) e um conjunto de avaliação com 30 telas anotadas por designers.
+- **Próximo:** medir mais (alvo de toque e tamanho de fonte nos pixels), analisar fluxos em vez de telas isoladas, comparar antes e depois.
+- **Depois:** plugin para Figma, envio de achados para o backlog e lentes com o design system do time.
 
 ## Como construí
 
