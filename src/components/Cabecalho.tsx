@@ -4,7 +4,8 @@ import { SITE } from "@/lib/site";
 import { GithubLogoIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Marca } from "./Marca";
+import { Logo } from "./Marca";
+import { SeletorTema } from "./SeletorTema";
 
 export function Cabecalho() {
   const rota = usePathname();
@@ -16,11 +17,13 @@ export function Cabecalho() {
   return (
     <header className="sticky top-0 z-30 border-b border-linha bg-fundo/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2.5 text-tinta" aria-label="Crivo, página inicial">
-          <Marca size={20} />
-          <span className="text-[17px] font-semibold tracking-tight">Crivo</span>
+        <Link href="/" className="flex items-center" aria-label="Crivo, abrir o espaço de trabalho">
+          <Logo altura={22} />
         </Link>
         <nav className="flex items-center gap-1 text-[14px]">
+          <span className="mr-1">
+            <SeletorTema />
+          </span>
           <Link
             href="/como-funciona"
             className={link(rota === "/como-funciona")}

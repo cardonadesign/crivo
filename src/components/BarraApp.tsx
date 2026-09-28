@@ -3,7 +3,8 @@
 import { SITE } from "@/lib/site";
 import { BookOpenTextIcon, GithubLogoIcon, ListIcon, PlusIcon, XIcon } from "@phosphor-icons/react";
 import Link from "next/link";
-import { Marca } from "./Marca";
+import { Logo } from "./Marca";
+import { SeletorTema } from "./SeletorTema";
 
 export function BarraApp(props: {
   onNova: () => void;
@@ -24,17 +25,24 @@ export function BarraApp(props: {
         >
           {props.menuAberto ? <XIcon size={18} aria-hidden /> : <ListIcon size={18} aria-hidden />}
         </button>
-        <span className="flex items-center gap-2 px-1.5 text-tinta">
-          <Marca size={18} />
-          <span className="text-[15px] font-semibold tracking-tight">Crivo</span>
+        <span className="flex items-center px-1.5">
+          <Logo altura={20} />
         </span>
         <span className="mx-2 hidden h-5 w-px bg-linha sm:block" aria-hidden />
-        <button type="button" onClick={props.onNova} className={`${icone} font-medium text-tinta`}>
+        <button
+          type="button"
+          onClick={props.onNova}
+          className={`${icone} whitespace-nowrap font-medium text-tinta`}
+          aria-label="Nova análise"
+        >
           <PlusIcon size={16} aria-hidden />
-          Nova análise
+          <span className="hidden sm:inline">Nova análise</span>
         </button>
       </div>
       <nav className="flex items-center gap-0.5">
+        <span className="mr-1.5">
+          <SeletorTema />
+        </span>
         <Link href="/como-funciona" className={icone}>
           <BookOpenTextIcon size={16} aria-hidden />
           <span className="hidden sm:inline">Como funciona</span>

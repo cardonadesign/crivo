@@ -36,36 +36,49 @@
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --fundo: #0c0c0e;
-    --superficie: #141417;
-    --superficie-2: #1b1b1f;
-    --tinta: #ededef;
-    --tinta-2: #a8a8b2;
-    --tinta-3: #8e8e98;
-    --linha: #26262b;
-    --linha-forte: #34343b;
-    --acento: #7b93ff;
-    --acento-hover: #97a9ff;
-    --sobre-acento: #0c0c0e;
-    --acento-suave: #182040;
-    --ok: #5cc98d;
-    --ok-fundo: #112a1c;
-    --erro: #f97066;
-    --erro-fundo: #2d1513;
-    --lente-usabilidade: #5ec4d6;
-    --lente-usabilidade-fundo: #10262b;
-    --lente-acessibilidade: #f4a06e;
-    --lente-acessibilidade-fundo: #2b1a12;
-    --lente-hierarquia: #f07aae;
-    --lente-hierarquia-fundo: #2b1420;
-    --lente-produto: #b69af7;
-    --lente-produto-fundo: #1e1734;
-    --sobre-lente: #0c0c0e;
-    --sombra: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -12px rgb(0 0 0 / 0.6);
-    color-scheme: dark;
-  }
+/*
+ * Tema escuro. O atributo data-theme é resolvido antes da pintura por um script no <head>
+ * (layout.tsx): segue o sistema por padrão e respeita a escolha manual do seletor de tema.
+ */
+:root[data-theme="dark"] {
+  --fundo: #0c0c0e;
+  --superficie: #141417;
+  --superficie-2: #1b1b1f;
+  --tinta: #ededef;
+  --tinta-2: #a8a8b2;
+  --tinta-3: #8e8e98;
+  --linha: #26262b;
+  --linha-forte: #34343b;
+  --acento: #7b93ff;
+  --acento-hover: #97a9ff;
+  --sobre-acento: #0c0c0e;
+  --acento-suave: #182040;
+  --ok: #5cc98d;
+  --ok-fundo: #112a1c;
+  --erro: #f97066;
+  --erro-fundo: #2d1513;
+  --lente-usabilidade: #5ec4d6;
+  --lente-usabilidade-fundo: #10262b;
+  --lente-acessibilidade: #f4a06e;
+  --lente-acessibilidade-fundo: #2b1a12;
+  --lente-hierarquia: #f07aae;
+  --lente-hierarquia-fundo: #2b1420;
+  --lente-produto: #b69af7;
+  --lente-produto-fundo: #1e1734;
+  --sobre-lente: #0c0c0e;
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -12px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+
+/* Logo: uma versão por tema (arquivos do Marlon em /public/marca). */
+.so-escuro {
+  display: none;
+}
+:root[data-theme="dark"] .so-escuro {
+  display: block;
+}
+:root[data-theme="dark"] .so-claro {
+  display: none;
 }
 
 @theme inline {
