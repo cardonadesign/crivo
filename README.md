@@ -4,7 +4,7 @@
 
 Você envia o print de uma tela. Quatro agentes revisam em paralelo, cada um com uma lente: usabilidade, acessibilidade, hierarquia & texto, e produto & conversão. Um quinto agente cruza tudo e decide o que corrigir primeiro. O que dá para medir, o Crivo mede nos pixels, sem confiar no modelo.
 
-🔗 **Demo:** _link da Vercel_
+🔗 **Demo:** https://crivo-snowy.vercel.app
 
 ---
 
