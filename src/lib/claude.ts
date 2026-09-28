@@ -17,9 +17,12 @@ const PRECOS: Record<string, [number, number]> = {
 
 const client = new Anthropic();
 
+/** Travessão (U+2014) e meia-risca (U+2013), montados por código para não aparecerem no fonte. */
+const TRAVESSOES = new RegExp(`\\s*[${String.fromCharCode(0x2014, 0x2013)}]\\s*`, "g");
+
 /** Troca travessões por vírgula em todo texto devolvido pelo modelo (padrão de escrita do produto). */
 export function limparTexto<T>(valor: T): T {
-  if (typeof valor === "string") return valor.replace(/\s*[—–]\s*/g, ", ") as T;
+  if (typeof valor === "string") return valor.replace(TRAVESSOES, ", ") as T;
   if (Array.isArray(valor)) return valor.map(limparTexto) as T;
   if (valor && typeof valor === "object")
     return Object.fromEntries(Object.entries(valor).map(([k, v]) => [k, limparTexto(v)])) as T;

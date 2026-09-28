@@ -56,7 +56,7 @@ function Matriz(props: {
 
   return (
     <div className="overflow-x-auto">
-      <div className="grid min-w-[420px] grid-cols-[88px_repeat(3,minmax(0,1fr))] text-[12px]">
+      <div className="grid min-w-[330px] grid-cols-[76px_repeat(3,minmax(0,1fr))] text-[12px]">
         <div />
         {rotuloColuna.map((r) => (
           <div key={r} className="px-2 pb-2 text-tinta-3">
@@ -136,8 +136,8 @@ export function PainelSintese(props: {
   const porN = new Map(achados.map((a) => [String(a.n), a]));
 
   return (
-    <div className="space-y-10">
-      <p className="text-[18px] font-medium leading-[1.5] tracking-tight text-tinta sm:text-[20px]">{sintese.veredito}</p>
+    <div className="space-y-8">
+      <p className="text-[16px] font-medium leading-[1.55] tracking-tight text-tinta">{sintese.veredito}</p>
 
       <section aria-labelledby="titulo-ordem">
         <h3 id="titulo-ordem" className="text-[15px] font-semibold">
@@ -155,11 +155,11 @@ export function PainelSintese(props: {
                 initial={reduzir ? false : { opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                className="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-3 py-6"
+                className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-2 py-5"
               >
-                <span className="num text-[28px] font-medium leading-none text-tinta-3">{i + 1}</span>
+                <span className="num text-[20px] font-medium leading-none text-tinta-3">{i + 1}</span>
                 <div className="min-w-0">
-                  <h4 className="text-[16px] font-semibold leading-snug">{p.titulo}</h4>
+                  <h4 className="text-[15px] font-semibold leading-snug">{p.titulo}</h4>
                   <p className="mt-1.5 text-[14px] leading-relaxed text-tinta-2">{p.por_que_primeiro}</p>
 
                   <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-[12px] text-tinta-3">
@@ -185,11 +185,15 @@ export function PainelSintese(props: {
                     </span>
                   </div>
 
-                  <dl className="mt-4 grid gap-x-4 gap-y-2 rounded-painel bg-superficie-2 p-4 text-[14px] leading-relaxed sm:grid-cols-[5.5rem_minmax(0,1fr)]">
-                    <dt className="font-medium text-tinta">Hipótese</dt>
-                    <dd className="text-tinta-2">{p.hipotese}</dd>
-                    <dt className="font-medium text-tinta">Métrica</dt>
-                    <dd className="text-tinta-2">{p.metrica}</dd>
+                  <dl className="mt-4 space-y-3 rounded-controle bg-superficie-2 p-3.5 text-[13px] leading-relaxed">
+                    <div>
+                      <dt className="text-[12px] font-medium text-tinta-3">Hipótese</dt>
+                      <dd className="mt-0.5 text-tinta">{p.hipotese}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-[12px] font-medium text-tinta-3">Métrica</dt>
+                      <dd className="mt-0.5 text-tinta">{p.metrica}</dd>
+                    </div>
                   </dl>
                 </div>
               </motion.li>

@@ -1,7 +1,23 @@
 import type { Verificacao } from "@/lib/contraste";
-import type { Achado, LenteId } from "@/lib/schema";
+import type { Achado, LenteId, RespostaLente, RespostaSintese } from "@/lib/schema";
+import type { Exemplo } from "@/lib/site";
 
 export type AchadoNumerado = Achado & { n: number; lente: LenteId; verificacao: Verificacao };
+
+export type EstadoLente = {
+  estado: "aguardando" | "rodando" | "ok" | "erro";
+  resp?: RespostaLente;
+  erro?: string;
+  inicio?: number;
+};
+export type EstadoSintese = { estado: "aguardando" | "rodando" | "ok" | "erro"; resp?: RespostaSintese; erro?: string };
+export type Aba = "prioridades" | "achados" | "limites";
+
+/** O que está aberto no espaço de trabalho. */
+export type Atual =
+  | { tipo: "vazio" }
+  | { tipo: "exemplo"; exemplo: Exemplo; geradoEm?: string; salvo: boolean }
+  | { tipo: "local"; id: string; nome: string; criadoEm: string };
 
 export const ROTULO_SEVERIDADE: Record<Achado["severidade"], string> = {
   critica: "Crítica",

@@ -1,20 +1,29 @@
 "use client";
 
 import { verificar } from "@/lib/contraste";
+import { lerHistorico, removerDoHistorico, salvarNoHistorico, type AnaliseLocal } from "@/lib/historico";
 import { arquivoParaDataUrl, prepararImagem, type ImagemPreparada } from "@/lib/imagem";
 import { LENTES_INFO } from "@/lib/lentes";
 import { LENTES, type AnaliseSalva, type LenteId, type RespostaLente, type RespostaSintese } from "@/lib/schema";
-import type { Exemplo } from "@/lib/site";
+import { EXEMPLOS, type Exemplo } from "@/lib/site";
+import { UploadSimpleIcon } from "@phosphor-icons/react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Analise, type Aba, type EstadoLente, type EstadoSintese, type Origem } from "./Analise";
-import { Inicio } from "./Inicio";
-import { Preparar } from "./Preparar";
-import { PESO_SEVERIDADE, type AchadoNumerado } from "./tipos";
+import { BarraApp } from "./BarraApp";
+import { Canvas } from "./Canvas";
+import { Inspetor } from "./Inspetor";
+import { ListaAnalises } from "./ListaAnalises";
+import { PESO_SEVERIDADE, type Aba, type AchadoNumerado, type Atual, type EstadoLente, type EstadoSintese } from "./tipos";
 
 const lentesVazias = (): Record<LenteId, EstadoLente> =>
   Object.fromEntries(LENTES.map((l) => [l, { estado: "aguardando" }])) as Record<LenteId, EstadoLente>;
 
-export async function postJson<T>(url: string, corpo: unknown): Promise<T> {
+const lentesDe = (salvas: Partial<Record<LenteId, RespostaLente>>) => {
+  const est = lentesVazias();
+  for (const l of LENTES) if (salvas[l]) est[l] = { estado: "ok", resp: salvas[l] };
+  return est;
+};
+
+async function postJson<T>(url: string, corpo: unknown): Promise<T> {
   const r = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -26,17 +35,23 @@ export async function postJson<T>(url: string, corpo: unknown): Promise<T> {
 }
 
 export function Crivo() {
-  const [fase, setFase] = useState<"inicio" | "preparar" | "analise">("inicio");
+  const [atual, setAtual] = useState<Atual>({ tipo: "vazio" });
   const [imagem, setImagem] = useState<ImagemPreparada | null>(null);
   const [contexto, setContexto] = useState("");
   const [lentes, setLentes] = useState(lentesVazias);
   const [sintese, setSintese] = useState<EstadoSintese>({ estado: "aguardando" });
-  const [origem, setOrigem] = useState<Origem | null>(null);
-  const [aba, setAba] = useState<Aba>("achados");
+  const [aba, setAba] = useState<Aba>("prioridades");
   const [abaManual, setAbaManual] = useState(false);
-  const [erroInicio, setErroInicio] = useState<string | null>(null);
-  const [carregandoExemplo, setCarregandoExemplo] = useState<string | null>(null);
+  const [ativo, setAtivo] = useState<number | null>(null);
+  const [filtro, setFiltro] = useState<LenteId | "todas">("todas");
+  const [historico, setHistorico] = useState<AnaliseLocal[]>([]);
+  const [erro, setErro] = useState<string | null>(null);
+  const [carregando, setCarregando] = useState(true);
+  const [arrastando, setArrastando] = useState(false);
+  const [menuAberto, setMenuAberto] = useState(false);
   const execucao = useRef(0);
+  const refs = useRef(new Map<number, HTMLElement>());
+  const nomeArquivo = useRef("Print colado");
 
   // Achados numerados + verificação por pixel
   const achados: AchadoNumerado[] = useMemo(() => {
@@ -51,6 +66,111 @@ export function Crivo() {
     return lista;
   }, [lentes, imagem]);
 
+  const limparVista = () => {
+    setAtivo(null);
+    setFiltro("todas");
+    setAbaManual(false);
+    setMenuAberto(false);
+    setErro(null);
+  };
+
+  // ---------- abrir ----------
+  const abrirExemplo = useCallback(async (ex: Exemplo) => {
+    const id = ++execucao.current;
+    limparVista();
+    setCarregando(true);
+    try {
+      const [img, salvo] = await Promise.all([
+        prepararImagem(`/samples/${ex.id}.png`),
+        fetch(`/samples/${ex.id}.json`).then((r) => (r.ok ? (r.json() as Promise<AnaliseSalva>) : null)),
+      ]);
+      if (execucao.current !== id) return;
+      setImagem(img);
+      setContexto(ex.contexto);
+      setLentes(salvo ? lentesDe(salvo.lentes) : lentesVazias());
+      setSintese(salvo?.sintese ? { estado: "ok", resp: salvo.sintese } : { estado: "aguardando" });
+      setAtual({ tipo: "exemplo", exemplo: ex, geradoEm: salvo?.geradoEm, salvo: !!salvo });
+      setAba("prioridades");
+      history.replaceState(null, "", `?exemplo=${ex.id}`);
+    } catch (e) {
+      setErro((e as Error).message);
+    } finally {
+      if (execucao.current === id) setCarregando(false);
+    }
+  }, []);
+
+  const abrirLocal = useCallback(async (a: AnaliseLocal) => {
+    const id = ++execucao.current;
+    limparVista();
+    setCarregando(true);
+    try {
+      const img = await prepararImagem(a.imagem.src);
+      if (execucao.current !== id) return;
+      setImagem(img);
+      setContexto(a.contexto);
+      setLentes(lentesDe(a.lentes));
+      setSintese(a.sintese ? { estado: "ok", resp: a.sintese } : { estado: "aguardando" });
+      setAtual({ tipo: "local", id: a.id, nome: a.nome, criadoEm: a.criadoEm });
+      setAba(a.sintese ? "prioridades" : "achados");
+      history.replaceState(null, "", "/");
+    } finally {
+      if (execucao.current === id) setCarregando(false);
+    }
+  }, []);
+
+  const novaAnalise = useCallback(() => {
+    execucao.current++;
+    limparVista();
+    setImagem(null);
+    setContexto("");
+    setLentes(lentesVazias());
+    setSintese({ estado: "aguardando" });
+    setAtual({ tipo: "vazio" });
+    setCarregando(false);
+    history.replaceState(null, "", "/");
+  }, []);
+
+  // Primeira visita: abre um exemplo (ou o indicado na URL), como um arquivo de demonstração.
+  useEffect(() => {
+    setHistorico(lerHistorico());
+    const pedido = new URLSearchParams(location.search).get("exemplo");
+    abrirExemplo(EXEMPLOS.find((e) => e.id === pedido) ?? EXEMPLOS[0]);
+  }, [abrirExemplo]);
+
+  const receberArquivo = useCallback(async (arquivo: File | undefined | null) => {
+    setErro(null);
+    if (!arquivo) return;
+    if (!arquivo.type.startsWith("image/")) return setErro("Envie uma imagem (PNG, JPG ou WebP).");
+    if (arquivo.size > 15 * 1024 * 1024) return setErro("Imagem muito grande. O limite é 15 MB.");
+    try {
+      const img = await prepararImagem(await arquivoParaDataUrl(arquivo));
+      execucao.current++;
+      limparVista();
+      nomeArquivo.current = arquivo.name ? arquivo.name.replace(/\.[a-z0-9]+$/i, "") : "Print colado";
+      setImagem(img);
+      setContexto("");
+      setLentes(lentesVazias());
+      setSintese({ estado: "aguardando" });
+      setAtual({ tipo: "vazio" });
+      setCarregando(false);
+      history.replaceState(null, "", "/");
+    } catch (e) {
+      setErro((e as Error).message);
+    }
+  }, []);
+
+  // Colar com Ctrl+V em qualquer lugar (menos dentro do campo de texto).
+  useEffect(() => {
+    const colar = (ev: ClipboardEvent) => {
+      if ((ev.target as HTMLElement)?.tagName === "TEXTAREA") return;
+      const item = [...(ev.clipboardData?.items ?? [])].find((i) => i.type.startsWith("image/"));
+      if (item) receberArquivo(item.getAsFile());
+    };
+    window.addEventListener("paste", colar);
+    return () => window.removeEventListener("paste", colar);
+  }, [receberArquivo]);
+
+  // ---------- executar ----------
   const rodarLente = useCallback(async (l: LenteId, img: ImagemPreparada, ctx: string, id: number) => {
     setLentes((s) => ({ ...s, [l]: { estado: "rodando", inicio: Date.now() } }));
     try {
@@ -68,23 +188,30 @@ export function Crivo() {
     }
   }, []);
 
-  const rodarAnalise = useCallback(
-    (img: ImagemPreparada, ctx: string) => {
-      const id = ++execucao.current;
-      setLentes(lentesVazias());
-      setSintese({ estado: "aguardando" });
-      setAba("achados");
-      setAbaManual(false);
-      setFase("analise");
-      window.scrollTo({ top: 0 });
-      LENTES.forEach((l) => rodarLente(l, img, ctx, id));
-    },
-    [rodarLente],
-  );
+  const analisar = useCallback(() => {
+    if (!imagem) return;
+    const id = ++execucao.current;
+    setLentes(lentesVazias());
+    setSintese({ estado: "aguardando" });
+    setAba("achados");
+    setAbaManual(false);
+    setFiltro("todas");
+    if (atual.tipo === "vazio") {
+      setAtual({
+        tipo: "local",
+        id: `a${Date.now().toString(36)}`,
+        nome: contexto.trim() ? contexto.trim().split(/[,.]/)[0].slice(0, 40) : nomeArquivo.current,
+        criadoEm: new Date().toISOString(),
+      });
+    } else if (atual.tipo === "exemplo") {
+      setAtual({ ...atual, salvo: false });
+    }
+    LENTES.forEach((l) => rodarLente(l, imagem, contexto, id));
+  }, [imagem, contexto, atual, rodarLente]);
 
   // Quando as quatro lentes terminam, o agente de síntese entra.
   useEffect(() => {
-    if (fase !== "analise" || sintese.estado !== "aguardando") return;
+    if (!imagem || sintese.estado !== "aguardando") return;
     if (LENTES.some((l) => lentes[l].estado === "rodando" || lentes[l].estado === "aguardando")) return;
     if (achados.length === 0) return;
     const id = execucao.current;
@@ -102,121 +229,142 @@ export function Crivo() {
     })
       .then((resp) => execucao.current === id && setSintese({ estado: "ok", resp }))
       .catch((e) => execucao.current === id && setSintese({ estado: "erro", erro: (e as Error).message }));
-  }, [fase, lentes, sintese.estado, achados]);
+  }, [imagem, lentes, sintese.estado, achados]);
 
   useEffect(() => {
     if (sintese.estado === "ok" && !abaManual) setAba("prioridades");
   }, [sintese.estado, abaManual]);
 
-  const receberArquivo = useCallback(async (arquivo: File | undefined | null) => {
-    setErroInicio(null);
-    if (!arquivo) return;
-    if (!arquivo.type.startsWith("image/")) return setErroInicio("Envie uma imagem (PNG, JPG ou WebP).");
-    if (arquivo.size > 15 * 1024 * 1024) return setErroInicio("Imagem muito grande. O limite é 15 MB.");
-    try {
-      const img = await prepararImagem(await arquivoParaDataUrl(arquivo));
-      execucao.current++;
-      setImagem(img);
-      setOrigem({ tipo: "upload" });
-      setContexto("");
-      setLentes(lentesVazias());
-      setSintese({ estado: "aguardando" });
-      setFase("preparar");
-    } catch (e) {
-      setErroInicio((e as Error).message);
-    }
-  }, []);
-
+  // Análise própria concluída: entra no histórico deste navegador.
   useEffect(() => {
-    if (fase !== "inicio") return;
-    const colar = (ev: ClipboardEvent) => {
-      const item = [...(ev.clipboardData?.items ?? [])].find((i) => i.type.startsWith("image/"));
-      if (item) receberArquivo(item.getAsFile());
-    };
-    window.addEventListener("paste", colar);
-    return () => window.removeEventListener("paste", colar);
-  }, [fase, receberArquivo]);
+    if (atual.tipo !== "local" || !imagem || (sintese.estado !== "ok" && sintese.estado !== "erro")) return;
+    const respostas = Object.fromEntries(LENTES.filter((l) => lentes[l].resp).map((l) => [l, lentes[l].resp!]));
+    setHistorico(
+      salvarNoHistorico({
+        id: atual.id,
+        nome: atual.nome,
+        criadoEm: atual.criadoEm,
+        contexto,
+        imagem: { src: `data:${imagem.mediaType};base64,${imagem.base64}`, largura: imagem.largura, altura: imagem.altura },
+        lentes: respostas,
+        sintese: sintese.resp ?? null,
+      }),
+    );
+  }, [atual, imagem, lentes, sintese, contexto]);
 
-  const abrirExemplo = useCallback(
-    async (ex: Exemplo) => {
-      setCarregandoExemplo(ex.id);
-      setErroInicio(null);
-      try {
-        const img = await prepararImagem(`/samples/${ex.id}.png`);
-        setImagem(img);
-        setContexto(ex.contexto);
-        const salvo = await fetch(`/samples/${ex.id}.json`).then((r) =>
-          r.ok ? (r.json() as Promise<AnaliseSalva>) : null,
-        );
-        if (salvo) {
-          execucao.current++;
-          const est = lentesVazias();
-          for (const l of LENTES) if (salvo.lentes[l]) est[l] = { estado: "ok", resp: salvo.lentes[l] };
-          setLentes(est);
-          setSintese(salvo.sintese ? { estado: "ok", resp: salvo.sintese } : { estado: "aguardando" });
-          setOrigem({ tipo: "exemplo", exemplo: ex, geradoEm: salvo.geradoEm, salvo: true });
-          setAba(salvo.sintese ? "prioridades" : "achados");
-          setAbaManual(false);
-          setFase("analise");
-          window.scrollTo({ top: 0 });
-        } else {
-          setOrigem({ tipo: "exemplo", exemplo: ex, salvo: false });
-          rodarAnalise(img, ex.contexto);
-        }
-      } catch (e) {
-        setErroInicio((e as Error).message);
-      } finally {
-        setCarregandoExemplo(null);
-      }
-    },
-    [rodarAnalise],
-  );
-
-  const voltarAoInicio = () => {
-    execucao.current++;
-    setFase("inicio");
-    setImagem(null);
-    setOrigem(null);
-    setLentes(lentesVazias());
-    setSintese({ estado: "aguardando" });
+  const irPara = (n: number) => {
+    setAba("achados");
+    setAbaManual(true);
+    setFiltro("todas");
+    setAtivo(n);
+    setTimeout(() => refs.current.get(n)?.scrollIntoView({ behavior: "smooth", block: "center" }), 40);
   };
 
-  if (fase === "inicio")
-    return (
-      <Inicio erro={erroInicio} carregandoExemplo={carregandoExemplo} onArquivo={receberArquivo} onExemplo={abrirExemplo} />
-    );
+  const salvarExemplo = async () => {
+    if (atual.tipo !== "exemplo" || !imagem) return;
+    const analise: AnaliseSalva = {
+      imagem: { src: `/samples/${atual.exemplo.id}.png`, largura: imagem.largura, altura: imagem.altura },
+      lentes: Object.fromEntries(LENTES.filter((l) => lentes[l].resp).map((l) => [l, lentes[l].resp!])),
+      sintese: sintese.resp ?? null,
+      geradoEm: new Date().toISOString(),
+    };
+    await postJson("/api/dev/salvar", { id: atual.exemplo.id, analise }).catch(() => {});
+  };
 
-  if (!imagem) return null;
+  const visiveis = filtro === "todas" ? achados : achados.filter((a) => a.lente === filtro);
 
-  if (fase === "preparar")
-    return (
-      <Preparar
-        imagem={imagem}
-        contexto={contexto}
-        onContexto={setContexto}
-        onAnalisar={() => rodarAnalise(imagem, contexto)}
-        onTrocar={voltarAoInicio}
-      />
-    );
+  const lista = (
+    <ListaAnalises
+      atual={atual}
+      historico={historico}
+      onExemplo={abrirExemplo}
+      onLocal={abrirLocal}
+      onRemover={(id) => {
+        setHistorico(removerDoHistorico(id));
+        if (atual.tipo === "local" && atual.id === id) novaAnalise();
+      }}
+    />
+  );
 
   return (
-    <Analise
-      imagem={imagem}
-      lentes={lentes}
-      sintese={sintese}
-      achados={achados}
-      origem={origem}
-      aba={aba}
-      onAba={(a) => {
-        setAba(a);
-        setAbaManual(true);
+    <div
+      className="relative flex min-h-[100dvh] flex-col lg:h-[100dvh] lg:overflow-hidden"
+      onDragOver={(e) => {
+        e.preventDefault();
+        setArrastando(true);
       }}
-      onVoltar={voltarAoInicio}
-      onRodarAoVivo={() => {
-        if (origem?.tipo === "exemplo") setOrigem({ ...origem, salvo: false });
-        rodarAnalise(imagem, contexto);
+      onDragLeave={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) setArrastando(false);
       }}
-      onTentarLente={(l) => rodarLente(l, imagem, contexto, execucao.current)}
-    />
+      onDrop={(e) => {
+        e.preventDefault();
+        setArrastando(false);
+        receberArquivo(e.dataTransfer.files?.[0]);
+      }}
+    >
+      <BarraApp onNova={novaAnalise} menuAberto={menuAberto} onMenu={setMenuAberto} />
+
+      {menuAberto && (
+        <div className="absolute inset-x-0 top-12 z-40 max-h-[70dvh] overflow-y-auto border-b border-linha bg-superficie shadow-painel lg:hidden">
+          {lista}
+        </div>
+      )}
+
+      {arrastando && (
+        <div className="pointer-events-none absolute inset-2 z-50 grid place-items-center rounded-painel border-2 border-dashed border-acento bg-fundo/85 backdrop-blur-sm">
+          <p className="flex items-center gap-2 text-[16px] font-medium text-acento">
+            <UploadSimpleIcon size={20} aria-hidden />
+            Solte para analisar
+          </p>
+        </div>
+      )}
+
+      <main
+        id="conteudo"
+        className="flex-1 lg:grid lg:min-h-0 lg:grid-cols-[240px_minmax(0,1fr)_minmax(360px,420px)] xl:grid-cols-[256px_minmax(0,1fr)_440px]"
+      >
+        <aside className="hidden border-r border-linha bg-superficie lg:block lg:overflow-y-auto">{lista}</aside>
+
+        <section aria-label="Tela" className="bg-fundo lg:min-h-0 lg:overflow-y-auto">
+          <Canvas
+            imagem={imagem}
+            achados={visiveis}
+            ativo={ativo}
+            onAtivar={setAtivo}
+            onSelecionar={irPara}
+            erro={erro}
+            onArquivo={receberArquivo}
+            carregando={carregando}
+          />
+        </section>
+
+        <aside aria-label="Inspetor" className="border-t border-linha bg-superficie lg:min-h-0 lg:overflow-y-auto lg:border-l lg:border-t-0">
+          <Inspetor
+            atual={atual}
+            imagem={carregando ? null : imagem}
+            contexto={contexto}
+            onContexto={setContexto}
+            onAnalisar={analisar}
+            lentes={lentes}
+            sintese={sintese}
+            achados={achados}
+            aba={aba}
+            onAba={(a) => {
+              setAba(a);
+              setAbaManual(true);
+            }}
+            ativo={ativo}
+            onAtivar={setAtivo}
+            onIrPara={irPara}
+            filtro={filtro}
+            onFiltro={setFiltro}
+            refs={refs}
+            onRodarAoVivo={analisar}
+            onTentarLente={(l) => imagem && rodarLente(l, imagem, contexto, execucao.current)}
+            onSalvarExemplo={salvarExemplo}
+          />
+        </aside>
+      </main>
+    </div>
   );
 }
