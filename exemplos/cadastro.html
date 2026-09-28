@@ -1,0 +1,53 @@
+<!doctype html>
+<!-- Tela fictícia com problemas plantados de propósito, usada como exemplo no Crivo. -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 390px; height: 844px; font-family: "Segoe UI", Arial, sans-serif; background: #fff; color: #333; overflow: hidden; }
+  .status { height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 22px; font-size: 14px; font-weight: 600; }
+  .topo { padding: 8px 24px 0; }
+  .voltar { font-size: 22px; color: #444; }
+  .logo { margin-top: 14px; display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 18px; color: #1F2937; }
+  .logo i { width: 26px; height: 26px; border-radius: 8px; background: #FFD54F; display: inline-block; }
+  h1 { font-size: 22px; margin-top: 18px; color: #1F2937; line-height: 1.2; }
+  .sub { font-size: 13px; color: #6B7280; margin-top: 6px; }
+  form { padding: 18px 24px 0; }
+  .input { height: 44px; border: 1px solid #E5E7EB; border-radius: 10px; padding: 0 14px; display: flex; align-items: center; font-size: 14px; color: #BDBDBD; margin-bottom: 10px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .input.err { border-color: #EF4444; }
+  .erro { font-size: 11px; color: #EF4444; margin: -6px 0 10px 2px; }
+  .btn { margin-top: 8px; height: 50px; border-radius: 12px; background: #FFD54F; color: #fff; font-weight: 700; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+  .ou { text-align: center; font-size: 12px; color: #9CA3AF; margin: 16px 0 10px; }
+  .sociais { display: flex; justify-content: center; gap: 14px; }
+  .sociais i { width: 20px; height: 20px; border-radius: 50%; display: inline-block; }
+  .login { text-align: center; margin-top: 18px; font-size: 12px; color: #C4C4C4; }
+  .legal { margin: 34px 24px 0; font-size: 9px; color: #C4C4C4; text-align: center; line-height: 1.4; }
+</style>
+</head>
+<body>
+<div class="status"><span>9:41</span><span>●●● ▮</span></div>
+<div class="topo">
+  <div class="voltar">←</div>
+  <div class="logo"><i></i>rotina</div>
+  <h1>Autentique suas credenciais para prosseguir</h1>
+  <p class="sub">Todos os campos são obrigatórios.</p>
+</div>
+<form>
+  <div class="input">Nome completo</div>
+  <div class="input">E-mail</div>
+  <div class="row"><div class="input">Telefone</div><div class="input">Nascimento</div></div>
+  <div class="row"><div class="input">Gênero ▾</div><div class="input">CPF</div></div>
+  <div class="input">Como nos conheceu? ▾</div>
+  <div class="input err">Senha</div>
+  <p class="erro">A senha não atende aos requisitos</p>
+  <div class="input">Confirmar senha</div>
+  <div class="btn">Criar conta</div>
+  <p class="ou">ou continue com</p>
+  <div class="sociais"><i style="background:#EA4335"></i><i style="background:#111"></i><i style="background:#1877F2"></i></div>
+  <p class="login">Já tenho uma conta</p>
+</form>
+<p class="legal">Ao criar uma conta você concorda com os Termos de Uso e a Política de Privacidade da Rotina Tecnologia.</p>
+</body>
+</html>

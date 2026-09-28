@@ -1,0 +1,748 @@
+{
+  "imagem": {
+    "src": "/samples/dashboard.png",
+    "largura": 1280,
+    "altura": 860
+  },
+  "lentes": {
+    "usabilidade": {
+      "lente": "usabilidade",
+      "resultado": {
+        "resumo": "Painel legível e organizado, mas informação-chave fica sem interpretação: o gráfico não tem eixos nem legenda, os indicadores de status da tabela são só bolinhas coloridas e o período \"últimos 7 dias\" não parece ajustável.",
+        "achados": [
+          {
+            "titulo": "Gráfico sem eixos, legenda ou valores",
+            "problema": "O card \"Desempenho\" mostra duas linhas sem rótulo de eixo, escala ou legenda, então não é possível saber o que cada série representa nem a magnitude dos valores.",
+            "evidencia": "Card com título \"Desempenho\" contendo apenas uma linha verde e uma vermelha, sem nenhum texto de eixo X/Y, unidade ou legenda de série.",
+            "sugestao": "Adicionar legenda nomeando as séries (ex. \"Ganhos\" / \"Perdidos\"), eixo Y com escala e eixo X com datas, além de tooltip com valor por ponto.",
+            "principio": "Nielsen 6 — Reconhecimento em vez de memorização; visibilidade da informação",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 249,
+              "y": 272,
+              "largura": 591,
+              "altura": 362
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Status por cor sem legenda na tabela",
+            "problema": "A coluna final de \"Últimos negócios\" usa apenas pontos verdes e vermelhos, sem cabeçalho nem legenda, obrigando o usuário a adivinhar o significado.",
+            "evidencia": "Após as colunas \"Cliente\", \"Valor\" e \"Resp.\" há uma coluna sem título, com bolinhas verdes e vermelhas alinhadas a cada linha.",
+            "sugestao": "Nomear a coluna (ex. \"Status\") e usar rótulo textual ou badge (\"Ganho\"/\"Perdido\") junto da cor.",
+            "principio": "Nielsen 6 — Reconhecimento em vez de memorização",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 1195,
+              "y": 322,
+              "largura": 55,
+              "altura": 268
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Período fixo, sem controle de filtro",
+            "problema": "\"últimos 7 dias\" aparece como texto discreto ao lado do título, sem aparência de controle, sugerindo que o recorte temporal de todos os números não pode ser alterado.",
+            "evidencia": "Ao lado de \"Visão geral\" há o texto pequeno e cinza \"últimos 7 dias\", sem seta, borda ou botão associado.",
+            "sugestao": "Transformar o período em um seletor visível (dropdown com borda e chevron) com opções como 7/30/90 dias e intervalo personalizado.",
+            "principio": "Nielsen 3 — Controle e liberdade do usuário; affordance de controle",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 370,
+              "y": 36,
+              "largura": 86,
+              "altura": 24
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Nomes de clientes truncados sem acesso ao texto",
+            "problema": "Vários clientes aparecem cortados, dificultando distinguir registros parecidos na lista de negócios.",
+            "evidencia": "Linhas como \"Distribuidora Horizonte Al...\", \"Clínica Vida Plena Odonto...\" e \"Construtora Alicerce Enge...\" terminam em reticências.",
+            "sugestao": "Ampliar a coluna \"Cliente\", reduzir o card lateral ou garantir tooltip/linha clicável que revele o nome completo.",
+            "principio": "Nielsen 8 — Design estético e minimalista sem perda de informação",
+            "severidade": "media",
+            "confianca": "alta",
+            "regiao": {
+              "x": 870,
+              "y": 352,
+              "largura": 170,
+              "altura": 238
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Botão \"...\" sem rótulo ou dica",
+            "problema": "O botão ao lado de \"Exportar PDF\" não indica quais ações contém, o que esconde funcionalidades relevantes atrás de um ícone ambíguo.",
+            "evidencia": "Botão quadrado com três pontos \"...\" no canto superior direito, sem texto acompanhante.",
+            "sugestao": "Usar ícone convencional de \"mais ações\" com tooltip/aria-label descritivo (ex. \"Mais opções do painel\") ou expor as ações principais como itens visíveis.",
+            "principio": "Nielsen 6 — Reconhecimento em vez de memorização",
+            "severidade": "baixa",
+            "confianca": "media",
+            "regiao": {
+              "x": 1217,
+              "y": 25,
+              "largura": 34,
+              "altura": 36
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Lista de negócios sem caminho para o detalhe",
+            "problema": "O card \"Últimos negócios\" mostra 7 registros sem indicação de paginação ou link para a lista completa, interrompendo o fluxo de investigação.",
+            "evidencia": "Após \"Studio Pilates Equilíbrio\" há área vazia no card, sem \"Ver todos\", contador ou paginação.",
+            "sugestao": "Incluir link \"Ver todos os negócios\" no rodapé do card e tornar cada linha clicável até o detalhe do negócio.",
+            "principio": "Nielsen 7 — Flexibilidade e eficiência de uso",
+            "severidade": "baixa",
+            "confianca": "media",
+            "regiao": {
+              "x": 854,
+              "y": 580,
+              "largura": 396,
+              "altura": 56
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          }
+        ],
+        "fora_do_alcance": [
+          "Não é possível verificar se linhas da tabela, cards de KPI ou o texto de período são interativos (hover, clique, tooltip).",
+          "Estados de carregamento, vazio e erro dos cards e do gráfico não aparecem no print.",
+          "O feedback após acionar \"Exportar PDF\" (progresso, sucesso, falha) não pode ser avaliado."
+        ]
+      },
+      "uso": {
+        "entrada": 4154,
+        "saida": 2544,
+        "custoUsd": 0.08437,
+        "ms": 33562,
+        "modelo": "claude-opus-5"
+      }
+    },
+    "acessibilidade": {
+      "lente": "acessibilidade",
+      "resultado": {
+        "resumo": "Dashboard com hierarquia visual clara, mas com falhas de acessibilidade em contraste de textos secundários, uso de cor como único canal de informação na tabela e gráfico, e controles sem rótulo textual.",
+        "achados": [
+          {
+            "titulo": "Status apenas por cor na tabela",
+            "problema": "A coluna final usa só bolinhas verdes e vermelhas para indicar o estado do negócio, sem texto ou ícone diferenciado. Quem não distingue cores não consegue interpretar.",
+            "evidencia": "Na coluna à direita de \"Resp.\" há apenas círculos verdes e vermelhos, sem rótulo de cabeçalho nem legenda; ex. linha \"Clínica Vida Plena Odonto... R$ 3.980 Rafael\" traz só um ponto vermelho.",
+            "sugestao": "Adicionar rótulo textual junto ao indicador (\"Ganho\"/\"Perdido\") ou ícones com formas distintas, além de cabeçalho e texto alternativo na coluna.",
+            "principio": "WCAG 1.4.1 Uso de cor (A)",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 1200,
+              "y": 340,
+              "largura": 40,
+              "altura": 250
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Séries do gráfico sem legenda",
+            "problema": "O gráfico \"Desempenho\" distingue duas séries apenas por verde e vermelho, sem legenda nem eixos rotulados, tornando o dado ininterpretável para daltônicos e leitores de tela.",
+            "evidencia": "O card \"Desempenho\" mostra duas linhas coloridas sem nenhum texto de legenda, rótulo de eixo ou valores.",
+            "sugestao": "Incluir legenda textual para cada série, rótulos de eixos e uma alternativa em texto ou tabela com os mesmos dados.",
+            "principio": "WCAG 1.4.1 e 1.1.1 Conteúdo não textual",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 249,
+              "y": 275,
+              "largura": 591,
+              "altura": 360
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Rótulos dos KPIs com contraste baixo",
+            "problema": "Os títulos das métricas usam cinza claro sobre branco, dificultando a leitura do significado dos números.",
+            "evidencia": "Textos \"Receita\", \"Ticket médio\", \"Negócios ganhos\", \"Negócios perdidos\", \"Conversão\" em cinza claro nos cards brancos.",
+            "sugestao": "Escurecer o rótulo para pelo menos #595F6B em fundo branco, garantindo 4.5:1.",
+            "principio": "WCAG 1.4.3 Contraste mínimo (AA)",
+            "severidade": "alta",
+            "confianca": "media",
+            "regiao": {
+              "x": 263,
+              "y": 96,
+              "largura": 220,
+              "altura": 18
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#A3A9B4",
+              "fundo_hex": "#FFFFFF",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Subtítulo do período pouco legível",
+            "problema": "O indicador do período filtrado está em fonte muito pequena e cinza claro, e é a única pista de qual recorte de dados está sendo exibido.",
+            "evidencia": "Texto \"últimos 7 dias\" ao lado do título \"Visão geral\", em ~11px cinza claro sobre fundo cinza muito claro.",
+            "sugestao": "Aumentar para 14px e escurecer a cor até atingir 4.5:1, ou transformar em um controle de filtro com rótulo visível.",
+            "principio": "WCAG 1.4.3 e 1.4.4",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 377,
+              "y": 40,
+              "largura": 74,
+              "altura": 16
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#A8AEB8",
+              "fundo_hex": "#F6F7F9",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Botão \"...\" sem rótulo acessível",
+            "problema": "O controle ao lado de \"Exportar PDF\" é só três pontos, sem texto visível que explique a ação, o que impede prever o resultado e prejudica leitores de tela se não houver aria-label.",
+            "evidencia": "Botão quadrado com \"...\" no canto superior direito, sem nenhum texto associado.",
+            "sugestao": "Adicionar rótulo acessível descritivo (ex. \"Mais ações do painel\") e tooltip visível ao foco/hover.",
+            "principio": "WCAG 4.1.2 Nome, função, valor",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 1218,
+              "y": 25,
+              "largura": 34,
+              "altura": 36
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Cabeçalhos da tabela com contraste insuficiente",
+            "problema": "Os cabeçalhos de coluna estão em cinza claro e fonte pequena, dificultando relacionar cada valor à sua coluna.",
+            "evidencia": "Cabeçalhos \"Cliente\", \"Valor\" e \"Resp.\" em cinza claro sobre o card branco de \"Últimos negócios\".",
+            "sugestao": "Usar cinza escuro (#4B5563 ou mais escuro) e peso semibold nos cabeçalhos.",
+            "principio": "WCAG 1.4.3 Contraste mínimo (AA)",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 872,
+              "y": 325,
+              "largura": 190,
+              "altura": 16
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#A3A9B4",
+              "fundo_hex": "#FFFFFF",
+              "texto_grande": false
+            }
+          }
+        ],
+        "fora_do_alcance": [
+          "Visibilidade e contraste do indicador de foco no teclado, não observável em print estático",
+          "Presença de aria-label, roles e ordem de tabulação no HTML",
+          "Comportamento de textos truncados (ex. \"Distribuidora Horizonte Al...\") em zoom de 200% ou com leitor de tela"
+        ]
+      },
+      "uso": {
+        "entrada": 4243,
+        "saida": 2153,
+        "custoUsd": 0.07504,
+        "ms": 27949,
+        "modelo": "claude-opus-5"
+      }
+    },
+    "hierarquia": {
+      "lente": "hierarquia",
+      "resultado": {
+        "resumo": "O painel apresenta oito indicadores com peso visual idêntico e nenhuma hierarquia entre eles, enquanto a única ação em destaque (\"Exportar PDF\") é secundária para quem chega para ler resultados. O gráfico e a coluna de status carecem de rótulos que expliquem o que está sendo mostrado.",
+        "achados": [
+          {
+            "titulo": "Gráfico sem legenda, eixos ou período",
+            "problema": "O bloco principal de análise mostra duas linhas coloridas sem indicar o que cada uma representa, nem escala ou datas. A pessoa não consegue interpretar o dado.",
+            "evidencia": "Card com o título \"Desempenho\" e duas linhas (verde e vermelha) sem nenhum texto de eixo, legenda ou valor em toda a área do gráfico.",
+            "sugestao": "Trocar o título por algo descritivo (ex.: \"Negócios ganhos x perdidos, últimos 7 dias\") e adicionar legenda de séries, rótulos de eixo e valores nos pontos extremos.",
+            "principio": "Nielsen: visibilidade do estado do sistema; correspondência entre sistema e mundo real",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 249,
+              "y": 270,
+              "largura": 592,
+              "altura": 365
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Oito KPIs sem hierarquia entre si",
+            "problema": "Todos os indicadores usam o mesmo tamanho, peso e cor, então nada indica o que importa mais. A leitura vira varredura linear e a métrica-chave se perde.",
+            "evidencia": "\"R$ 84.210\", \"R$ 1.402\", \"60\", \"41\", \"18,3%\", \"23 d\", \"328\" e \"1.207\" aparecem em cards idênticos, mesma tipografia e mesmo tamanho.",
+            "sugestao": "Eleger 2 ou 3 métricas primárias com card maior e valor em corpo maior, e agrupar as demais em uma faixa secundária mais compacta, com rótulos de variação vs. período anterior.",
+            "principio": "Hierarquia visual e Lei de Prägnanz (agrupamento por semelhança)",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 249,
+              "y": 82,
+              "largura": 1002,
+              "altura": 172
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Ação em destaque é secundária",
+            "problema": "O único elemento com cor sólida da tela é \"Exportar PDF\", uma ação de saída. Isso rouba atenção de um painel cujo objetivo é leitura e navegação para o pipeline.",
+            "evidencia": "Botão azul \"Exportar PDF\" no topo direito, único elemento preenchido com cor de marca, ao lado de um botão \"...\" sem rótulo.",
+            "sugestao": "Rebaixar \"Exportar PDF\" para botão secundário (contorno) e reservar o destaque azul para a ação que move o trabalho, como \"Novo negócio\"; nomear o menu \"...\" com tooltip e rótulo acessível.",
+            "principio": "Nielsen: consistência e padrões; hierarquia de ações primária/secundária",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 1081,
+              "y": 22,
+              "largura": 170,
+              "altura": 42
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Rótulos dos KPIs em cinza fraco",
+            "problema": "Os rótulos que dão sentido aos números estão em cinza claro e corpo pequeno sobre branco, dificultando a leitura e invertendo a relação com o valor.",
+            "evidencia": "Textos \"Receita\", \"Ticket médio\", \"Negócios ganhos\", \"Negócios perdidos\", \"Conversão\", \"Ciclo médio\", \"Leads novos\" e \"Atividades\" em cinza bem claro dentro dos cards brancos.",
+            "sugestao": "Escurecer os rótulos para pelo menos #6B7280 (idealmente #4B5563) e manter o contraste mínimo de 4,5:1 em texto de ~13px.",
+            "principio": "WCAG 2.1 – 1.4.3 Contraste mínimo",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 263,
+              "y": 96,
+              "largura": 560,
+              "altura": 115
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#9CA3AF",
+              "fundo_hex": "#FFFFFF",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Coluna de status sem cabeçalho nem legenda",
+            "problema": "A última coluna da tabela traz bolinhas verdes e vermelhas sem título nem legenda, obrigando a adivinhar o significado. A cor sozinha também não comunica.",
+            "evidencia": "Cabeçalhos \"Cliente\", \"Valor\" e \"Resp.\" seguidos de uma quarta coluna sem rótulo, com pontos verdes e vermelhos nas linhas de \"Distribuidora Horizonte Al...\" a \"Studio Pilates Equilíbrio\".",
+            "sugestao": "Nomear a coluna (ex.: \"Situação\") e substituir o ponto por rótulo textual curto \"Ganho\"/\"Perdido\", mantendo a cor apenas como reforço.",
+            "principio": "WCAG 2.1 – 1.4.1 Uso de cor; rotulagem de dados tabulares",
+            "severidade": "media",
+            "confianca": "alta",
+            "regiao": {
+              "x": 1140,
+              "y": 322,
+              "largura": 100,
+              "altura": 268
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Nomes de clientes truncados",
+            "problema": "Quase todos os nomes da lista são cortados, então não dá para distinguir clientes com prefixo parecido sem interagir.",
+            "evidencia": "\"Distribuidora Horizonte Al...\", \"Clínica Vida Plena Odonto...\", \"Oficina Mecânica Irmãos ...\", \"Escola de Idiomas Ponte ...\", \"Construtora Alicerce Enge...\".",
+            "sugestao": "Reduzir a largura das colunas \"Valor\" e \"Resp.\", permitir quebra em duas linhas para o nome e garantir tooltip com o nome completo.",
+            "principio": "Nielsen: reconhecer em vez de lembrar; legibilidade de conteúdo",
+            "severidade": "baixa",
+            "confianca": "alta",
+            "regiao": {
+              "x": 868,
+              "y": 352,
+              "largura": 180,
+              "altura": 238
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          }
+        ],
+        "fora_do_alcance": [
+          "Se \"últimos 7 dias\" é apenas um rótulo ou um seletor de período clicável",
+          "Comportamento de tooltips no gráfico e na lista ao passar o mouse",
+          "Se existe uma ação primária (ex.: criar negócio) em outra tela ou em estado não visível neste print"
+        ]
+      },
+      "uso": {
+        "entrada": 4184,
+        "saida": 2951,
+        "custoUsd": 0.094695,
+        "ms": 39307,
+        "modelo": "claude-opus-5"
+      }
+    },
+    "produto": {
+      "lente": "produto",
+      "resultado": {
+        "resumo": "Painel entrega oito números soltos sem comparação, meta ou próxima ação: a tela informa, mas não orienta o que fazer a seguir. A única ação em destaque é 'Exportar PDF', o que sugere que o valor real da ferramenta acontece fora dela.",
+        "achados": [
+          {
+            "titulo": "KPIs sem comparação nem meta",
+            "problema": "Os oito indicadores mostram apenas o valor absoluto do período, sem variação vs. período anterior ou meta. A pessoa não sabe se 'R$ 84.210' é bom ou ruim, o que reduz o hábito de abrir o painel (retenção) e o uso do produto na rotina.",
+            "evidencia": "Cards exibem só rótulo e número: 'Receita R$ 84.210', 'Conversão 18,3%', 'Ciclo médio 23 d', sem nenhum delta, seta ou referência de meta — mesmo havendo item 'Metas' no menu lateral.",
+            "sugestao": "Adicionar em cada card a variação percentual vs. os 7 dias anteriores (com sinal e cor) e, quando houver meta cadastrada, uma barra de progresso ou '% da meta'.",
+            "principio": "Visibilidade do status do sistema; dado acionável exige contexto comparativo",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 248,
+              "y": 84,
+              "largura": 1004,
+              "altura": 172
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Gráfico 'Desempenho' sem legenda nem eixos",
+            "problema": "O gráfico ocupa o maior bloco da tela mas não diz o que as duas linhas representam nem a escala. Vira ruído decorativo, desperdiça o espaço nobre e gera dúvida/suporte em vez de decisão.",
+            "evidencia": "Cartão titulado apenas 'Desempenho', com uma linha verde e uma vermelha, sem legenda, sem rótulos de eixo X (datas) e sem valores no eixo Y.",
+            "sugestao": "Incluir legenda nomeando as séries (ex.: 'Ganhos' x 'Perdidos'), eixo temporal, escala de valores e tooltip com o número por ponto.",
+            "principio": "Correspondência entre sistema e mundo real; clareza de dados (Few)",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 250,
+              "y": 270,
+              "largura": 590,
+              "altura": 365
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Ação principal é exportar, não vender",
+            "problema": "O único botão primário é 'Exportar PDF'. Para uma equipe de vendas, as ações de valor (criar negócio, registrar atividade, avançar pipeline) não existem na tela, o que reduz ativação e frequência de uso do produto.",
+            "evidencia": "Topo direito com botão azul 'Exportar PDF' e um menu '...'; nenhum CTA de 'Novo negócio', 'Novo lead' ou atalho a partir da lista 'Últimos negócios'.",
+            "sugestao": "Promover um CTA primário de criação (ex.: 'Novo negócio') no cabeçalho e rebaixar 'Exportar PDF' para ação secundária dentro do menu '...'.",
+            "principio": "Hierarquia de ações alinhada ao objetivo do usuário",
+            "severidade": "alta",
+            "confianca": "media",
+            "regiao": {
+              "x": 1081,
+              "y": 23,
+              "largura": 170,
+              "altura": 40
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Período '7 dias' parece fixo e é pouco visível",
+            "problema": "O recorte temporal governa todos os números, mas aparece como texto cinza pequeno ao lado do título, sem aparência de controle. Usuários podem ler os KPIs com a janela errada e tirar conclusões equivocadas.",
+            "evidencia": "Subtítulo 'últimos 7 dias' em cinza claro ao lado de 'Visão geral', sem seta, borda ou qualquer affordance de seletor.",
+            "sugestao": "Transformar em um seletor explícito de período (chip com seta: 7d / 30d / trimestre / personalizado) posicionado junto ao cabeçalho dos cards.",
+            "principio": "Affordance e controle do usuário (Nielsen: liberdade e controle)",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 374,
+              "y": 36,
+              "largura": 86,
+              "altura": 24
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Lista de negócios trunca nomes e usa código de cor sem legenda",
+            "problema": "Os nomes de cliente são cortados e o status vira um ponto verde/vermelho sem rótulo. A pessoa precisa clicar para entender cada linha, aumentando atrito e chamadas de suporte sobre o significado das cores.",
+            "evidencia": "'Distribuidora Horizonte Al...', 'Clínica Vida Plena Odonto...', 'Construtora Alicerce Enge...' truncados, e coluna final apenas com bolinhas verdes e vermelhas sem cabeçalho nem legenda.",
+            "sugestao": "Adicionar coluna 'Status' com rótulo textual (Ganho/Perdido) ao lado do ponto e exibir nome completo via tooltip ou largura maior, aproveitando o espaço vazio inferior da tela.",
+            "principio": "Não depender só de cor para transmitir informação (WCAG 1.4.1) e reconhecimento em vez de memorização",
+            "severidade": "media",
+            "confianca": "alta",
+            "regiao": {
+              "x": 862,
+              "y": 320,
+              "largura": 380,
+              "altura": 270
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          }
+        ],
+        "fora_do_alcance": [
+          "Não dá para saber se cards, linhas da tabela e o texto 'últimos 7 dias' são clicáveis ou levam a drill-down.",
+          "Estados vazios (conta nova, sem negócios no período) e carregamento não aparecem no print.",
+          "Comportamento real do 'Exportar PDF' e das opções do menu '...' não é observável."
+        ]
+      },
+      "uso": {
+        "entrada": 4186,
+        "saida": 2437,
+        "custoUsd": 0.081855,
+        "ms": 35070,
+        "modelo": "claude-opus-5"
+      }
+    }
+  },
+  "sintese": {
+    "sintese": {
+      "veredito": "O painel está visualmente organizado, mas não é interpretável: o maior bloco da tela (gráfico) e o status dos negócios não comunicam nada sem legenda, e os oito KPIs não dizem se o número é bom ou ruim. É um dashboard bonito que não sustenta decisão.",
+      "prioridades": [
+        {
+          "titulo": "Tornar o gráfico 'Desempenho' legível: legenda, eixos e período",
+          "ids": [
+            "1",
+            "8",
+            "13",
+            "20"
+          ],
+          "por_que_primeiro": "É o maior bloco da tela, convergem as quatro lentes e hoje ele ocupa espaço nobre sem entregar informação alguma.",
+          "hipotese": "Se adicionarmos legenda nomeando as séries, rótulos de eixo com escala e o período no próprio gráfico (além de diferenciação por forma/traço, não só cor), então o tempo até a primeira interação analítica cai e as dúvidas sobre 'o que esse gráfico mostra' desaparecem, porque a pessoa passa a conseguir interpretar o dado sem inferência.",
+          "metrica": "Taxa de interação com o gráfico (hover/tooltip/filtro) e tickets de suporte sobre interpretação do painel",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "titulo": "Dar significado às linhas da tabela: status com rótulo e nomes completos",
+          "ids": [
+            "2",
+            "7",
+            "17",
+            "23",
+            "4",
+            "18"
+          ],
+          "por_que_primeiro": "Cor sozinha é falha de acessibilidade e de compreensão ao mesmo tempo; a correção é barata e desbloqueia a leitura de toda a tabela.",
+          "hipotese": "Se a coluna de status ganhar cabeçalho, texto/ícone além da cor e os nomes de cliente exibirem tooltip ou largura suficiente, então a pessoa identificará o estado de cada negócio sem clicar, porque a informação deixa de depender de memória e de percepção cromática.",
+          "metrica": "Cliques exploratórios por linha (clique-para-entender) e taxa de acerto em teste de interpretação de status",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "titulo": "KPIs com hierarquia e contexto (variação vs. período anterior / meta)",
+          "ids": [
+            "14",
+            "19",
+            "9",
+            "16"
+          ],
+          "por_que_primeiro": "Oito números iguais e sem comparação não geram decisão nem hábito de retorno ao painel — é o que mais afeta retenção.",
+          "hipotese": "Se destacarmos 2–3 métricas-chave com maior peso visual e adicionarmos variação percentual vs. período anterior ou meta em cada KPI, então a frequência de retorno ao painel aumenta, porque a pessoa passa a extrair um julgamento ('está bom ou ruim') em segundos.",
+          "metrica": "Sessões recorrentes por usuário/semana no painel e tempo até primeira ação após abrir a tela",
+          "impacto": "alto",
+          "esforco": "medio"
+        }
+      ],
+      "matriz": [
+        {
+          "id": "1",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "id": "2",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "3",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "4",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "5",
+          "impacto": "baixo",
+          "esforco": "baixo"
+        },
+        {
+          "id": "6",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "7",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "8",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "id": "9",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "10",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "11",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "12",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "13",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "id": "14",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "id": "15",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "16",
+          "impacto": "baixo",
+          "esforco": "baixo"
+        },
+        {
+          "id": "17",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "18",
+          "impacto": "baixo",
+          "esforco": "baixo"
+        },
+        {
+          "id": "19",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "id": "20",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "id": "21",
+          "impacto": "alto",
+          "esforco": "alto"
+        },
+        {
+          "id": "22",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "23",
+          "impacto": "medio",
+          "esforco": "baixo"
+        }
+      ]
+    },
+    "uso": {
+      "entrada": 5347,
+      "saida": 1994,
+      "custoUsd": 0.076585,
+      "ms": 23549,
+      "modelo": "claude-opus-5"
+    }
+  },
+  "geradoEm": "2026-09-28T15:36:31.737Z"
+}

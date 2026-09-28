@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+:root {
+  --papel: #f5f3ee;
+  --cartao: #ffffff;
+  --tinta: #16140f;
+  --tinta-2: #45413a;
+  --tinta-3: #69645a;
+  --linha: #e3dfd5;
+  --linha-forte: #cfc9bb;
+  --acento: #d9480f;
+  --acento-texto: #a8380b;
+  --ok: #067647;
+  --ok-fundo: #e7f6ee;
+  --alerta: #93370d;
+  --alerta-fundo: #fdf0e1;
+  --neutro-fundo: #efece5;
+}
+
+@theme inline {
+  --color-papel: var(--papel);
+  --color-cartao: var(--cartao);
+  --color-tinta: var(--tinta);
+  --color-tinta-2: var(--tinta-2);
+  --color-tinta-3: var(--tinta-3);
+  --color-linha: var(--linha);
+  --color-linha-forte: var(--linha-forte);
+  --color-acento: var(--acento);
+  --color-acento-texto: var(--acento-texto);
+  --color-ok: var(--ok);
+  --color-ok-fundo: var(--ok-fundo);
+  --color-alerta: var(--alerta);
+  --color-alerta-fundo: var(--alerta-fundo);
+  --color-neutro-fundo: var(--neutro-fundo);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-instrument-serif);
+}
+
+html {
+  background: var(--papel);
+}
+
+body {
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #ffd8c2;
+}
+
+.titulo-serif {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+@keyframes varredura {
+  0% {
+    top: 0%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+.linha-varredura {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--acento), transparent);
+  box-shadow: 0 0 18px 4px rgba(217, 72, 15, 0.25);
+  animation: varredura 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes surgir {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.surgir {
+  animation: surgir 0.35s ease-out both;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+}
+.aparecer {
+  animation: aparecer 0.3s ease-out;
+}
+
+@keyframes pulso {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.pulso {
+  animation: pulso 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .linha-varredura,
+  .surgir,
+  .aparecer,
+  .pulso {
+    animation: none;
+  }
+}

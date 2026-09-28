@@ -1,0 +1,83 @@
+<!doctype html>
+<!-- Tela fictícia com problemas plantados de propósito, usada como exemplo no Crivo. -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1280px; height: 800px; font-family: "Segoe UI", Arial, sans-serif; background: #FAF7F2; color: #333; overflow: hidden; }
+  header { height: 72px; background: #fff; border-bottom: 1px solid #eee; display: flex; align-items: center; justify-content: space-between; padding: 0 56px; }
+  .logo { font-size: 24px; font-weight: 700; color: #5B3A29; letter-spacing: -0.5px; }
+  .logo span { color: #C98B5E; }
+  nav a { margin-left: 28px; font-size: 14px; color: #666; text-decoration: none; }
+  main { display: grid; grid-template-columns: 1fr 400px; gap: 40px; padding: 36px 56px; }
+  h1 { font-size: 26px; color: #2b2b2b; margin-bottom: 6px; }
+  .sub { font-size: 14px; color: #777; margin-bottom: 24px; }
+  .card { background: #fff; border-radius: 12px; padding: 28px; border: 1px solid #eee; }
+  .input { height: 46px; border: 1px solid #e3e3e3; border-radius: 8px; padding: 0 14px; display: flex; align-items: center; font-size: 15px; color: #C9C9C9; margin-bottom: 14px; background: #fff; }
+  .input.err { border-color: #E53935; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .erro { color: #E53935; font-size: 12px; margin: -8px 0 14px; }
+  .cupom { margin-top: 10px; background: #FFF4D6; border: 2px dashed #F2B705; border-radius: 12px; padding: 18px; display: flex; gap: 12px; align-items: center; }
+  .cupom .input { flex: 1; margin: 0; }
+  .btn-cupom { background: #F2B705; color: #3a2a00; font-weight: 800; font-size: 15px; padding: 14px 22px; border-radius: 8px; letter-spacing: 0.5px; }
+  .termos { display: flex; gap: 8px; align-items: center; margin-top: 18px; font-size: 10px; color: #BDBDBD; }
+  .termos i { width: 12px; height: 12px; border: 1px solid #ccc; border-radius: 2px; display: inline-block; }
+  .resumo h2 { font-size: 18px; margin-bottom: 18px; color: #2b2b2b; }
+  .item { display: flex; gap: 14px; align-items: center; margin-bottom: 16px; }
+  .thumb { width: 56px; height: 56px; border-radius: 8px; background: linear-gradient(135deg,#8B5E3C,#C98B5E); }
+  .item p { font-size: 14px; color: #333; }
+  .item small { font-size: 12px; color: #888; }
+  .item b { margin-left: auto; font-size: 14px; font-weight: 600; }
+  .linha { display: flex; justify-content: space-between; font-size: 14px; color: #555; padding: 8px 0; }
+  .frete { font-size: 12px; color: #999; font-style: italic; }
+  .total { display: flex; justify-content: space-between; border-top: 1px solid #eee; margin-top: 10px; padding-top: 14px; font-size: 15px; color: #B5B5B5; }
+  .total b { font-size: 16px; color: #B5B5B5; font-weight: 600; }
+  .acoes { display: grid; gap: 10px; margin-top: 22px; }
+  .btn-sec { background: #5B3A29; color: #fff; text-align: center; padding: 15px; border-radius: 10px; font-weight: 700; font-size: 16px; }
+  .btn-pri { border: 1.5px solid #9CC9BC; color: #9CC9BC; text-align: center; padding: 13px; border-radius: 10px; font-size: 15px; background: #fff; }
+  .selo { margin-top: 16px; font-size: 13px; color: #555; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">brisa<span>.</span>café</div>
+  <nav><a>Cafés</a><a>Métodos</a><a>Assinatura</a><a>Minha conta</a><a>Carrinho (3)</a></nav>
+</header>
+<main>
+  <section>
+    <h1>Pagamento</h1>
+    <p class="sub">Preencha os dados do cartão para concluir.</p>
+    <div class="card">
+      <div class="input">Nome impresso no cartão</div>
+      <div class="input err">Número do cartão</div>
+      <p class="erro">Dados inválidos</p>
+      <div class="row">
+        <div class="input">MM/AA</div>
+        <div class="input">CVV</div>
+      </div>
+      <div class="input">CPF do titular</div>
+      <div class="cupom">
+        <div class="input">Tem um cupom? Digite aqui</div>
+        <div class="btn-cupom">APLICAR CUPOM</div>
+      </div>
+      <div class="termos"><i></i> Li e aceito os termos de uso, a política de privacidade e as condições de assinatura recorrente.</div>
+    </div>
+  </section>
+  <aside class="card resumo">
+    <h2>Seu pedido</h2>
+    <div class="item"><div class="thumb"></div><div><p>Catuaí Amarelo 250g</p><small>Moagem: grãos</small></div><b>R$ 54,90</b></div>
+    <div class="item"><div class="thumb"></div><div><p>Bourbon Vermelho 250g</p><small>Moagem: média</small></div><b>R$ 49,90</b></div>
+    <div class="item"><div class="thumb"></div><div><p>Filtro de papel 102</p><small>100 unidades</small></div><b>R$ 18,00</b></div>
+    <div class="linha"><span>Subtotal</span><span>R$ 122,80</span></div>
+    <div class="linha"><span>Frete</span><span class="frete">calculado na próxima etapa</span></div>
+    <div class="total"><span>Total parcial</span><b>R$ 122,80</b></div>
+    <div class="acoes">
+      <div class="btn-sec">Continuar comprando</div>
+      <div class="btn-pri">Finalizar compra</div>
+    </div>
+    <p class="selo">Compra protegida · Parcele em até 3x</p>
+  </aside>
+</main>
+</body>
+</html>

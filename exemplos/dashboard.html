@@ -1,0 +1,79 @@
+<!doctype html>
+<!-- Tela fictícia com problemas plantados de propósito, usada como exemplo no Crivo. -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1280px; height: 860px; font-family: "Segoe UI", Arial, sans-serif; background: #F4F6F8; color: #333; overflow: hidden; display: flex; }
+  aside { width: 220px; background: #0F1B2D; color: #9FB0C8; padding: 22px 16px; }
+  .logo { color: #fff; font-weight: 700; font-size: 20px; margin-bottom: 26px; padding-left: 8px; }
+  aside a { display: block; font-size: 13px; padding: 9px 8px; color: #8A9BB4; }
+  aside a.on { color: #fff; background: #1B2B44; border-radius: 6px; }
+  main { flex: 1; padding: 22px 28px; }
+  .top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  h1 { font-size: 22px; color: #1F2937; }
+  .per { font-size: 11px; color: #9CA3AF; margin-left: 10px; font-weight: 400; }
+  .acoes { display: flex; gap: 10px; align-items: center; }
+  .export { background: #2563EB; color: #fff; padding: 11px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; }
+  .mais { width: 36px; height: 36px; border: 1px solid #E5E7EB; border-radius: 8px; display: grid; place-items: center; color: #6B7280; background: #fff; }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+  .kpi { background: #fff; border-radius: 10px; padding: 14px 16px; border: 1px solid #EEF0F3; }
+  .kpi small { font-size: 12px; color: #B0B0B0; display: block; }
+  .kpi b { font-size: 24px; color: #111827; display: block; margin-top: 4px; }
+  .grid2 { display: grid; grid-template-columns: 1.4fr 1fr; gap: 12px; }
+  .box { background: #fff; border-radius: 10px; border: 1px solid #EEF0F3; padding: 16px; }
+  .box h3 { font-size: 14px; color: #374151; margin-bottom: 10px; }
+  svg { display: block; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; font-size: 11px; color: #9CA3AF; font-weight: 600; padding: 6px 4px; border-bottom: 1px solid #F0F0F0; }
+  td { padding: 9px 4px; border-bottom: 1px solid #F5F5F5; color: #374151; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 110px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+</style>
+</head>
+<body>
+<aside>
+  <div class="logo">norte</div>
+  <a class="on">Visão geral</a><a>Vendas</a><a>Pipeline</a><a>Clientes</a><a>Produtos</a><a>Metas</a><a>Comissões</a>
+  <a>Relatórios</a><a>Integrações</a><a>Equipe</a><a>Automação</a><a>Faturamento</a><a>Configurações</a><a>Ajuda</a>
+</aside>
+<main>
+  <div class="top">
+    <h1>Visão geral <span class="per">últimos 7 dias</span></h1>
+    <div class="acoes"><div class="export">Exportar PDF</div><div class="mais">⋯</div></div>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><small>Receita</small><b>R$ 84.210</b></div>
+    <div class="kpi"><small>Ticket médio</small><b>R$ 1.402</b></div>
+    <div class="kpi"><small>Negócios ganhos</small><b>60</b></div>
+    <div class="kpi"><small>Negócios perdidos</small><b>41</b></div>
+    <div class="kpi"><small>Conversão</small><b>18,3%</b></div>
+    <div class="kpi"><small>Ciclo médio</small><b>23 d</b></div>
+    <div class="kpi"><small>Leads novos</small><b>328</b></div>
+    <div class="kpi"><small>Atividades</small><b>1.207</b></div>
+  </div>
+  <div class="grid2">
+    <div class="box">
+      <h3>Desempenho</h3>
+      <svg width="560" height="300" viewBox="0 0 560 300">
+        <polyline fill="none" stroke="#22C55E" stroke-width="3" points="0,220 80,180 160,200 240,140 320,150 400,90 480,110 560,60"/>
+        <polyline fill="none" stroke="#EF4444" stroke-width="3" points="0,240 80,230 160,210 240,225 320,190 400,200 480,170 560,180"/>
+      </svg>
+    </div>
+    <div class="box">
+      <h3>Últimos negócios</h3>
+      <table>
+        <tr><th>Cliente</th><th>Valor</th><th>Resp.</th><th></th></tr>
+        <tr><td>Distribuidora Horizonte Alimentos</td><td>R$ 12.400</td><td>Camila</td><td><i class="dot" style="background:#22C55E"></i></td></tr>
+        <tr><td>Clínica Vida Plena Odontologia</td><td>R$ 3.980</td><td>Rafael</td><td><i class="dot" style="background:#EF4444"></i></td></tr>
+        <tr><td>Oficina Mecânica Irmãos Prado</td><td>R$ 2.150</td><td>Camila</td><td><i class="dot" style="background:#22C55E"></i></td></tr>
+        <tr><td>Escola de Idiomas Ponte Aérea</td><td>R$ 6.700</td><td>Júlia</td><td><i class="dot" style="background:#EF4444"></i></td></tr>
+        <tr><td>Padaria e Confeitaria Trigo Bom</td><td>R$ 1.320</td><td>Rafael</td><td><i class="dot" style="background:#22C55E"></i></td></tr>
+        <tr><td>Construtora Alicerce Engenharia</td><td>R$ 18.900</td><td>Júlia</td><td><i class="dot" style="background:#EF4444"></i></td></tr>
+        <tr><td>Studio Pilates Equilíbrio</td><td>R$ 2.890</td><td>Camila</td><td><i class="dot" style="background:#22C55E"></i></td></tr>
+      </table>
+    </div>
+  </div>
+</main>
+</body>
+</html>

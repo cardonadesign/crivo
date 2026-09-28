@@ -1,0 +1,725 @@
+{
+  "imagem": {
+    "src": "/samples/cadastro.png",
+    "largura": 585,
+    "altura": 1266
+  },
+  "lentes": {
+    "usabilidade": {
+      "lente": "usabilidade",
+      "resultado": {
+        "resumo": "Formulário de cadastro com rótulos apenas como placeholder, mensagem de erro genérica na senha sem informar os requisitos e ícones sociais sem identificação textual. O conjunto gera dependência de memória e alto risco de erro no preenchimento.",
+        "achados": [
+          {
+            "titulo": "Erro de senha sem dizer os requisitos",
+            "problema": "A mensagem informa que a senha é inválida, mas não lista quais regras devem ser atendidas, deixando a pessoa tentando adivinhar.",
+            "evidencia": "Campo \"Senha\" com borda vermelha e texto \"A senha não atende aos requisitos\", sem nenhuma lista de critérios (tamanho mínimo, número, símbolo) na tela.",
+            "sugestao": "Exibir os requisitos de senha desde o início, com checklist que marca cada regra atendida em tempo real, e substituir a mensagem genérica por indicação do que falta.",
+            "principio": "Nielsen 9 — ajudar a reconhecer, diagnosticar e recuperar erros",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 36,
+              "y": 760,
+              "largura": 513,
+              "altura": 92
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Rótulos só como placeholder",
+            "problema": "Todos os campos usam o texto de exemplo como único rótulo; ao digitar, o rótulo desaparece e a pessoa precisa lembrar o que era cada caixa, dificultando a revisão antes de enviar.",
+            "evidencia": "Campos \"Nome completo\", \"E-mail\", \"Telefone\", \"Nascimento\", \"Gênero\", \"CPF\" e \"Confirmar senha\" não têm rótulo externo, apenas texto interno em cinza claro.",
+            "sugestao": "Adicionar rótulo persistente acima de cada campo (ou label flutuante) e manter o placeholder apenas para formato esperado.",
+            "principio": "Nielsen 6 — reconhecimento em vez de memorização",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 36,
+              "y": 352,
+              "largura": 513,
+              "altura": 578
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Botões sociais sem identificação",
+            "problema": "Os três círculos coloridos não trazem rótulo nem logo visível, obrigando a pessoa a deduzir qual provedor de login cada cor representa.",
+            "evidencia": "Abaixo de \"ou continue com\" há três círculos sólidos vermelho, preto e azul, sem texto ou símbolo.",
+            "sugestao": "Usar botões com logo e texto do provedor, por exemplo \"Continuar com Google\", \"Continuar com Apple\".",
+            "principio": "Nielsen 2 — correspondência com o mundo real / clareza de affordance",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 222,
+              "y": 1078,
+              "largura": 141,
+              "altura": 42
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "\"Já tenho uma conta\" parece desabilitado",
+            "problema": "O link secundário está em cinza muito claro, semelhante a um elemento inativo, o que pode fazer quem já é cliente não perceber o caminho para login.",
+            "evidencia": "Texto \"Já tenho uma conta\" em cinza claro, sem sublinhado, contrastando com o restante dos textos em preto.",
+            "sugestao": "Dar aparência clara de link acionável: cor de ação da marca, peso maior e área de toque de 44px.",
+            "principio": "Nielsen 4 — consistência e padrões; affordance de link",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 190,
+              "y": 1136,
+              "largura": 205,
+              "altura": 34
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#C8C8C8",
+              "fundo_hex": "#FFFFFF",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Formato de campos sensíveis não informado",
+            "problema": "Campos como \"Nascimento\", \"Telefone\" e \"CPF\" não indicam o formato esperado, aumentando a chance de erro de digitação e rejeição no envio.",
+            "evidencia": "Placeholders exibem só \"Nascimento\", \"Telefone\" e \"CPF\", sem exemplo do tipo \"DD/MM/AAAA\" ou \"000.000.000-00\".",
+            "sugestao": "Incluir máscara de entrada e texto de apoio com o formato esperado sob cada campo.",
+            "principio": "Nielsen 5 — prevenção de erros",
+            "severidade": "media",
+            "confianca": "alta",
+            "regiao": {
+              "x": 36,
+              "y": 513,
+              "largura": 513,
+              "altura": 146
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          }
+        ],
+        "fora_do_alcance": [
+          "Não é possível verificar se a validação ocorre em tempo real ou apenas no envio, nem se o botão fica em estado de carregamento.",
+          "Não dá para avaliar se \"Termos de Uso\" e \"Política de Privacidade\" no rodapé são realmente links clicáveis.",
+          "Comportamento dos selects \"Gênero\" e \"Como nos conheceu?\" (opções, obrigatoriedade real) não é observável no print."
+        ]
+      },
+      "uso": {
+        "entrada": 3681,
+        "saida": 1879,
+        "custoUsd": 0.06538,
+        "ms": 24760,
+        "modelo": "claude-opus-5"
+      }
+    },
+    "acessibilidade": {
+      "lente": "acessibilidade",
+      "resultado": {
+        "resumo": "O formulário depende de placeholders cinza-claro como único rótulo e tem vários textos abaixo do contraste mínimo, incluindo o texto do botão primário. Os botões de login social são apenas círculos coloridos, sem rótulo textual visível.",
+        "achados": [
+          {
+            "titulo": "Texto do botão primário sem contraste",
+            "problema": "O rótulo branco sobre o amarelo do botão principal fica quase ilegível, comprometendo a ação mais importante da tela.",
+            "evidencia": "Botão preenchido em amarelo com o texto \"Criar conta\" em branco e negrito.",
+            "sugestao": "Trocar o texto para um tom escuro (ex.: #1A1A1A) sobre o amarelo, atingindo pelo menos 4.5:1.",
+            "principio": "WCAG 2.2 – 1.4.3 Contraste (Mínimo)",
+            "severidade": "critica",
+            "confianca": "alta",
+            "regiao": {
+              "x": 228,
+              "y": 970,
+              "largura": 130,
+              "altura": 28
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#FFFFFF",
+              "fundo_hex": "#FCD44F",
+              "texto_grande": true
+            }
+          },
+          {
+            "titulo": "Placeholder usado como rótulo",
+            "problema": "Nenhum campo tem label visível; ao digitar, o usuário perde a referência do que está preenchendo, e o cinza-claro do placeholder já é difícil de ler.",
+            "evidencia": "Campos exibem apenas \"Nome completo\", \"E-mail\", \"Telefone\", \"Nascimento\", \"Gênero\", \"CPF\", \"Senha\" e \"Confirmar senha\" dentro das caixas, sem texto acima.",
+            "sugestao": "Adicionar rótulos persistentes acima de cada campo e escurecer o placeholder para no mínimo 4.5:1.",
+            "principio": "WCAG 2.2 – 3.3.2 Rótulos ou Instruções e 1.4.3 Contraste",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 36,
+              "y": 352,
+              "largura": 513,
+              "altura": 83
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#A9A9A9",
+              "fundo_hex": "#FFFFFF",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Login social identificado só por cor",
+            "problema": "Os três botões de login social são círculos coloridos sem ícone reconhecível nem texto, então quem não distingue as cores (ou usa leitor de tela sem rótulo) não sabe qual provedor está escolhendo.",
+            "evidencia": "Abaixo de \"ou continue com\" há três círculos sólidos vermelho, preto e azul, sem nenhum texto ou glifo.",
+            "sugestao": "Incluir o logo de cada provedor e rótulo textual visível (ex.: \"Entrar com Google\") ou, no mínimo, nome abaixo do botão e aria-label.",
+            "principio": "WCAG 2.2 – 1.4.1 Uso de Cor e 1.1.1 Conteúdo Não Textual",
+            "severidade": "alta",
+            "confianca": "media",
+            "regiao": {
+              "x": 220,
+              "y": 1078,
+              "largura": 144,
+              "altura": 42
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Link \"Já tenho uma conta\" apagado",
+            "problema": "O link secundário está em cinza muito claro, parecendo texto desabilitado e ficando difícil de ler para baixa visão.",
+            "evidencia": "Texto \"Já tenho uma conta\" em cinza-claro sobre fundo branco, sem sublinhado ou destaque.",
+            "sugestao": "Usar cor com contraste ≥4.5:1 e sublinhar ou aplicar peso de link para sinalizar interatividade.",
+            "principio": "WCAG 2.2 – 1.4.3 Contraste (Mínimo)",
+            "severidade": "media",
+            "confianca": "alta",
+            "regiao": {
+              "x": 212,
+              "y": 1142,
+              "largura": 162,
+              "altura": 22
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#BDBDBD",
+              "fundo_hex": "#FFFFFF",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Mensagem de erro genérica e sem ícone",
+            "problema": "O erro diz apenas que a senha não atende aos requisitos, sem listá-los, e é sinalizado só por vermelho na borda e no texto.",
+            "evidencia": "Campo \"Senha\" com borda vermelha e o texto \"A senha não atende aos requisitos\", sem nenhuma regra visível de senha na tela.",
+            "sugestao": "Exibir os requisitos de senha antes do envio e acrescentar ícone de alerta junto à mensagem, não apenas cor.",
+            "principio": "WCAG 2.2 – 3.3.1 Identificação de Erro, 3.3.3 Sugestão de Erro e 1.4.1 Uso de Cor",
+            "severidade": "media",
+            "confianca": "alta",
+            "regiao": {
+              "x": 36,
+              "y": 829,
+              "largura": 256,
+              "altura": 22
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Aviso legal em corpo minúsculo e claro",
+            "problema": "O texto sobre Termos de Uso e Política de Privacidade está em fonte muito pequena e cinza-claro, dificultando a leitura de informação juridicamente relevante.",
+            "evidencia": "Rodapé com \"Ao criar uma conta você concorda com os Termos de Uso e a Política de Privacidade da Rotina Tecnologia.\" em tamanho bem menor que o restante.",
+            "sugestao": "Aumentar para pelo menos 14px, escurecer o texto e destacar os links de Termos e Política como links reais.",
+            "principio": "WCAG 2.2 – 1.4.3 Contraste e 1.4.4 Redimensionamento de Texto",
+            "severidade": "baixa",
+            "confianca": "media",
+            "regiao": {
+              "x": 36,
+              "y": 1216,
+              "largura": 513,
+              "altura": 38
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#AEAEAE",
+              "fundo_hex": "#FFFFFF",
+              "texto_grande": false
+            }
+          }
+        ],
+        "fora_do_alcance": [
+          "Indicador de foco visível no teclado e ordem de navegação não podem ser verificados em print estático.",
+          "Rótulos programáticos (label/for, aria-label) e associação do erro ao campo via aria-describedby não são observáveis.",
+          "Comportamento com fontes ampliadas, leitor de tela e autocomplete dos campos não pode ser avaliado."
+        ]
+      },
+      "uso": {
+        "entrada": 3770,
+        "saida": 2772,
+        "custoUsd": 0.08815,
+        "ms": 36303,
+        "modelo": "claude-opus-5"
+      }
+    },
+    "hierarquia": {
+      "lente": "hierarquia",
+      "resultado": {
+        "resumo": "A tela cumpre o fluxo de cadastro, mas a hierarquia textual trabalha contra a tarefa: o título usa linguagem burocrática de autenticação em vez de cadastro, o CTA principal tem baixa presença visual por causa do texto branco sobre amarelo e a ação secundária \"Já tenho uma conta\" quase desaparece. O microcopy de erro não diz o que corrigir.",
+        "achados": [
+          {
+            "titulo": "Título com jargão e tarefa errada",
+            "problema": "O título fala de autenticar credenciais, mas a tela é de criação de conta. A pessoa lê linguagem de sistema e não reconhece onde está.",
+            "evidencia": "Título em destaque: \"Autentique suas credenciais para prosseguir\", enquanto o botão principal diz \"Criar conta\" e o link inferior diz \"Já tenho uma conta\".",
+            "sugestao": "Trocar por algo direto e orientado ao benefício, como \"Crie sua conta\" ou \"Comece sua rotina\", e mover qualquer aviso de obrigatoriedade para os campos.",
+            "principio": "Nielsen: correspondência entre o sistema e o mundo real; UX writing orientado à tarefa",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 33,
+              "y": 208,
+              "largura": 515,
+              "altura": 82
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Erro de senha não diz o que corrigir",
+            "problema": "A mensagem aponta falha sem revelar quais são os requisitos, obrigando tentativa e erro para concluir o cadastro.",
+            "evidencia": "Sob o campo destacado em vermelho aparece apenas \"A senha não atende aos requisitos\", sem nenhuma lista de regras visível na tela.",
+            "sugestao": "Exibir os requisitos de forma persistente abaixo do campo (ex.: \"Mínimo 8 caracteres, 1 número e 1 letra maiúscula\") e marcar quais já foram atendidos.",
+            "principio": "Nielsen: ajudar a reconhecer, diagnosticar e recuperar de erros; WCAG 3.3.3 Sugestão de erro",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 34,
+              "y": 826,
+              "largura": 290,
+              "altura": 26
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "CTA principal com texto de baixa leitura",
+            "problema": "O rótulo branco sobre o amarelo claro enfraquece a ação primária, que deveria ser o elemento mais evidente da tela.",
+            "evidencia": "Botão amarelo com o texto \"Criar conta\" em branco, logo abaixo do campo \"Confirmar senha\".",
+            "sugestao": "Usar rótulo em texto escuro (ex.: cinza-900) sobre o amarelo, mantendo peso alto, para reforçar a hierarquia da ação primária.",
+            "principio": "WCAG 1.4.3 Contraste mínimo; hierarquia visual da ação primária",
+            "severidade": "alta",
+            "confianca": "media",
+            "regiao": {
+              "x": 35,
+              "y": 948,
+              "largura": 513,
+              "altura": 70
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#FFFFFF",
+              "fundo_hex": "#FCD65B",
+              "texto_grande": true
+            }
+          },
+          {
+            "titulo": "\"Já tenho uma conta\" quase invisível",
+            "problema": "Quem já é cadastrado precisa desse atalho, mas ele está mais apagado que o texto legal, invertendo a hierarquia entre ação e aviso.",
+            "evidencia": "O texto \"Já tenho uma conta\" aparece em cinza muito claro, com peso visual semelhante ou menor que o rodapé \"Ao criar uma conta você concorda com os Termos de Uso...\".",
+            "sugestao": "Elevar o contraste e o peso desse link (texto escuro ou cor de marca, com \"Entrar\" sublinhado) para sinalizar que é uma ação clicável.",
+            "principio": "WCAG 1.4.3; affordance de link e hierarquia de ações secundárias",
+            "severidade": "media",
+            "confianca": "alta",
+            "regiao": {
+              "x": 205,
+              "y": 1138,
+              "largura": 175,
+              "altura": 28
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#C9CDD2",
+              "fundo_hex": "#FFFFFF",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Login social sem rótulo de texto",
+            "problema": "Três círculos coloridos sem nome nem ícone legível não comunicam qual provedor será usado, gerando hesitação na escolha.",
+            "evidencia": "Depois de \"ou continue com\" há apenas três círculos sólidos (vermelho, preto e azul), sem texto ou logo identificável.",
+            "sugestao": "Adicionar os logotipos e rótulos acessíveis dos provedores (ex.: \"Continuar com Google\") ou pelo menos nomes sob cada ícone.",
+            "principio": "Nielsen: visibilidade e reconhecimento em vez de memorização; WCAG 1.1.1 Conteúdo não textual",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 218,
+              "y": 1078,
+              "largura": 150,
+              "altura": 42
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Campos identificados só por placeholder",
+            "problema": "Com o placeholder como único rótulo, a pessoa perde a referência do que está digitando e a revisão do formulário fica difícil.",
+            "evidencia": "Todos os campos usam texto interno cinza claro como identificação: \"Nome completo\", \"E-mail\", \"Telefone\", \"Nascimento\", \"Gênero\", \"CPF\".",
+            "sugestao": "Adicionar labels persistentes acima de cada campo e usar o placeholder apenas para formato (ex.: \"DD/MM/AAAA\" em Nascimento).",
+            "principio": "WCAG 3.3.2 Rótulos ou instruções; hierarquia de leitura em formulários",
+            "severidade": "media",
+            "confianca": "alta",
+            "regiao": {
+              "x": 35,
+              "y": 352,
+              "largura": 513,
+              "altura": 300
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          }
+        ],
+        "fora_do_alcance": [
+          "Se os requisitos de senha aparecem em tooltip, ao focar o campo ou após interação",
+          "Comportamento dos labels (se o placeholder sobe ao digitar) e estados de foco, hover e carregamento do botão",
+          "Qual provedor cada ícone social representa e o conteúdo real dos links de Termos e Política"
+        ]
+      },
+      "uso": {
+        "entrada": 3711,
+        "saida": 2854,
+        "custoUsd": 0.089905,
+        "ms": 37670,
+        "modelo": "claude-opus-5"
+      }
+    },
+    "produto": {
+      "lente": "produto",
+      "resultado": {
+        "resumo": "A tela pede 9 campos obrigatórios para criar conta em um app de hábitos, com título em linguagem burocrática e um erro de senha sem critérios. O conjunto empurra o abandono justamente no passo de ativação.",
+        "achados": [
+          {
+            "titulo": "Formulário longo demais para o valor entregue",
+            "problema": "São 9 campos obrigatórios (incluindo CPF, gênero, nascimento e pesquisa de origem) antes de qualquer valor entregue, o que derruba a taxa de conclusão de cadastro e a ativação de novos usuários.",
+            "evidencia": "O subtítulo afirma \"Todos os campos são obrigatórios.\" e a tela lista \"Nome completo\", \"E-mail\", \"Telefone\", \"Nascimento\", \"Gênero\", \"CPF\", \"Como nos conheceu?\", \"Senha\" e \"Confirmar senha\".",
+            "sugestao": "Reduzir o cadastro inicial a e-mail e senha (ou nome + e-mail) e mover CPF, gênero, telefone e \"Como nos conheceu?\" para onboarding pós-cadastro ou marcá-los como opcionais.",
+            "principio": "Redução de atrito no funil; minimização de dados (LGPD) e Lei de Hick",
+            "severidade": "critica",
+            "confianca": "alta",
+            "regiao": {
+              "x": 36,
+              "y": 296,
+              "largura": 513,
+              "altura": 440
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Erro de senha não diz os requisitos",
+            "problema": "A mensagem de erro não informa quais regras a senha deve cumprir, gerando tentativa e erro no último passo do cadastro e abandono ou contato com suporte.",
+            "evidencia": "Campo \"Senha\" com borda vermelha e o texto \"A senha não atende aos requisitos\", sem nenhuma lista de critérios na tela.",
+            "sugestao": "Exibir os requisitos de senha antes do preenchimento (ex. mínimo 8 caracteres, 1 número) com checklist que valida em tempo real, e substituir a mensagem genérica pelo critério não atendido.",
+            "principio": "Nielsen: mensagens de erro devem ser específicas e ajudar na recuperação",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 36,
+              "y": 757,
+              "largura": 513,
+              "altura": 95
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Título não comunica benefício e usa jargão",
+            "problema": "\"Autentique suas credenciais\" é linguagem de sistema e não diz que a pessoa está criando uma conta nem o que ganha com isso, reduzindo a motivação para preencher um formulário longo.",
+            "evidencia": "Título \"Autentique suas credenciais para prosseguir\" acima do formulário, cujo botão diz \"Criar conta\".",
+            "sugestao": "Trocar por algo direto e com valor, ex. \"Crie sua conta e comece seus hábitos hoje\", com uma linha de benefício (\"leva 1 minuto\").",
+            "principio": "Clareza de proposta de valor; linguagem do usuário, não do sistema",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 34,
+              "y": 210,
+              "largura": 515,
+              "altura": 80
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Link de login parece desabilitado",
+            "problema": "Usuários que já têm conta podem não identificar o caminho de entrar, criando contas duplicadas ou desistindo — impacto direto em retenção e volume de suporte.",
+            "evidencia": "O texto \"Já tenho uma conta\" aparece em cinza claro, sem sublinhado nem aparência de botão, ao contrário do CTA \"Criar conta\" em amarelo sólido.",
+            "sugestao": "Tratar \"Já tenho uma conta\" como link secundário evidente (cor de ação, peso maior, área de toque ampla) e posicioná-lo logo abaixo do CTA.",
+            "principio": "Affordance de elementos clicáveis; visibilidade de caminhos alternativos",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 180,
+              "y": 1137,
+              "largura": 225,
+              "altura": 32
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Login social sem identificação do provedor",
+            "problema": "Os atalhos de cadastro mais rápidos aparecem como três círculos coloridos sem nome ou logotipo legível, o que faz a pessoa ignorar a rota de menor atrito e voltar ao formulário longo.",
+            "evidencia": "Abaixo de \"ou continue com\" há apenas três círculos sólidos (vermelho, preto e azul), sem rótulos como \"Continuar com Google\".",
+            "sugestao": "Usar botões com logotipo e rótulo textual do provedor e dar destaque a eles acima do formulário, já que eliminam a maior parte dos campos.",
+            "principio": "Reconhecimento em vez de recordação; visibilidade do caminho de menor esforço",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 222,
+              "y": 1078,
+              "largura": 141,
+              "altura": 42
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          }
+        ],
+        "fora_do_alcance": [
+          "Não é possível saber se \"Termos de Uso\" e \"Política de Privacidade\" são links clicáveis nem qual o consentimento real coletado.",
+          "Não dá para avaliar máscaras, validação em tempo real e mensagens dos demais campos, nem o comportamento do teclado no mobile.",
+          "O que acontece após \"Criar conta\" (verificação de e-mail, onboarding, paywall) não aparece no print."
+        ]
+      },
+      "uso": {
+        "entrada": 3713,
+        "saida": 2426,
+        "custoUsd": 0.079215,
+        "ms": 32809,
+        "modelo": "claude-opus-5"
+      }
+    }
+  },
+  "sintese": {
+    "sintese": {
+      "veredito": "A tela é um formulário de cadastro longo que se apresenta com linguagem de sistema, esconde os rótulos dentro dos placeholders e deixa a ação primária com texto ilegível — ou seja, pede muito, explica pouco e dificulta o clique final. Os problemas se repetem nas quatro lentes, o que indica falhas estruturais de fundação, não detalhes estéticos.",
+      "prioridades": [
+        {
+          "titulo": "Reduzir o formulário e dar propósito à tela (título + benefício)",
+          "ids": [
+            "18",
+            "12",
+            "20"
+          ],
+          "por_que_primeiro": "9 campos obrigatórios antes de qualquer valor, sob um título em jargão que não explica que se trata de criar conta, é a maior fonte de abandono do funil.",
+          "hipotese": "Se reduzirmos o cadastro aos campos essenciais (adiando CPF, gênero e pesquisa de origem para depois da ativação) e trocarmos o título por um que nomeie a tarefa e o benefício, então a taxa de conclusão do cadastro sobe, porque a pessoa entende o que ganha e percebe um custo de preenchimento compatível.",
+          "metrica": "Taxa de conclusão do cadastro (início → conta criada) e tempo médio até conclusão",
+          "impacto": "alto",
+          "esforco": "alto"
+        },
+        {
+          "titulo": "CTA primário legível e hierarquia de ações corrigida",
+          "ids": [
+            "6",
+            "14",
+            "4",
+            "9",
+            "15",
+            "21"
+          ],
+          "por_que_primeiro": "O botão que fecha a conversão tem texto quase ilegível (medição confirmada) e o atalho de login parece desabilitado, quebrando os dois caminhos de saída da tela.",
+          "hipotese": "Se ajustarmos o contraste do texto do botão primário para pelo menos 4.5:1 e elevarmos o link 'Já tenho uma conta' acima do texto legal em peso e contraste, então aumentam os cliques no CTA e os logins de usuários existentes, porque ambos passam a ser percebidos como ações disponíveis.",
+          "metrica": "Taxa de clique no CTA primário, taxa de ida para login e volume de contas duplicadas",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "titulo": "Rótulos visíveis e erros de senha que dizem o que corrigir",
+          "ids": [
+            "2",
+            "7",
+            "17",
+            "5",
+            "1",
+            "13",
+            "19",
+            "10"
+          ],
+          "por_que_primeiro": "Sem rótulo persistente, sem máscara de formato e com erro genérico, a pessoa trava exatamente no último passo do cadastro — é atrito puro, com correção barata.",
+          "hipotese": "Se adotarmos labels visíveis acima dos campos, dicas de formato em Nascimento/Telefone/CPF e exibirmos os requisitos de senha antes e durante a digitação (com ícone além da cor no erro), então cai o número de submissões com erro e sobe a conclusão, porque a pessoa sabe o que preencher e como corrigir sem adivinhar.",
+          "metrica": "Taxa de erro de validação por campo e nº de tentativas até submissão bem-sucedida",
+          "impacto": "alto",
+          "esforco": "medio"
+        }
+      ],
+      "matriz": [
+        {
+          "id": "1",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "2",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "id": "3",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "4",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "5",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "6",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "7",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "id": "8",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "9",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "10",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "11",
+          "impacto": "baixo",
+          "esforco": "baixo"
+        },
+        {
+          "id": "12",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "13",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "14",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "15",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "16",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "17",
+          "impacto": "medio",
+          "esforco": "medio"
+        },
+        {
+          "id": "18",
+          "impacto": "alto",
+          "esforco": "alto"
+        },
+        {
+          "id": "19",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "20",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "21",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "22",
+          "impacto": "medio",
+          "esforco": "baixo"
+        }
+      ]
+    },
+    "uso": {
+      "entrada": 4980,
+      "saida": 1623,
+      "custoUsd": 0.065475,
+      "ms": 21347,
+      "modelo": "claude-opus-5"
+    }
+  },
+  "geradoEm": "2026-09-28T15:36:32.263Z"
+}

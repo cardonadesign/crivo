@@ -1,0 +1,778 @@
+{
+  "imagem": {
+    "src": "/samples/checkout.png",
+    "largura": 1280,
+    "altura": 800
+  },
+  "lentes": {
+    "usabilidade": {
+      "lente": "usabilidade",
+      "resultado": {
+        "resumo": "A tela de pagamento tem hierarquia invertida: a ação secundária \"Continuar comprando\" é o botão mais destacado, enquanto \"Finalizar compra\" parece desabilitado. Somado a isso, a mensagem de erro é vaga e o cupom recebe ênfase visual maior que o próprio checkout.",
+        "achados": [
+          {
+            "titulo": "Ação principal parece desabilitada",
+            "problema": "O botão que conclui a compra tem aparência de estado inativo, com texto claro e fundo branco, o que faz a pessoa acreditar que não pode avançar.",
+            "evidencia": "\"Finalizar compra\" aparece em cinza claro sobre fundo branco com borda fina, logo abaixo de \"Continuar comprando\" em marrom sólido e alto contraste.",
+            "sugestao": "Inverter a hierarquia: \"Finalizar compra\" como botão primário sólido e \"Continuar comprando\" como link ou botão fantasma; se estiver realmente desabilitado, explicar o que falta preencher.",
+            "principio": "Nielsen: visibilidade do status do sistema e consistência de padrões; affordance de controles",
+            "severidade": "critica",
+            "confianca": "alta",
+            "regiao": {
+              "x": 853,
+              "y": 596,
+              "largura": 342,
+              "altura": 44
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Mensagem de erro vaga no cartão",
+            "problema": "O aviso não diz qual é o problema nem como corrigir, forçando a pessoa a adivinhar entre número errado, quantidade de dígitos ou bandeira não aceita.",
+            "evidencia": "Abaixo do campo \"Número do cartão\" com borda vermelha aparece apenas \"Dados inválidos\".",
+            "sugestao": "Substituir por mensagem específica e acionável, ex. \"Número do cartão incompleto: informe os 16 dígitos\", e indicar as bandeiras aceitas junto ao campo.",
+            "principio": "Nielsen: ajudar usuários a reconhecer, diagnosticar e recuperar-se de erros",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 85,
+              "y": 333,
+              "largura": 230,
+              "altura": 18
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Cupom rouba o foco do pagamento",
+            "problema": "A caixa de cupom tem borda tracejada, fundo amarelo e o único botão amarelo vibrante da área do formulário, atraindo mais atenção que os dados do cartão e o botão de concluir.",
+            "evidencia": "O bloco \"Tem um cupom? Digite aqui\" com \"APLICAR CUPOM\" em amarelo destaca-se mais que qualquer outro elemento do formulário \"Pagamento\".",
+            "sugestao": "Reduzir o cupom a um link expansível (\"Tenho um cupom\") com botão secundário, reservando o destaque visual para a ação de finalizar a compra.",
+            "principio": "Nielsen: estética e design minimalista; hierarquia visual coerente com a tarefa",
+            "severidade": "media",
+            "confianca": "alta",
+            "regiao": {
+              "x": 84,
+              "y": 487,
+              "largura": 671,
+              "altura": 80
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Total sem frete e sem prazo",
+            "problema": "A pessoa não consegue saber o valor final antes de avançar, o que gera insegurança e abandono no momento de pagar com o cartão já digitado.",
+            "evidencia": "\"Frete\" exibe \"calculado na próxima etapa\" e o rótulo é \"Total parcial R$ 122,80\", igual ao subtotal.",
+            "sugestao": "Calcular o frete antes da etapa de pagamento (ou permitir informar o CEP aqui) e mostrar um total definitivo; se impossível, deixar claro que haverá acréscimo antes da cobrança.",
+            "principio": "Nielsen: visibilidade do status do sistema e prevenção de erros",
+            "severidade": "alta",
+            "confianca": "media",
+            "regiao": {
+              "x": 853,
+              "y": 436,
+              "largura": 342,
+              "altura": 80
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Aceite de termos com alvo minúsculo",
+            "problema": "O consentimento junta três documentos distintos em uma linha diminuta sem links visíveis, dificultando marcar e entender o que está sendo aceito, inclusive a assinatura recorrente.",
+            "evidencia": "Checkbox pequeno com o texto \"Li e aceito os termos de uso, a política de privacidade e as condições de assinatura recorrente.\" em fonte muito reduzida, sem sublinhado ou cor de link.",
+            "sugestao": "Aumentar o texto e a área de clique (mínimo 44px), transformar cada documento em link explícito e destacar a cobrança recorrente em linha própria.",
+            "principio": "Nielsen: prevenção de erros e reconhecimento em vez de memorização; WCAG 2.5.5 tamanho de alvo",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 84,
+              "y": 586,
+              "largura": 460,
+              "altura": 22
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Sem indicação de etapa do checkout",
+            "problema": "Não há trilha de progresso nem caminho de volta para revisar entrega ou dados anteriores, então a pessoa não sabe quantos passos faltam.",
+            "evidencia": "O topo mostra apenas \"Pagamento\" e \"Preencha os dados do cartão para concluir.\", sem indicador de etapas e sem link \"voltar\".",
+            "sugestao": "Incluir indicador de etapas (ex. \"2 de 3\") e um link de retorno para a etapa de entrega, sem perder os dados já preenchidos.",
+            "principio": "Nielsen: visibilidade do status do sistema e controle/liberdade do usuário",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 56,
+              "y": 110,
+              "largura": 400,
+              "altura": 56
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          }
+        ],
+        "fora_do_alcance": [
+          "Se \"Finalizar compra\" está de fato desabilitado ou apenas estilizado assim, e qual regra o libera",
+          "Validação em tempo real, máscaras e mensagens dos demais campos (CPF, CVV, MM/AA)",
+          "Comportamento após aplicar cupom, recálculo do total e fluxo das etapas seguintes"
+        ]
+      },
+      "uso": {
+        "entrada": 4054,
+        "saida": 2333,
+        "custoUsd": 0.078595,
+        "ms": 33918,
+        "modelo": "claude-opus-5"
+      }
+    },
+    "acessibilidade": {
+      "lente": "acessibilidade",
+      "resultado": {
+        "resumo": "Formulário de pagamento sem rótulos visíveis, com placeholders de contraste muito baixo, erro sinalizado principalmente por cor e CTA principal aparentemente desabilitado sem explicação. Vários textos de apoio ficam abaixo de 4.5:1.",
+        "achados": [
+          {
+            "titulo": "Campos sem rótulo visível, só placeholder",
+            "problema": "Todos os campos do cartão usam placeholder como rótulo; ao digitar, a pessoa perde a referência do que aquele campo pede, e leitores de tela podem não ter nome acessível.",
+            "evidencia": "Os campos exibem apenas \"Nome impresso no cartão\", \"Número do cartão\", \"MM/AA\", \"CVV\" e \"CPF do titular\" como texto interno cinza-claro, sem nenhum rótulo acima.",
+            "sugestao": "Adicionar label visível persistente acima de cada campo e manter o placeholder apenas para formato (ex.: \"12/28\").",
+            "principio": "WCAG 3.3.2 Rótulos ou Instruções; 2.4.6",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 85,
+              "y": 224,
+              "largura": 670,
+              "altura": 244
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Placeholders com contraste insuficiente",
+            "problema": "O texto dos placeholders é cinza muito claro sobre branco, dificultando a leitura por pessoas com baixa visão ou em telas com brilho reduzido.",
+            "evidencia": "\"Nome impresso no cartão\", \"MM/AA\" e \"CPF do titular\" aparecem em cinza bem claro sobre o fundo branco do campo.",
+            "sugestao": "Escurecer o placeholder para pelo menos #6B7280 sobre branco e garantir 4.5:1 ao texto digitado.",
+            "principio": "WCAG 1.4.3 Contraste mínimo (AA)",
+            "severidade": "alta",
+            "confianca": "media",
+            "regiao": {
+              "x": 96,
+              "y": 234,
+              "largura": 190,
+              "altura": 21
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#C7C2BC",
+              "fundo_hex": "#FFFFFF",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Erro sinalizado essencialmente por cor",
+            "problema": "O campo inválido é destacado por borda e texto vermelhos, sem ícone ou instrução de correção, o que prejudica quem não distingue cores.",
+            "evidencia": "O campo \"Número do cartão\" tem borda vermelha e a mensagem genérica \"Dados inválidos\" em vermelho pequeno.",
+            "sugestao": "Incluir ícone de alerta, texto explicativo do que corrigir (\"Número do cartão deve ter 16 dígitos\") e associar a mensagem ao campo via aria-describedby.",
+            "principio": "WCAG 1.4.1 Uso de cor; 3.3.1 Identificação de erro",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 85,
+              "y": 283,
+              "largura": 670,
+              "altura": 68
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Botão principal parece desabilitado sem motivo",
+            "problema": "O CTA de conclusão tem texto muito claro sobre branco, indicando estado desabilitado sem informar o que falta para habilitá-lo, bloqueando a tarefa.",
+            "evidencia": "\"Finalizar compra\" aparece em cinza-claro sobre fundo branco, enquanto \"Continuar comprando\" é o botão de maior contraste.",
+            "sugestao": "Explicitar em texto o que falta (ex.: \"Corrija o número do cartão e aceite os termos\") e garantir contraste mínimo de 3:1 mesmo no estado desabilitado, além de manter foco alcançável.",
+            "principio": "WCAG 1.4.1, 3.3.1 e 1.4.11 Contraste de elementos não textuais",
+            "severidade": "critica",
+            "confianca": "media",
+            "regiao": {
+              "x": 853,
+              "y": 596,
+              "largura": 342,
+              "altura": 44
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#D8D3CC",
+              "fundo_hex": "#FFFFFF",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Checkbox de termos minúsculo e texto ilegível",
+            "problema": "O alvo de toque do checkbox tem cerca de 14×14px e o texto legal é muito pequeno e claro, dificultando marcação e leitura de uma decisão importante.",
+            "evidencia": "Checkbox pequeno ao lado de \"Li e aceito os termos de uso, a política de privacidade e as condições de assinatura recorrente.\" em fonte reduzida e cinza-claro.",
+            "sugestao": "Ampliar a área clicável para no mínimo 24×24px (idealmente 44px), tornar o rótulo clicável e aumentar o texto para 14px em cor com 4.5:1.",
+            "principio": "WCAG 2.5.8 Tamanho do alvo (mínimo); 1.4.3",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 85,
+              "y": 588,
+              "largura": 470,
+              "altura": 18
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#BDB7B0",
+              "fundo_hex": "#FFFFFF",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Informações do pedido com baixo contraste",
+            "problema": "Dados relevantes do resumo aparecem em cinza claro e itálico pequeno, dificultando conferência de valores antes do pagamento.",
+            "evidencia": "\"calculado na próxima etapa\" em itálico cinza-claro e \"Total parcial\" / \"R$ 122,80\" mais apagados que o restante do resumo.",
+            "sugestao": "Usar cor com contraste mínimo de 4.5:1 para textos de apoio e reforçar o total parcial com peso tipográfico em vez de cinza claro.",
+            "principio": "WCAG 1.4.3 Contraste mínimo (AA)",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 1051,
+              "y": 441,
+              "largura": 144,
+              "altura": 16
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#B0A9A1",
+              "fundo_hex": "#FFFFFF",
+              "texto_grande": false
+            }
+          }
+        ],
+        "fora_do_alcance": [
+          "Indicador de foco visível ao navegar por teclado e ordem de tabulação",
+          "Nomes acessíveis reais (aria-label, for/id) e anúncio do erro por leitor de tela",
+          "Comportamento responsivo e tamanho dos alvos em telas de toque"
+        ]
+      },
+      "uso": {
+        "entrada": 4143,
+        "saida": 2309,
+        "custoUsd": 0.07844,
+        "ms": 32179,
+        "modelo": "claude-opus-5"
+      }
+    },
+    "hierarquia": {
+      "lente": "hierarquia",
+      "resultado": {
+        "resumo": "A hierarquia está invertida no ponto mais crítico: a ação principal (\"Finalizar compra\") é o elemento mais apagado da tela, enquanto o cupom e o botão secundário dominam o olhar. O microcopy de erro e de termos é genérico e quase invisível.",
+        "achados": [
+          {
+            "titulo": "Ação principal é a menos evidente",
+            "problema": "O botão que conclui a compra aparece como contorno claro com texto acinzentado, enquanto a ação secundária logo acima é sólida e escura. A pessoa tende a clicar em \"Continuar comprando\" e sair do checkout.",
+            "evidencia": "\"Continuar comprando\" aparece em botão marrom sólido e preenchido, e logo abaixo \"Finalizar compra\" aparece em botão de contorno branco com texto cinza-claro.",
+            "sugestao": "Inverta os pesos: \"Finalizar compra\" como botão sólido de maior contraste e no topo do bloco; \"Continuar comprando\" como link ou botão de texto.",
+            "principio": "Hierarquia visual e Nielsen #6 (reconhecer em vez de lembrar): a ação primária deve ter o maior peso visual",
+            "severidade": "critica",
+            "confianca": "alta",
+            "regiao": {
+              "x": 853,
+              "y": 532,
+              "largura": 342,
+              "altura": 112
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Bloco de cupom rouba a atenção do formulário",
+            "problema": "A caixa de cupom usa borda tracejada amarela, fundo destacado e o único botão saturado da coluna esquerda, ficando mais chamativa que os campos obrigatórios do cartão e que o próprio fechamento do pedido.",
+            "evidencia": "O bloco \"Tem um cupom? Digite aqui\" tem moldura tracejada amarela e o botão \"APLICAR CUPOM\" em amarelo forte com caixa alta, em contraste com todos os outros campos neutros.",
+            "sugestao": "Reduza o cupom a um link discreto (\"Tenho um cupom\") que expande um campo, e remova o destaque amarelo e a caixa alta do botão.",
+            "principio": "Hierarquia visual: um único foco por região; elementos opcionais não competem com a tarefa principal",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 85,
+              "y": 485,
+              "largura": 670,
+              "altura": 85
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Mensagem de erro não diz o que corrigir",
+            "problema": "\"Dados inválidos\" não informa qual regra falhou nem como resolver, obrigando a pessoa a adivinhar no campo mais sensível do formulário.",
+            "evidencia": "Abaixo do campo \"Número do cartão\" em borda vermelha, o texto de erro é apenas \"Dados inválidos\".",
+            "sugestao": "Troque por mensagem específica e acionável, como \"Número do cartão incompleto. Digite os 16 dígitos sem espaços.\"",
+            "principio": "Nielsen #9: ajudar a reconhecer, diagnosticar e recuperar-se de erros",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 85,
+              "y": 333,
+              "largura": 200,
+              "altura": 18
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Aceite de termos minúsculo e juridiquês",
+            "problema": "O consentimento que habilita a compra está no menor tamanho e no menor contraste da tela, com três documentos empilhados numa frase só, o que dificulta ler e decidir.",
+            "evidencia": "\"Li e aceito os termos de uso, a política de privacidade e as condições de assinatura recorrente.\" em texto cinza-claro bem abaixo do tamanho dos demais rótulos.",
+            "sugestao": "Aumente para o tamanho de corpo padrão, use cinza escuro e destaque \"assinatura recorrente\" como link com explicação curta da cobrança.",
+            "principio": "WCAG 1.4.3 (contraste mínimo) e clareza de consentimento",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 85,
+              "y": 588,
+              "largura": 470,
+              "altura": 18
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#B9AEA4",
+              "fundo_hex": "#FFFFFF",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Valor total apagado e rótulo ambíguo",
+            "problema": "O número que a pessoa mais precisa conferir antes de pagar está em cinza claro, com menos presença que os preços dos itens, e o rótulo \"Total parcial\" não deixa claro o que ainda falta somar.",
+            "evidencia": "\"Total parcial  R$ 122,80\" aparece em cinza claro, enquanto \"R$ 54,90\" e \"R$ 49,90\" dos itens estão em texto escuro; o frete aparece como \"calculado na próxima etapa\".",
+            "sugestao": "Destaque o total em texto escuro e maior, e renomeie para \"Total sem frete\" ou \"Subtotal a pagar agora\".",
+            "principio": "Hierarquia da informação e Nielsen #1: visibilidade do status do sistema",
+            "severidade": "media",
+            "confianca": "alta",
+            "regiao": {
+              "x": 853,
+              "y": 489,
+              "largura": 342,
+              "altura": 26
+            },
+            "contraste": {
+              "aplica": true,
+              "texto_hex": "#A99C90",
+              "fundo_hex": "#FFFFFF",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Placeholders substituem rótulos nos campos",
+            "problema": "Todos os campos usam apenas texto dentro da caixa; ao digitar, a pessoa perde a referência do que aquele campo pede, sobretudo em \"MM/AA\" e \"CVV\".",
+            "evidencia": "Os campos exibem só \"Nome impresso no cartão\", \"Número do cartão\", \"MM/AA\", \"CVV\" e \"CPF do titular\" como texto interno cinza, sem rótulo externo.",
+            "sugestao": "Adicione rótulo persistente acima de cada campo e mantenha o placeholder apenas para exemplo de formato (ex.: \"12/28\").",
+            "principio": "Nielsen #6: reconhecimento em vez de memorização; WCAG 3.3.2 (rótulos e instruções)",
+            "severidade": "media",
+            "confianca": "alta",
+            "regiao": {
+              "x": 85,
+              "y": 222,
+              "largura": 670,
+              "altura": 246
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          }
+        ],
+        "fora_do_alcance": [
+          "Não dá para saber se \"Finalizar compra\" está realmente desabilitado por causa do erro e do checkbox, ou se é só estilo visual fraco.",
+          "Estados de foco, hover e mensagens de validação em tempo real dos demais campos não aparecem no print.",
+          "O conteúdo dos termos e as condições reais da assinatura recorrente não podem ser avaliados aqui."
+        ]
+      },
+      "uso": {
+        "entrada": 4084,
+        "saida": 2702,
+        "custoUsd": 0.08797,
+        "ms": 40032,
+        "modelo": "claude-opus-5"
+      }
+    },
+    "produto": {
+      "lente": "produto",
+      "resultado": {
+        "resumo": "Tela de pagamento com hierarquia invertida: a ação de sair do checkout tem mais peso visual que a de finalizar a compra, e o cupom é o elemento mais chamativo da página. Somado ao frete não calculado e ao aceite de assinatura recorrente, a tela acumula atritos e gatilhos de desconfiança no ponto mais sensível do funil.",
+        "achados": [
+          {
+            "titulo": "CTA de finalizar tem menos peso que sair",
+            "problema": "O botão principal da etapa aparece apagado e com aparência de desabilitado, enquanto 'Continuar comprando' recebe o estilo sólido de ação primária. Isso desvia a pessoa do fechamento e derruba a taxa de conversão no último passo.",
+            "evidencia": "'Continuar comprando' está em botão marrom sólido, logo acima de 'Finalizar compra' em contorno claro com texto acinzentado.",
+            "sugestao": "Inverter a hierarquia: 'Finalizar compra' como botão sólido de alto contraste no topo do bloco e 'Continuar comprando' como link secundário discreto.",
+            "principio": "Hierarquia visual e correspondência entre importância da ação e destaque (Nielsen: visibilidade do status e affordance)",
+            "severidade": "critica",
+            "confianca": "alta",
+            "regiao": {
+              "x": 853,
+              "y": 534,
+              "largura": 342,
+              "altura": 108
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Cupom é o elemento mais chamativo do checkout",
+            "problema": "O bloco de cupom, com fundo amarelo e borda tracejada, domina o formulário e sugere que existe desconto disponível. Isso induz a pessoa a abandonar o pagamento para procurar código em outro site, reduzindo a conversão.",
+            "evidencia": "Bloco destacado em amarelo com 'Tem um cupom? Digite aqui' e botão 'APLICAR CUPOM' em amarelo saturado, mais visível que qualquer outro controle da tela.",
+            "sugestao": "Colapsar o cupom em um link discreto do tipo 'Tenho um cupom' que expande o campo apenas quando acionado.",
+            "principio": "Redução de distrações no funil de checkout (Baymard: coupon-code distraction)",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 85,
+              "y": 486,
+              "largura": 670,
+              "altura": 82
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Custo final desconhecido na hora de pagar",
+            "problema": "A pessoa preenche dados de cartão sem saber o valor total, já que o frete só será calculado depois. Custo revelado tarde é uma das maiores causas de abandono e gera contestação e suporte.",
+            "evidencia": "No resumo: 'Frete — calculado na próxima etapa' e 'Total parcial R$ 122,80', sem total final.",
+            "sugestao": "Calcular o frete antes da etapa de pagamento (ou por CEP nesta tela) e exibir o total definitivo acima do botão de finalizar.",
+            "principio": "Transparência de custos e prevenção de surpresa no checkout",
+            "severidade": "alta",
+            "confianca": "alta",
+            "regiao": {
+              "x": 853,
+              "y": 436,
+              "largura": 342,
+              "altura": 80
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Aceite mistura assinatura recorrente na compra avulsa",
+            "problema": "Um único checkbox obriga a aceitar 'condições de assinatura recorrente' em um pedido que aparenta ser avulso. Isso gera desconfiança de cobrança recorrente indevida, trava o aceite e aumenta chamados de suporte.",
+            "evidencia": "'Li e aceito os termos de uso, a política de privacidade e as condições de assinatura recorrente.' em texto pequeno e cinza claro.",
+            "sugestao": "Separar o aceite de assinatura e exibi-lo apenas quando houver item recorrente no carrinho; deixar termos e privacidade como links visíveis.",
+            "principio": "Consentimento específico e informado; evitar agrupamento de aceites (dark pattern)",
+            "severidade": "alta",
+            "confianca": "media",
+            "regiao": {
+              "x": 85,
+              "y": 588,
+              "largura": 540,
+              "altura": 20
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Erro genérico no número do cartão",
+            "problema": "A mensagem não diz o que corrigir, levando a tentativas repetidas e desistência justamente no campo mais crítico do pagamento.",
+            "evidencia": "Campo 'Número do cartão' com borda vermelha e o texto 'Dados inválidos' abaixo.",
+            "sugestao": "Trocar por mensagem específica, como 'Número do cartão incompleto: informe os 16 dígitos', e validar em tempo real com bandeira detectada.",
+            "principio": "Nielsen #9: ajudar a reconhecer, diagnosticar e recuperar-se de erros",
+            "severidade": "media",
+            "confianca": "alta",
+            "regiao": {
+              "x": 85,
+              "y": 282,
+              "largura": 670,
+              "altura": 68
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          },
+          {
+            "titulo": "Prova de segurança fraca e sem indicação de etapa",
+            "problema": "A garantia aparece como texto pequeno abaixo do botão e não há indicador de progresso do checkout, o que reduz a confiança para digitar cartão e CPF.",
+            "evidencia": "'Compra protegida · Parcele em até 3x' em fonte pequena no rodapé do card; o cabeçalho traz apenas 'Pagamento' sem passos.",
+            "sugestao": "Exibir selo de segurança próximo aos campos de cartão e um indicador de etapas (ex.: Entrega › Pagamento › Revisão) no topo.",
+            "principio": "Sinais de confiança e visibilidade do status do sistema",
+            "severidade": "media",
+            "confianca": "media",
+            "regiao": {
+              "x": 853,
+              "y": 658,
+              "largura": 342,
+              "altura": 22
+            },
+            "contraste": {
+              "aplica": false,
+              "texto_hex": "",
+              "fundo_hex": "",
+              "texto_grande": false
+            }
+          }
+        ],
+        "fora_do_alcance": [
+          "Não dá para saber se o botão 'Finalizar compra' está realmente desabilitado ou apenas com estilo fraco.",
+          "Não é possível verificar se o carrinho contém item de assinatura que justifique o aceite recorrente.",
+          "Validações em tempo real, estados de foco e o comportamento da etapa seguinte (frete) não são observáveis em um print."
+        ]
+      },
+      "uso": {
+        "entrada": 4086,
+        "saida": 2491,
+        "custoUsd": 0.082705,
+        "ms": 32190,
+        "modelo": "claude-opus-5"
+      }
+    }
+  },
+  "sintese": {
+    "sintese": {
+      "veredito": "O checkout inverte a hierarquia do próprio objetivo: a ação de concluir parece desabilitada enquanto 'Continuar comprando' e o cupom amarelo dominam a tela. Somado a erro genérico no cartão e total sem frete, é uma tela que empurra a pessoa para fora no passo mais caro do funil.",
+      "prioridades": [
+        {
+          "titulo": "Devolver o peso visual ao botão de concluir a compra",
+          "ids": [
+            "1",
+            "7",
+            "13",
+            "19"
+          ],
+          "por_que_primeiro": "Quatro lentes convergem no mesmo ponto crítico: a ação que gera receita parece indisponível e perde para a ação de sair do checkout.",
+          "hipotese": "Se o botão de concluir virar sólido, com alto contraste e rótulo de valor, e 'Continuar comprando' for rebaixado para link/secundário, então a taxa de conclusão do pagamento sobe, porque a pessoa passa a identificar imediatamente a ação que finaliza o pedido em vez de interpretá-la como desabilitada.",
+          "metrica": "Taxa de conclusão de pedido na etapa de pagamento (cliques no CTA / visitas à tela) e cliques em 'Continuar comprando'",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "titulo": "Mostrar custo total real e reduzir o ruído do cupom",
+          "ids": [
+            "3",
+            "21",
+            "17",
+            "4",
+            "14",
+            "20",
+            "12"
+          ],
+          "por_que_primeiro": "Custo revelado tarde é uma das maiores causas de abandono, e o cupom amarelo tira a pessoa do fluxo exatamente quando ela deveria pagar.",
+          "hipotese": "Se exibirmos frete, prazo e total final com destaque antes do pagamento e transformarmos o cupom em um link discreto do resumo, então o abandono na etapa de pagamento cai, porque a pessoa decide com o valor completo em mãos e não sai do site para caçar código de desconto.",
+          "metrica": "Taxa de abandono na etapa de pagamento e cliques/saídas a partir do bloco de cupom",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "titulo": "Tornar erros e campos do cartão autoexplicativos",
+          "ids": [
+            "2",
+            "15",
+            "23",
+            "10",
+            "8",
+            "18",
+            "9"
+          ],
+          "por_que_primeiro": "Erro genérico no campo mais sensível gera tentativas repetidas e desistência, e a falta de rótulos agrava o problema para todo mundo, não só para leitores de tela.",
+          "hipotese": "Se cada erro disser a regra que falhou e como corrigir, com ícone além da cor, e os campos tiverem rótulos visíveis e placeholders legíveis, então o número de tentativas falhas por pedido cai e mais sessões chegam ao pagamento aprovado, porque a pessoa sabe exatamente o que ajustar.",
+          "metrica": "Tentativas de submissão com erro por sessão e taxa de recuperação após o primeiro erro",
+          "impacto": "alto",
+          "esforco": "medio"
+        }
+      ],
+      "matriz": [
+        {
+          "id": "1",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "2",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "id": "3",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "id": "4",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "5",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "6",
+          "impacto": "medio",
+          "esforco": "medio"
+        },
+        {
+          "id": "7",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "8",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "id": "9",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "10",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "11",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "12",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "13",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "14",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "15",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "id": "16",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "17",
+          "impacto": "medio",
+          "esforco": "baixo"
+        },
+        {
+          "id": "18",
+          "impacto": "medio",
+          "esforco": "medio"
+        },
+        {
+          "id": "19",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "20",
+          "impacto": "alto",
+          "esforco": "baixo"
+        },
+        {
+          "id": "21",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "id": "22",
+          "impacto": "alto",
+          "esforco": "medio"
+        },
+        {
+          "id": "23",
+          "impacto": "medio",
+          "esforco": "medio"
+        },
+        {
+          "id": "24",
+          "impacto": "medio",
+          "esforco": "medio"
+        }
+      ]
+    },
+    "uso": {
+      "entrada": 5513,
+      "saida": 1621,
+      "custoUsd": 0.06809,
+      "ms": 29797,
+      "modelo": "claude-opus-5"
+    }
+  },
+  "geradoEm": "2026-09-28T15:34:25.713Z"
+}
