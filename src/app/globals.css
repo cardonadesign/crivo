@@ -1,102 +1,144 @@
 @import "tailwindcss";
 
+/*
+ * Sistema visual "instrumento preciso": neutros frios, um único acento (cobalto) reservado para
+ * interação, e cores semânticas só para o resultado da verificação e para a severidade.
+ * Raios: controles 6px, painéis/imagens 10px, badges 4px, pins são círculos (marcadores).
+ */
 :root {
-  --papel: #f5f3ee;
-  --cartao: #ffffff;
-  --tinta: #16140f;
-  --tinta-2: #45413a;
-  --tinta-3: #69645a;
-  --linha: #e3dfd5;
-  --linha-forte: #cfc9bb;
-  --acento: #d9480f;
-  --acento-texto: #a8380b;
-  --ok: #067647;
-  --ok-fundo: #e7f6ee;
-  --alerta: #93370d;
-  --alerta-fundo: #fdf0e1;
-  --neutro-fundo: #efece5;
+  --fundo: #fafaf9;
+  --superficie: #ffffff;
+  --superficie-2: #f4f4f5;
+  --tinta: #111113;
+  --tinta-2: #52525b;
+  --tinta-3: #6b6b74;
+  --linha: #e4e4e7;
+  --linha-forte: #d4d4d8;
+  --acento: #2747d8;
+  --acento-hover: #1f3bb8;
+  --sobre-acento: #ffffff;
+  --acento-suave: #eef1fd;
+  --ok: #1a6e43;
+  --ok-fundo: #e8f4ed;
+  --erro: #b42318;
+  --erro-fundo: #fdecea;
+  --sev-critica: #9f2f2d;
+  --sev-critica-fundo: #fdebec;
+  --sev-alta: #8a5300;
+  --sev-alta-fundo: #fbf1dc;
+  --sev-media: #1f5f8f;
+  --sev-media-fundo: #e5f1fb;
+  --sev-baixa: #52525b;
+  --sev-baixa-fundo: #f0f0f2;
+  --sombra: 0 1px 2px rgb(17 17 19 / 0.04), 0 8px 24px -12px rgb(17 17 19 / 0.12);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #0c0c0e;
+    --superficie: #141417;
+    --superficie-2: #1b1b1f;
+    --tinta: #ededef;
+    --tinta-2: #a8a8b2;
+    --tinta-3: #8e8e98;
+    --linha: #26262b;
+    --linha-forte: #34343b;
+    --acento: #7b93ff;
+    --acento-hover: #97a9ff;
+    --sobre-acento: #0c0c0e;
+    --acento-suave: #182040;
+    --ok: #5cc98d;
+    --ok-fundo: #112a1c;
+    --erro: #f97066;
+    --erro-fundo: #2d1513;
+    --sev-critica: #f5a19c;
+    --sev-critica-fundo: #2d1614;
+    --sev-alta: #e8b660;
+    --sev-alta-fundo: #2a2010;
+    --sev-media: #8cc3ee;
+    --sev-media-fundo: #13222f;
+    --sev-baixa: #b4b4bd;
+    --sev-baixa-fundo: #1f1f24;
+    --sombra: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -12px rgb(0 0 0 / 0.6);
+    color-scheme: dark;
+  }
 }
 
 @theme inline {
-  --color-papel: var(--papel);
-  --color-cartao: var(--cartao);
+  --color-fundo: var(--fundo);
+  --color-superficie: var(--superficie);
+  --color-superficie-2: var(--superficie-2);
   --color-tinta: var(--tinta);
   --color-tinta-2: var(--tinta-2);
   --color-tinta-3: var(--tinta-3);
   --color-linha: var(--linha);
   --color-linha-forte: var(--linha-forte);
   --color-acento: var(--acento);
-  --color-acento-texto: var(--acento-texto);
+  --color-acento-hover: var(--acento-hover);
+  --color-sobre-acento: var(--sobre-acento);
+  --color-acento-suave: var(--acento-suave);
   --color-ok: var(--ok);
   --color-ok-fundo: var(--ok-fundo);
-  --color-alerta: var(--alerta);
-  --color-alerta-fundo: var(--alerta-fundo);
-  --color-neutro-fundo: var(--neutro-fundo);
+  --color-erro: var(--erro);
+  --color-erro-fundo: var(--erro-fundo);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-instrument-serif);
+  --radius-controle: 6px;
+  --radius-painel: 10px;
+  --radius-badge: 4px;
+  --shadow-painel: var(--sombra);
 }
 
 html {
-  background: var(--papel);
+  background: var(--fundo);
 }
 
 body {
-  background: var(--papel);
+  background: var(--fundo);
   color: var(--tinta);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 ::selection {
-  background: #ffd8c2;
+  background: var(--acento-suave);
 }
 
-.titulo-serif {
-  font-family: var(--font-instrument-serif), Georgia, serif;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
 }
 
-@keyframes varredura {
+.num {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes brilho {
   0% {
-    top: 0%;
+    background-position: 100% 0;
   }
   100% {
-    top: 100%;
+    background-position: -100% 0;
   }
 }
-.linha-varredura {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--acento), transparent);
-  box-shadow: 0 0 18px 4px rgba(217, 72, 15, 0.25);
-  animation: varredura 2.4s ease-in-out infinite alternate;
-}
-
-@keyframes surgir {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-.surgir {
-  animation: surgir 0.35s ease-out both;
-}
-
-@keyframes aparecer {
-  from {
-    opacity: 0;
-  }
-}
-.aparecer {
-  animation: aparecer 0.3s ease-out;
+.esqueleto {
+  background: linear-gradient(90deg, var(--superficie-2) 25%, var(--linha) 50%, var(--superficie-2) 75%);
+  background-size: 200% 100%;
+  animation: brilho 1.6s ease-in-out infinite;
+  border-radius: var(--radius-badge);
 }
 
 @keyframes pulso {
@@ -105,17 +147,15 @@ body {
     opacity: 1;
   }
   50% {
-    opacity: 0.35;
+    opacity: 0.4;
   }
 }
 .pulso {
-  animation: pulso 1.2s ease-in-out infinite;
+  animation: pulso 1.4s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .linha-varredura,
-  .surgir,
-  .aparecer,
+  .esqueleto,
   .pulso {
     animation: none;
   }

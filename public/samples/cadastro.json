@@ -15,7 +15,7 @@
             "problema": "A mensagem informa que a senha é inválida, mas não lista quais regras devem ser atendidas, deixando a pessoa tentando adivinhar.",
             "evidencia": "Campo \"Senha\" com borda vermelha e texto \"A senha não atende aos requisitos\", sem nenhuma lista de critérios (tamanho mínimo, número, símbolo) na tela.",
             "sugestao": "Exibir os requisitos de senha desde o início, com checklist que marca cada regra atendida em tempo real, e substituir a mensagem genérica por indicação do que falta.",
-            "principio": "Nielsen 9 — ajudar a reconhecer, diagnosticar e recuperar erros",
+            "principio": "Nielsen 9, ajudar a reconhecer, diagnosticar e recuperar erros",
             "severidade": "alta",
             "confianca": "alta",
             "regiao": {
@@ -36,7 +36,7 @@
             "problema": "Todos os campos usam o texto de exemplo como único rótulo; ao digitar, o rótulo desaparece e a pessoa precisa lembrar o que era cada caixa, dificultando a revisão antes de enviar.",
             "evidencia": "Campos \"Nome completo\", \"E-mail\", \"Telefone\", \"Nascimento\", \"Gênero\", \"CPF\" e \"Confirmar senha\" não têm rótulo externo, apenas texto interno em cinza claro.",
             "sugestao": "Adicionar rótulo persistente acima de cada campo (ou label flutuante) e manter o placeholder apenas para formato esperado.",
-            "principio": "Nielsen 6 — reconhecimento em vez de memorização",
+            "principio": "Nielsen 6, reconhecimento em vez de memorização",
             "severidade": "alta",
             "confianca": "alta",
             "regiao": {
@@ -57,7 +57,7 @@
             "problema": "Os três círculos coloridos não trazem rótulo nem logo visível, obrigando a pessoa a deduzir qual provedor de login cada cor representa.",
             "evidencia": "Abaixo de \"ou continue com\" há três círculos sólidos vermelho, preto e azul, sem texto ou símbolo.",
             "sugestao": "Usar botões com logo e texto do provedor, por exemplo \"Continuar com Google\", \"Continuar com Apple\".",
-            "principio": "Nielsen 2 — correspondência com o mundo real / clareza de affordance",
+            "principio": "Nielsen 2, correspondência com o mundo real / clareza de affordance",
             "severidade": "media",
             "confianca": "media",
             "regiao": {
@@ -78,7 +78,7 @@
             "problema": "O link secundário está em cinza muito claro, semelhante a um elemento inativo, o que pode fazer quem já é cliente não perceber o caminho para login.",
             "evidencia": "Texto \"Já tenho uma conta\" em cinza claro, sem sublinhado, contrastando com o restante dos textos em preto.",
             "sugestao": "Dar aparência clara de link acionável: cor de ação da marca, peso maior e área de toque de 44px.",
-            "principio": "Nielsen 4 — consistência e padrões; affordance de link",
+            "principio": "Nielsen 4, consistência e padrões; affordance de link",
             "severidade": "media",
             "confianca": "media",
             "regiao": {
@@ -99,7 +99,7 @@
             "problema": "Campos como \"Nascimento\", \"Telefone\" e \"CPF\" não indicam o formato esperado, aumentando a chance de erro de digitação e rejeição no envio.",
             "evidencia": "Placeholders exibem só \"Nascimento\", \"Telefone\" e \"CPF\", sem exemplo do tipo \"DD/MM/AAAA\" ou \"000.000.000-00\".",
             "sugestao": "Incluir máscara de entrada e texto de apoio com o formato esperado sob cada campo.",
-            "principio": "Nielsen 5 — prevenção de erros",
+            "principio": "Nielsen 5, prevenção de erros",
             "severidade": "media",
             "confianca": "alta",
             "regiao": {
@@ -140,7 +140,7 @@
             "problema": "O rótulo branco sobre o amarelo do botão principal fica quase ilegível, comprometendo a ação mais importante da tela.",
             "evidencia": "Botão preenchido em amarelo com o texto \"Criar conta\" em branco e negrito.",
             "sugestao": "Trocar o texto para um tom escuro (ex.: #1A1A1A) sobre o amarelo, atingindo pelo menos 4.5:1.",
-            "principio": "WCAG 2.2 – 1.4.3 Contraste (Mínimo)",
+            "principio": "WCAG 2.2, 1.4.3 Contraste (Mínimo)",
             "severidade": "critica",
             "confianca": "alta",
             "regiao": {
@@ -161,7 +161,7 @@
             "problema": "Nenhum campo tem label visível; ao digitar, o usuário perde a referência do que está preenchendo, e o cinza-claro do placeholder já é difícil de ler.",
             "evidencia": "Campos exibem apenas \"Nome completo\", \"E-mail\", \"Telefone\", \"Nascimento\", \"Gênero\", \"CPF\", \"Senha\" e \"Confirmar senha\" dentro das caixas, sem texto acima.",
             "sugestao": "Adicionar rótulos persistentes acima de cada campo e escurecer o placeholder para no mínimo 4.5:1.",
-            "principio": "WCAG 2.2 – 3.3.2 Rótulos ou Instruções e 1.4.3 Contraste",
+            "principio": "WCAG 2.2, 3.3.2 Rótulos ou Instruções e 1.4.3 Contraste",
             "severidade": "alta",
             "confianca": "alta",
             "regiao": {
@@ -182,7 +182,7 @@
             "problema": "Os três botões de login social são círculos coloridos sem ícone reconhecível nem texto, então quem não distingue as cores (ou usa leitor de tela sem rótulo) não sabe qual provedor está escolhendo.",
             "evidencia": "Abaixo de \"ou continue com\" há três círculos sólidos vermelho, preto e azul, sem nenhum texto ou glifo.",
             "sugestao": "Incluir o logo de cada provedor e rótulo textual visível (ex.: \"Entrar com Google\") ou, no mínimo, nome abaixo do botão e aria-label.",
-            "principio": "WCAG 2.2 – 1.4.1 Uso de Cor e 1.1.1 Conteúdo Não Textual",
+            "principio": "WCAG 2.2, 1.4.1 Uso de Cor e 1.1.1 Conteúdo Não Textual",
             "severidade": "alta",
             "confianca": "media",
             "regiao": {
@@ -203,7 +203,7 @@
             "problema": "O link secundário está em cinza muito claro, parecendo texto desabilitado e ficando difícil de ler para baixa visão.",
             "evidencia": "Texto \"Já tenho uma conta\" em cinza-claro sobre fundo branco, sem sublinhado ou destaque.",
             "sugestao": "Usar cor com contraste ≥4.5:1 e sublinhar ou aplicar peso de link para sinalizar interatividade.",
-            "principio": "WCAG 2.2 – 1.4.3 Contraste (Mínimo)",
+            "principio": "WCAG 2.2, 1.4.3 Contraste (Mínimo)",
             "severidade": "media",
             "confianca": "alta",
             "regiao": {
@@ -224,7 +224,7 @@
             "problema": "O erro diz apenas que a senha não atende aos requisitos, sem listá-los, e é sinalizado só por vermelho na borda e no texto.",
             "evidencia": "Campo \"Senha\" com borda vermelha e o texto \"A senha não atende aos requisitos\", sem nenhuma regra visível de senha na tela.",
             "sugestao": "Exibir os requisitos de senha antes do envio e acrescentar ícone de alerta junto à mensagem, não apenas cor.",
-            "principio": "WCAG 2.2 – 3.3.1 Identificação de Erro, 3.3.3 Sugestão de Erro e 1.4.1 Uso de Cor",
+            "principio": "WCAG 2.2, 3.3.1 Identificação de Erro, 3.3.3 Sugestão de Erro e 1.4.1 Uso de Cor",
             "severidade": "media",
             "confianca": "alta",
             "regiao": {
@@ -245,7 +245,7 @@
             "problema": "O texto sobre Termos de Uso e Política de Privacidade está em fonte muito pequena e cinza-claro, dificultando a leitura de informação juridicamente relevante.",
             "evidencia": "Rodapé com \"Ao criar uma conta você concorda com os Termos de Uso e a Política de Privacidade da Rotina Tecnologia.\" em tamanho bem menor que o restante.",
             "sugestao": "Aumentar para pelo menos 14px, escurecer o texto e destacar os links de Termos e Política como links reais.",
-            "principio": "WCAG 2.2 – 1.4.3 Contraste e 1.4.4 Redimensionamento de Texto",
+            "principio": "WCAG 2.2, 1.4.3 Contraste e 1.4.4 Redimensionamento de Texto",
             "severidade": "baixa",
             "confianca": "media",
             "regiao": {
@@ -492,7 +492,7 @@
           },
           {
             "titulo": "Link de login parece desabilitado",
-            "problema": "Usuários que já têm conta podem não identificar o caminho de entrar, criando contas duplicadas ou desistindo — impacto direto em retenção e volume de suporte.",
+            "problema": "Usuários que já têm conta podem não identificar o caminho de entrar, criando contas duplicadas ou desistindo, impacto direto em retenção e volume de suporte.",
             "evidencia": "O texto \"Já tenho uma conta\" aparece em cinza claro, sem sublinhado nem aparência de botão, ao contrário do CTA \"Criar conta\" em amarelo sólido.",
             "sugestao": "Tratar \"Já tenho uma conta\" como link secundário evidente (cor de ação, peso maior, área de toque ampla) e posicioná-lo logo abaixo do CTA.",
             "principio": "Affordance de elementos clicáveis; visibilidade de caminhos alternativos",
@@ -550,7 +550,7 @@
   },
   "sintese": {
     "sintese": {
-      "veredito": "A tela é um formulário de cadastro longo que se apresenta com linguagem de sistema, esconde os rótulos dentro dos placeholders e deixa a ação primária com texto ilegível — ou seja, pede muito, explica pouco e dificulta o clique final. Os problemas se repetem nas quatro lentes, o que indica falhas estruturais de fundação, não detalhes estéticos.",
+      "veredito": "A tela é um formulário de cadastro longo que se apresenta com linguagem de sistema, esconde os rótulos dentro dos placeholders e deixa a ação primária com texto ilegível, ou seja, pede muito, explica pouco e dificulta o clique final. Os problemas se repetem nas quatro lentes, o que indica falhas estruturais de fundação, não detalhes estéticos.",
       "prioridades": [
         {
           "titulo": "Reduzir o formulário e dar propósito à tela (título + benefício)",
@@ -593,7 +593,7 @@
             "19",
             "10"
           ],
-          "por_que_primeiro": "Sem rótulo persistente, sem máscara de formato e com erro genérico, a pessoa trava exatamente no último passo do cadastro — é atrito puro, com correção barata.",
+          "por_que_primeiro": "Sem rótulo persistente, sem máscara de formato e com erro genérico, a pessoa trava exatamente no último passo do cadastro, é atrito puro, com correção barata.",
           "hipotese": "Se adotarmos labels visíveis acima dos campos, dicas de formato em Nascimento/Telefone/CPF e exibirmos os requisitos de senha antes e durante a digitação (com ícone além da cor no erro), então cai o número de submissões com erro e sobe a conclusão, porque a pessoa sabe o que preencher e como corrigir sem adivinhar.",
           "metrica": "Taxa de erro de validação por campo e nº de tentativas até submissão bem-sucedida",
           "impacto": "alto",

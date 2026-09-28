@@ -493,7 +493,7 @@
           {
             "titulo": "Custo final desconhecido na hora de pagar",
             "problema": "A pessoa preenche dados de cartão sem saber o valor total, já que o frete só será calculado depois. Custo revelado tarde é uma das maiores causas de abandono e gera contestação e suporte.",
-            "evidencia": "No resumo: 'Frete — calculado na próxima etapa' e 'Total parcial R$ 122,80', sem total final.",
+            "evidencia": "No resumo: 'Frete, calculado na próxima etapa' e 'Total parcial R$ 122,80', sem total final.",
             "sugestao": "Calcular o frete antes da etapa de pagamento (ou por CEP nesta tela) e exibir o total definitivo acima do botão de finalizar.",
             "principio": "Transparência de custos e prevenção de surpresa no checkout",
             "severidade": "alta",

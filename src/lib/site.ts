@@ -14,19 +14,19 @@ export const EXEMPLOS: Exemplo[] = [
   {
     id: "checkout",
     nome: "Brisa Café",
-    tipo: "Checkout · desktop",
+    tipo: "Checkout no desktop",
     contexto: "Etapa de pagamento de uma loja online de cafés especiais.",
   },
   {
     id: "cadastro",
     nome: "Rotina",
-    tipo: "Cadastro · mobile",
+    tipo: "Cadastro no celular",
     contexto: "Tela de criação de conta de um app de hábitos.",
   },
   {
     id: "dashboard",
     nome: "Norte",
-    tipo: "Dashboard · SaaS",
+    tipo: "Dashboard de SaaS",
     contexto: "Painel inicial de uma ferramenta de gestão de vendas para pequenas equipes.",
   },
 ];

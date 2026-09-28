@@ -17,6 +17,15 @@ const PRECOS: Record<string, [number, number]> = {
 
 const client = new Anthropic();
 
+/** Troca travessões por vírgula em todo texto devolvido pelo modelo (padrão de escrita do produto). */
+export function limparTexto<T>(valor: T): T {
+  if (typeof valor === "string") return valor.replace(/\s*[—–]\s*/g, ", ") as T;
+  if (Array.isArray(valor)) return valor.map(limparTexto) as T;
+  if (valor && typeof valor === "object")
+    return Object.fromEntries(Object.entries(valor).map(([k, v]) => [k, limparTexto(v)])) as T;
+  return valor;
+}
+
 export class ErroModelo extends Error {
   constructor(
     message: string,
@@ -63,7 +72,7 @@ export async function chamarEstruturado<S extends z.ZodType>(opts: {
   const entrada = resposta.usage.input_tokens;
   const saida = resposta.usage.output_tokens;
   return {
-    dados: resposta.parsed_output as z.infer<S>,
+    dados: limparTexto(resposta.parsed_output as z.infer<S>),
     uso: {
       entrada,
       saida,

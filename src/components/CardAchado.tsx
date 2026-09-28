@@ -2,52 +2,57 @@
 
 import { formatarRazao, type Verificacao } from "@/lib/contraste";
 import { LENTES_INFO } from "@/lib/lentes";
+import { CheckCircleIcon, CircleHalfIcon, QuestionIcon, XCircleIcon } from "@phosphor-icons/react";
 import { forwardRef } from "react";
-import { COR_SEVERIDADE, ROTULO_SEVERIDADE, type AchadoNumerado } from "./tipos";
+import type { AchadoNumerado } from "./tipos";
+import { BadgeSeveridade, IconeLente } from "./ui";
 
 const ROTULO_CONFIANCA = { alta: "confiança alta", media: "confiança média", baixa: "confiança baixa" };
 
 export function SeloVerificacao({ v, confianca }: { v: Verificacao; confianca: AchadoNumerado["confianca"] }) {
+  const base = "inline-flex flex-wrap items-center gap-x-1.5 gap-y-1 rounded-badge px-2 py-1 text-[12px]";
+
   if (v.status === "julgamento") {
     return (
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-neutro-fundo px-2 py-0.5 text-[11px] text-tinta-2">
-        <span aria-hidden>◐</span> Julgamento da IA · {ROTULO_CONFIANCA[confianca]}
+      <span className={`${base} bg-superficie-2 text-tinta-2`}>
+        <CircleHalfIcon size={14} aria-hidden />
+        Julgamento da IA, {ROTULO_CONFIANCA[confianca]}
       </span>
     );
   }
   if (v.status === "nao_mensuravel") {
     return (
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-neutro-fundo px-2 py-0.5 text-[11px] text-tinta-2">
-        <span aria-hidden>?</span> Contraste não mensurável · {v.motivo}
+      <span className={`${base} bg-superficie-2 text-tinta-2`}>
+        <QuestionIcon size={14} aria-hidden />
+        Não mensurável: {v.motivo.replace(/\.$/, "").toLowerCase()}
       </span>
     );
   }
   const confirmado = v.status === "confirmado";
   return (
     <span
-      className={`inline-flex flex-wrap items-center gap-1.5 rounded-full px-2 py-0.5 text-[11px] font-medium ${
-        confirmado ? "bg-ok-fundo text-ok" : "bg-alerta-fundo text-alerta"
-      }`}
+      className={`${base} font-medium ${confirmado ? "bg-ok-fundo text-ok" : "bg-erro-fundo text-erro"}`}
+      title={`Contraste medido nos pixels da imagem: ${formatarRazao(v.medido)} (mínimo ${formatarRazao(v.limite)})`}
     >
-      <span aria-hidden>{confirmado ? "✓" : "✕"}</span>
-      {confirmado ? "Medido nos pixels: confirmado" : "Medido nos pixels: a IA errou"}
-      <span className="font-mono">
+      {confirmado ? <CheckCircleIcon size={14} weight="fill" aria-hidden /> : <XCircleIcon size={14} weight="fill" aria-hidden />}
+      {confirmado ? "Confirmado na medição" : "A IA errou"}
+      <span className="num font-normal">
         {formatarRazao(v.medido)} {confirmado ? "<" : "≥"} {formatarRazao(v.limite)}
       </span>
       <span className="inline-flex items-center gap-0.5" aria-hidden>
-        <i className="h-2.5 w-2.5 rounded-sm border border-black/10" style={{ background: v.texto }} />
-        <i className="h-2.5 w-2.5 rounded-sm border border-black/10" style={{ background: v.fundo }} />
+        <i className="h-3 w-3 rounded-[2px] border border-black/10" style={{ background: v.texto }} />
+        <i className="h-3 w-3 rounded-[2px] border border-black/10" style={{ background: v.fundo }} />
       </span>
     </span>
   );
 }
 
+/** Um achado como linha de lista (sem card): o destaque vem do fundo quando ativo. */
 export const CardAchado = forwardRef<
   HTMLElement,
   { a: AchadoNumerado; ativo: boolean; onAtivar: (n: number | null) => void }
 >(function CardAchado({ a, ativo, onAtivar }, ref) {
   const lente = LENTES_INFO[a.lente];
-  const sev = COR_SEVERIDADE[a.severidade];
   const contestado = a.verificacao.status === "nao_confirmado";
   return (
     <article
@@ -57,45 +62,43 @@ export const CardAchado = forwardRef<
       onMouseLeave={() => onAtivar(null)}
       onFocus={() => onAtivar(a.n)}
       onBlur={() => onAtivar(null)}
-      className={`surgir scroll-mt-24 rounded-xl border bg-cartao p-4 outline-none transition-all ${
-        ativo ? "border-tinta/40 shadow-[0_8px_24px_-16px_rgba(22,20,15,0.5)]" : "border-linha"
-      } ${contestado ? "opacity-75" : ""}`}
+      className={`-mx-3 scroll-mt-24 rounded-painel px-3 py-5 outline-none transition-colors ${
+        ativo ? "bg-acento-suave" : ""
+      }`}
     >
-      <header className="flex items-start gap-3">
+      <div className="grid grid-cols-[2rem_minmax(0,1fr)] gap-x-3">
         <span
-          className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full font-mono text-[11px] font-semibold text-white"
-          style={{ background: lente.cor }}
+          className={`num mt-0.5 grid h-6 w-6 place-items-center rounded-full text-[11px] font-semibold ${
+            ativo ? "bg-acento text-sobre-acento" : contestado ? "border border-tinta-3 text-tinta-3" : "bg-tinta text-fundo"
+          }`}
         >
           {a.n}
         </span>
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <h3 className={`text-[15px] font-semibold leading-snug ${contestado ? "line-through decoration-1" : ""}`}>
-              {a.titulo}
-            </h3>
+        <div className="min-w-0">
+          <h3 className={`text-[15px] font-semibold leading-snug ${contestado ? "text-tinta-2 line-through decoration-1" : ""}`}>
+            {a.titulo}
+          </h3>
+          <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] text-tinta-3">
+            <BadgeSeveridade severidade={a.severidade} />
+            <span className="inline-flex items-center gap-1">
+              <IconeLente lente={a.lente} size={14} />
+              {lente.nome}
+            </span>
+            <span className="min-w-0">{a.principio}</span>
           </div>
-          <div className="mt-1 flex flex-wrap items-center gap-1.5 text-[11px]">
-            <span className="rounded-full px-2 py-0.5 font-medium" style={{ color: sev.texto, background: sev.fundo }}>
-              {ROTULO_SEVERIDADE[a.severidade]}
-            </span>
-            <span className="text-tinta-3">
-              {lente.nome} · {a.principio}
-            </span>
+
+          <p className="mt-3 text-[14px] leading-relaxed text-tinta-2">{a.problema}</p>
+          <blockquote className="mt-2.5 border-l-2 border-linha-forte pl-3 text-[13px] leading-relaxed text-tinta-3">
+            {a.evidencia}
+          </blockquote>
+          <p className="mt-2.5 text-[14px] leading-relaxed">
+            <span className="font-medium text-tinta">Sugestão. </span>
+            <span className="text-tinta-2">{a.sugestao}</span>
+          </p>
+          <div className="mt-3">
+            <SeloVerificacao v={a.verificacao} confianca={a.confianca} />
           </div>
         </div>
-      </header>
-
-      <p className="mt-3 text-[14px] leading-relaxed text-tinta-2">{a.problema}</p>
-      <p className="mt-2 border-l-2 border-linha-forte pl-3 text-[13px] leading-relaxed text-tinta-3">
-        <span className="font-medium text-tinta-2">Evidência: </span>
-        {a.evidencia}
-      </p>
-      <p className="mt-2 text-[14px] leading-relaxed">
-        <span className="font-medium">Sugestão: </span>
-        <span className="text-tinta-2">{a.sugestao}</span>
-      </p>
-      <div className="mt-3">
-        <SeloVerificacao v={a.verificacao} confianca={a.confianca} />
       </div>
     </article>
   );

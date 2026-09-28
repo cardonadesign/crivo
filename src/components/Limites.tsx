@@ -1,43 +1,65 @@
 import { LENTES_INFO } from "@/lib/lentes";
 import { LENTES, type LenteId, type RespostaLente } from "@/lib/schema";
+import { CheckCircleIcon, CircleHalfIcon, XCircleIcon } from "@phosphor-icons/react";
+import { IconeLente } from "./ui";
 
 export function Limites({ respostas }: { respostas: Partial<Record<LenteId, RespostaLente>> }) {
+  const grupos = LENTES.map((l) => ({ l, itens: respostas[l]?.resultado.fora_do_alcance ?? [] })).filter(
+    (g) => g.itens.length > 0,
+  );
+
   return (
-    <div className="space-y-6 text-[14px] leading-relaxed text-tinta-2">
-      <section>
-        <h3 className="text-[11px] font-medium uppercase tracking-wider text-tinta-3">O que cada lente disse que não consegue ver</h3>
-        <ul className="mt-2 space-y-2">
-          {LENTES.flatMap((l) =>
-            (respostas[l]?.resultado.fora_do_alcance ?? []).map((t, i) => (
-              <li key={`${l}-${i}`} className="flex gap-2.5">
-                <span className="mt-2 h-2 w-2 shrink-0 rounded-full" style={{ background: LENTES_INFO[l].cor }} />
-                <span>{t}</span>
-              </li>
-            )),
-          )}
-        </ul>
+    <div className="space-y-10 text-[14px] leading-relaxed text-tinta-2">
+      <section aria-labelledby="titulo-limites">
+        <h3 id="titulo-limites" className="text-[15px] font-semibold text-tinta">
+          O que cada lente disse que não consegue ver
+        </h3>
+        {grupos.length === 0 ? (
+          <p className="mt-2 text-tinta-3">Os limites declarados aparecem aqui quando as lentes terminarem.</p>
+        ) : (
+          <div className="mt-4 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+            {grupos.map(({ l, itens }) => (
+              <div key={l}>
+                <p className="flex items-center gap-1.5 text-[13px] font-medium text-tinta">
+                  <IconeLente lente={l} size={15} />
+                  {LENTES_INFO[l].nome}
+                </p>
+                <ul className="mt-1.5 space-y-1.5">
+                  {itens.map((t, i) => (
+                    <li key={i}>{t}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
-      <section className="rounded-xl border border-linha bg-cartao p-4">
-        <h3 className="font-medium text-tinta">Como ler os selos</h3>
-        <ul className="mt-2 space-y-1.5">
-          <li>
-            <span className="font-medium text-ok">✓ Confirmado:</span> a IA afirmou contraste insuficiente e a medição nos pixels
-            comprovou (razão WCAG abaixo de 4,5:1, ou 3:1 para texto grande).
-          </li>
-          <li>
-            <span className="font-medium text-alerta">✕ A IA errou:</span> a medição contradisse a afirmação. O achado continua
-            visível, riscado, e perde peso na priorização.
-          </li>
-          <li>
-            <span className="font-medium text-tinta">◐ Julgamento da IA:</span> não há como medir só com um print. Vale como
-            hipótese, com o nível de confiança que o próprio modelo declarou.
-          </li>
-        </ul>
+
+      <section aria-labelledby="titulo-selos" className="border-t border-linha pt-8">
+        <h3 id="titulo-selos" className="text-[15px] font-semibold text-tinta">
+          Como ler os selos
+        </h3>
+        <dl className="mt-4 grid gap-x-4 gap-y-3 sm:grid-cols-[11rem_minmax(0,1fr)]">
+          <dt className="flex items-center gap-1.5 font-medium text-ok">
+            <CheckCircleIcon size={16} weight="fill" aria-hidden />
+            Confirmado
+          </dt>
+          <dd>A IA afirmou contraste insuficiente e a medição nos pixels comprovou (abaixo de 4,5:1, ou 3:1 para texto grande).</dd>
+          <dt className="flex items-center gap-1.5 font-medium text-erro">
+            <XCircleIcon size={16} weight="fill" aria-hidden />A IA errou
+          </dt>
+          <dd>A medição contradisse a afirmação. O achado continua visível, riscado, e perde peso na priorização.</dd>
+          <dt className="flex items-center gap-1.5 font-medium text-tinta">
+            <CircleHalfIcon size={16} aria-hidden />
+            Julgamento da IA
+          </dt>
+          <dd>Não há como medir só com um print. Vale como hipótese, com a confiança que o próprio modelo declarou.</dd>
+        </dl>
       </section>
-      <p className="text-[13px] text-tinta-3">
-        Um print é uma foto de um instante. Estados de erro, carregamento, navegação por teclado, leitor de tela e comportamento
-        real de uso ficam de fora. O Crivo é um ponto de partida para a conversa de design, não um substituto para teste com
-        pessoas.
+
+      <p className="border-t border-linha pt-8 text-[13px] text-tinta-3">
+        Um print é uma foto de um instante. Estados de erro, carregamento, navegação por teclado, leitor de tela e uso real
+        ficam de fora. O Crivo é um ponto de partida para a conversa de design, não substitui teste com pessoas.
       </p>
     </div>
   );

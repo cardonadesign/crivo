@@ -15,7 +15,7 @@
             "problema": "O card \"Desempenho\" mostra duas linhas sem rótulo de eixo, escala ou legenda, então não é possível saber o que cada série representa nem a magnitude dos valores.",
             "evidencia": "Card com título \"Desempenho\" contendo apenas uma linha verde e uma vermelha, sem nenhum texto de eixo X/Y, unidade ou legenda de série.",
             "sugestao": "Adicionar legenda nomeando as séries (ex. \"Ganhos\" / \"Perdidos\"), eixo Y com escala e eixo X com datas, além de tooltip com valor por ponto.",
-            "principio": "Nielsen 6 — Reconhecimento em vez de memorização; visibilidade da informação",
+            "principio": "Nielsen 6, Reconhecimento em vez de memorização; visibilidade da informação",
             "severidade": "alta",
             "confianca": "alta",
             "regiao": {
@@ -36,7 +36,7 @@
             "problema": "A coluna final de \"Últimos negócios\" usa apenas pontos verdes e vermelhos, sem cabeçalho nem legenda, obrigando o usuário a adivinhar o significado.",
             "evidencia": "Após as colunas \"Cliente\", \"Valor\" e \"Resp.\" há uma coluna sem título, com bolinhas verdes e vermelhas alinhadas a cada linha.",
             "sugestao": "Nomear a coluna (ex. \"Status\") e usar rótulo textual ou badge (\"Ganho\"/\"Perdido\") junto da cor.",
-            "principio": "Nielsen 6 — Reconhecimento em vez de memorização",
+            "principio": "Nielsen 6, Reconhecimento em vez de memorização",
             "severidade": "alta",
             "confianca": "alta",
             "regiao": {
@@ -57,7 +57,7 @@
             "problema": "\"últimos 7 dias\" aparece como texto discreto ao lado do título, sem aparência de controle, sugerindo que o recorte temporal de todos os números não pode ser alterado.",
             "evidencia": "Ao lado de \"Visão geral\" há o texto pequeno e cinza \"últimos 7 dias\", sem seta, borda ou botão associado.",
             "sugestao": "Transformar o período em um seletor visível (dropdown com borda e chevron) com opções como 7/30/90 dias e intervalo personalizado.",
-            "principio": "Nielsen 3 — Controle e liberdade do usuário; affordance de controle",
+            "principio": "Nielsen 3, Controle e liberdade do usuário; affordance de controle",
             "severidade": "media",
             "confianca": "media",
             "regiao": {
@@ -78,7 +78,7 @@
             "problema": "Vários clientes aparecem cortados, dificultando distinguir registros parecidos na lista de negócios.",
             "evidencia": "Linhas como \"Distribuidora Horizonte Al...\", \"Clínica Vida Plena Odonto...\" e \"Construtora Alicerce Enge...\" terminam em reticências.",
             "sugestao": "Ampliar a coluna \"Cliente\", reduzir o card lateral ou garantir tooltip/linha clicável que revele o nome completo.",
-            "principio": "Nielsen 8 — Design estético e minimalista sem perda de informação",
+            "principio": "Nielsen 8, Design estético e minimalista sem perda de informação",
             "severidade": "media",
             "confianca": "alta",
             "regiao": {
@@ -99,7 +99,7 @@
             "problema": "O botão ao lado de \"Exportar PDF\" não indica quais ações contém, o que esconde funcionalidades relevantes atrás de um ícone ambíguo.",
             "evidencia": "Botão quadrado com três pontos \"...\" no canto superior direito, sem texto acompanhante.",
             "sugestao": "Usar ícone convencional de \"mais ações\" com tooltip/aria-label descritivo (ex. \"Mais opções do painel\") ou expor as ações principais como itens visíveis.",
-            "principio": "Nielsen 6 — Reconhecimento em vez de memorização",
+            "principio": "Nielsen 6, Reconhecimento em vez de memorização",
             "severidade": "baixa",
             "confianca": "media",
             "regiao": {
@@ -120,7 +120,7 @@
             "problema": "O card \"Últimos negócios\" mostra 7 registros sem indicação de paginação ou link para a lista completa, interrompendo o fluxo de investigação.",
             "evidencia": "Após \"Studio Pilates Equilíbrio\" há área vazia no card, sem \"Ver todos\", contador ou paginação.",
             "sugestao": "Incluir link \"Ver todos os negócios\" no rodapé do card e tornar cada linha clicável até o detalhe do negócio.",
-            "principio": "Nielsen 7 — Flexibilidade e eficiência de uso",
+            "principio": "Nielsen 7, Flexibilidade e eficiência de uso",
             "severidade": "baixa",
             "confianca": "media",
             "regiao": {
@@ -370,7 +370,7 @@
             "problema": "Os rótulos que dão sentido aos números estão em cinza claro e corpo pequeno sobre branco, dificultando a leitura e invertendo a relação com o valor.",
             "evidencia": "Textos \"Receita\", \"Ticket médio\", \"Negócios ganhos\", \"Negócios perdidos\", \"Conversão\", \"Ciclo médio\", \"Leads novos\" e \"Atividades\" em cinza bem claro dentro dos cards brancos.",
             "sugestao": "Escurecer os rótulos para pelo menos #6B7280 (idealmente #4B5563) e manter o contraste mínimo de 4,5:1 em texto de ~13px.",
-            "principio": "WCAG 2.1 – 1.4.3 Contraste mínimo",
+            "principio": "WCAG 2.1, 1.4.3 Contraste mínimo",
             "severidade": "media",
             "confianca": "media",
             "regiao": {
@@ -391,7 +391,7 @@
             "problema": "A última coluna da tabela traz bolinhas verdes e vermelhas sem título nem legenda, obrigando a adivinhar o significado. A cor sozinha também não comunica.",
             "evidencia": "Cabeçalhos \"Cliente\", \"Valor\" e \"Resp.\" seguidos de uma quarta coluna sem rótulo, com pontos verdes e vermelhos nas linhas de \"Distribuidora Horizonte Al...\" a \"Studio Pilates Equilíbrio\".",
             "sugestao": "Nomear a coluna (ex.: \"Situação\") e substituir o ponto por rótulo textual curto \"Ganho\"/\"Perdido\", mantendo a cor apenas como reforço.",
-            "principio": "WCAG 2.1 – 1.4.1 Uso de cor; rotulagem de dados tabulares",
+            "principio": "WCAG 2.1, 1.4.1 Uso de cor; rotulagem de dados tabulares",
             "severidade": "media",
             "confianca": "alta",
             "regiao": {
@@ -451,7 +451,7 @@
           {
             "titulo": "KPIs sem comparação nem meta",
             "problema": "Os oito indicadores mostram apenas o valor absoluto do período, sem variação vs. período anterior ou meta. A pessoa não sabe se 'R$ 84.210' é bom ou ruim, o que reduz o hábito de abrir o painel (retenção) e o uso do produto na rotina.",
-            "evidencia": "Cards exibem só rótulo e número: 'Receita R$ 84.210', 'Conversão 18,3%', 'Ciclo médio 23 d', sem nenhum delta, seta ou referência de meta — mesmo havendo item 'Metas' no menu lateral.",
+            "evidencia": "Cards exibem só rótulo e número: 'Receita R$ 84.210', 'Conversão 18,3%', 'Ciclo médio 23 d', sem nenhum delta, seta ou referência de meta, mesmo havendo item 'Metas' no menu lateral.",
             "sugestao": "Adicionar em cada card a variação percentual vs. os 7 dias anteriores (com sinal e cor) e, quando houver meta cadastrada, uma barra de progresso ou '% da meta'.",
             "principio": "Visibilidade do status do sistema; dado acionável exige contexto comparativo",
             "severidade": "alta",
@@ -611,8 +611,8 @@
             "9",
             "16"
           ],
-          "por_que_primeiro": "Oito números iguais e sem comparação não geram decisão nem hábito de retorno ao painel — é o que mais afeta retenção.",
-          "hipotese": "Se destacarmos 2–3 métricas-chave com maior peso visual e adicionarmos variação percentual vs. período anterior ou meta em cada KPI, então a frequência de retorno ao painel aumenta, porque a pessoa passa a extrair um julgamento ('está bom ou ruim') em segundos.",
+          "por_que_primeiro": "Oito números iguais e sem comparação não geram decisão nem hábito de retorno ao painel, é o que mais afeta retenção.",
+          "hipotese": "Se destacarmos 2, 3 métricas-chave com maior peso visual e adicionarmos variação percentual vs. período anterior ou meta em cada KPI, então a frequência de retorno ao painel aumenta, porque a pessoa passa a extrair um julgamento ('está bom ou ruim') em segundos.",
           "metrica": "Sessões recorrentes por usuário/semana no painel e tempo até primeira ação após abrir a tela",
           "impacto": "alto",
           "esforco": "medio"

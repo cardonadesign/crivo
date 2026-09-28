@@ -1,6 +1,8 @@
 "use client";
 
 import type { ImagemPreparada } from "@/lib/imagem";
+import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react";
+import { BOTAO } from "./tipos";
 
 export function Preparar(props: {
   imagem: ImagemPreparada;
@@ -11,44 +13,47 @@ export function Preparar(props: {
 }) {
   const { imagem } = props;
   return (
-    <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:py-12">
-      <div className="relative overflow-hidden rounded-xl border border-linha bg-cartao">
+    <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:py-16">
+      <div className="overflow-hidden rounded-painel border border-linha bg-superficie shadow-painel">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={imagem.src} alt="Pré-visualização da tela" className="max-h-[70vh] w-full object-contain" />
+        <img src={imagem.src} alt="Pré-visualização da tela enviada" className="max-h-[72vh] w-full object-contain" />
       </div>
-      <div className="flex flex-col gap-5">
-        <div>
-          <p className="text-[11px] font-medium uppercase tracking-wider text-tinta-3">Antes de começar</p>
-          <h2 className="titulo-serif mt-1 text-4xl leading-tight">O que é essa tela?</h2>
-          <p className="mt-2 text-[15px] leading-relaxed text-tinta-2">
-            Opcional, mas ajuda as lentes a julgarem com contexto: produto, público, objetivo da etapa.
-          </p>
-        </div>
+
+      <div className="flex flex-col">
+        <h1 className="text-[28px] font-semibold leading-tight tracking-tight">O que é essa tela?</h1>
+        <p className="mt-2 max-w-[48ch] text-[15px] leading-relaxed text-tinta-2">
+          Contexto é opcional, mas deixa as lentes mais precisas: produto, público e objetivo da etapa.
+        </p>
+
+        <label htmlFor="contexto" className="mt-8 text-[14px] font-medium">
+          Contexto da tela
+        </label>
         <textarea
+          id="contexto"
+          aria-describedby="contexto-ajuda"
           value={props.contexto}
           onChange={(e) => props.onContexto(e.target.value.slice(0, 300))}
-          rows={3}
-          placeholder="Ex.: tela de pagamento de um app de delivery, público 25–40 anos, mobile."
-          className="w-full resize-none rounded-lg border border-linha-forte bg-cartao p-3 text-[15px] outline-none placeholder:text-tinta-3 focus:border-tinta"
+          rows={4}
+          placeholder="Ex.: pagamento de um app de delivery, público de 25 a 40 anos, mobile."
+          className="mt-2 w-full resize-none rounded-controle border border-linha-forte bg-superficie p-3 text-[15px] leading-relaxed outline-none transition-colors placeholder:text-tinta-3 focus:border-acento"
         />
-        <div className="flex flex-wrap gap-3">
-          <button
-            type="button"
-            onClick={props.onAnalisar}
-            className="rounded-full bg-tinta px-6 py-3 text-[15px] font-medium text-white transition-colors hover:bg-black"
-          >
-            Analisar com 4 lentes →
+        <p id="contexto-ajuda" className="num mt-1.5 text-right text-[12px] text-tinta-3">
+          {props.contexto.length}/300
+        </p>
+
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <button type="button" onClick={props.onAnalisar} className={BOTAO.primario}>
+            Analisar a tela
+            <ArrowRightIcon size={16} aria-hidden />
           </button>
-          <button
-            type="button"
-            onClick={props.onTrocar}
-            className="rounded-full border border-linha-forte px-5 py-3 text-[15px] text-tinta-2 hover:border-tinta hover:text-tinta"
-          >
+          <button type="button" onClick={props.onTrocar} className={BOTAO.texto}>
+            <ArrowLeftIcon size={16} aria-hidden />
             Trocar imagem
           </button>
         </div>
-        <p className="text-[13px] text-tinta-3">
-          Dimensões enviadas ao modelo: {imagem.largura}×{imagem.altura}px. A imagem não é armazenada.
+
+        <p className="mt-auto pt-10 text-[13px] text-tinta-3">
+          A imagem vai ao modelo com <span className="num">{imagem.largura}×{imagem.altura}</span> px e não é armazenada.
         </p>
       </div>
     </div>

@@ -1,24 +1,35 @@
+"use client";
+
 import { SITE } from "@/lib/site";
+import { GithubLogoIcon } from "@phosphor-icons/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Marca } from "./Marca";
 
 export function Cabecalho() {
+  const rota = usePathname();
+  const link = (ativo: boolean) =>
+    `rounded-controle px-3 py-1.5 transition-colors ${
+      ativo ? "text-tinta" : "text-tinta-2 hover:text-tinta"
+    }`;
+
   return (
-    <header className="sticky top-0 z-30 border-b border-linha bg-papel/85 backdrop-blur">
-      <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-baseline gap-2">
-          <span className="titulo-serif text-[26px] leading-none">Crivo</span>
-          <span className="hidden text-[12px] text-tinta-3 sm:inline">crítica de interface com prova</span>
+    <header className="sticky top-0 z-30 border-b border-linha bg-fundo/85 backdrop-blur-md">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6">
+        <Link href="/" className="flex items-center gap-2.5 text-tinta" aria-label="Crivo, página inicial">
+          <Marca size={20} />
+          <span className="text-[17px] font-semibold tracking-tight">Crivo</span>
         </Link>
         <nav className="flex items-center gap-1 text-[14px]">
-          <Link href="/como-funciona" className="rounded-full px-3 py-1.5 text-tinta-2 hover:bg-cartao hover:text-tinta">
+          <Link
+            href="/como-funciona"
+            className={link(rota === "/como-funciona")}
+            aria-current={rota === "/como-funciona" ? "page" : undefined}
+          >
             Como funciona
           </Link>
-          <a
-            href={SITE.repo}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full px-3 py-1.5 text-tinta-2 hover:bg-cartao hover:text-tinta"
-          >
+          <a href={SITE.repo} target="_blank" rel="noreferrer" className={`${link(false)} inline-flex items-center gap-1.5`}>
+            <GithubLogoIcon size={16} aria-hidden />
             Código
           </a>
         </nav>
@@ -30,11 +41,11 @@ export function Cabecalho() {
 export function Rodape() {
   return (
     <footer className="mt-auto border-t border-linha">
-      <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-6 text-[13px] text-tinta-3 sm:px-6">
-        <span>
+      <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-6 text-[13px] text-tinta-3 sm:px-6">
+        <p>
           Desenhado e construído por <span className="text-tinta-2">{SITE.autor}</span>, com Claude Code.
-        </span>
-        <span>As imagens enviadas não são armazenadas.</span>
+        </p>
+        <p>As imagens enviadas não são armazenadas.</p>
       </div>
     </footer>
   );

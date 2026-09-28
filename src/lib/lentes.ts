@@ -71,7 +71,7 @@ Regras de rigor:
 - Coordenadas: a imagem tem as dimensões informadas pelo usuário. A "regiao" é em pixels dessa imagem, com origem
   no canto superior esquerdo, e deve envolver o elemento de forma justa.
 - contraste.aplica só é true quando o achado afirma contraste insuficiente de texto. Nos demais, false e hex vazios.
-- Escreva em português do Brasil, frases curtas, tom direto e profissional.`;
+- Escreva em português do Brasil, frases curtas, tom direto e profissional. Nunca use travessão.`;
 }
 
 export function promptUsuario(largura: number, altura: number, contexto?: string): string {
@@ -94,4 +94,4 @@ Sua tarefa:
 3. Para cada prioridade, escreva uma hipótese testável ("Se ..., então ..., porque ...") e a métrica que leria o resultado.
 4. Classifique TODOS os achados em impacto × esforço.
 
-Escreva em português do Brasil, tom direto.`;
+Escreva em português do Brasil, tom direto. Nunca use travessão.`;

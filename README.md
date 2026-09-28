@@ -104,6 +104,8 @@ Variáveis opcionais: `CRIVO_MODEL` (padrão `claude-opus-5`) e `CRIVO_EFFORT` (
 
 ## Como construí
 
-Desenhei o produto (problema, lentes, método de verificação, interface) e construí com **Claude Code** como par de programação, em um dia. Stack: Next.js, TypeScript, Tailwind, Claude API (Anthropic), Vercel.
+Desenhei o produto (problema, lentes, método de verificação, interface) e construí com **Claude Code** como par de programação, em um dia. Stack: Next.js, TypeScript, Tailwind, Motion, Phosphor Icons, Claude API (Anthropic), Vercel.
 
-— Marlon Cardona
+A direção visual foi auditada contra o [taste-skill](https://github.com/Leonxlnx/taste-skill), um catálogo dos padrões que denunciam interface gerada por IA: serifa da moda, paleta creme com acento argila, rótulos em caixa alta sobre cada seção, cards iguais, travessões. Troquei tudo isso por um sistema monocromático com um único acento reservado para interação, uma família tipográfica (Geist e Geist Mono), ícones de biblioteca e modo escuro automático.
+
+Marlon Cardona

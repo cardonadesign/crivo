@@ -10,13 +10,6 @@ export const ROTULO_SEVERIDADE: Record<Achado["severidade"], string> = {
   baixa: "Baixa",
 };
 
-export const COR_SEVERIDADE: Record<Achado["severidade"], { texto: string; fundo: string }> = {
-  critica: { texto: "#A11A12", fundo: "#FDECEA" },
-  alta: { texto: "#A23A08", fundo: "#FDEEE4" },
-  media: { texto: "#7A4E05", fundo: "#FBF3DC" },
-  baixa: { texto: "#475467", fundo: "#EEF0F3" },
-};
-
 export const PESO_SEVERIDADE: Record<Achado["severidade"], number> = { critica: 0, alta: 1, media: 2, baixa: 3 };
 
 export function formatarUsd(v: number) {
@@ -26,3 +19,13 @@ export function formatarUsd(v: number) {
 export function formatarSeg(ms: number) {
   return (ms / 1000).toFixed(1).replace(".", ",") + "s";
 }
+
+/** Classes de botão compartilhadas. Controles usam raio de 6px, nunca pílula. */
+export const BOTAO = {
+  primario:
+    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-controle bg-acento px-4 py-2.5 text-[14px] font-medium text-sobre-acento transition-[background-color,transform] duration-150 hover:bg-acento-hover active:scale-[0.98] disabled:opacity-60",
+  secundario:
+    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-controle border border-linha-forte bg-superficie px-3.5 py-2 text-[14px] font-medium text-tinta transition-[border-color,transform] duration-150 hover:border-tinta-3 active:scale-[0.98]",
+  texto:
+    "inline-flex items-center gap-1.5 whitespace-nowrap rounded-controle text-[14px] font-medium text-tinta-2 underline-offset-4 transition-colors hover:text-tinta hover:underline",
+};
