@@ -29,6 +29,50 @@ export function limparTexto<T>(valor: T): T {
   return valor;
 }
 
+/** Modelo rápido para tarefas pequenas e em tempo real (nomear a tela). */
+export const MODELO_RAPIDO = "claude-haiku-4-5";
+const TRAVESSAO_SOLTO = new RegExp(`[${String.fromCharCode(0x2014, 0x2013)}]`, "g");
+
+/**
+ * Texto em stream do modelo rápido, já como bytes para uma Response.
+ * O primeiro evento é aguardado aqui: erro de chave, limite ou rede estoura antes de responder,
+ * e a rota devolve um JSON de erro normal em vez de um stream quebrado.
+ */
+export async function transmitirTexto(opts: {
+  sistema: string;
+  conteudo: Anthropic.ContentBlockParam[];
+}): Promise<ReadableStream<Uint8Array>> {
+  const stream = client.messages.stream({
+    model: MODELO_RAPIDO,
+    max_tokens: 200,
+    system: opts.sistema,
+    messages: [{ role: "user", content: opts.conteudo }],
+  });
+  const iterador = stream[Symbol.asyncIterator]();
+  const primeiro = await iterador.next();
+  const codificador = new TextEncoder();
+
+  return new ReadableStream<Uint8Array>({
+    async start(controle) {
+      const emitir = (ev: Anthropic.MessageStreamEvent) => {
+        if (ev.type === "content_block_delta" && ev.delta.type === "text_delta") {
+          controle.enqueue(codificador.encode(ev.delta.text.replace(TRAVESSAO_SOLTO, ",")));
+        }
+      };
+      try {
+        if (!primeiro.done) emitir(primeiro.value);
+        for (let r = await iterador.next(); !r.done; r = await iterador.next()) emitir(r.value);
+        controle.close();
+      } catch (e) {
+        controle.error(e);
+      }
+    },
+    cancel() {
+      stream.abort();
+    },
+  });
+}
+
 export class ErroModelo extends Error {
   constructor(
     message: string,

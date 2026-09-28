@@ -74,7 +74,15 @@ export function promptUsuario(largura: number, altura: number, contexto?: string
   return `Revise esta interface. Dimensões da imagem: ${largura}×${altura} px.${ctx}`;
 }
 
-export const PROMPT_SINTESE = `Você é um(a) líder de produto e design consolidando a revisão de uma tela feita por quatro
+export const PROMPT_IDENTIFICACAO = `Você dá nome a prints de interface para organizá-los numa lista.
+Responda com exatamente duas linhas de texto puro, sem rótulos, aspas, markdown ou explicação:
+linha 1: o nome do produto ou da marca visível na tela, em até 4 palavras. Se não houver marca visível,
+um nome curto do que é o produto (ex.: App de banco). Nunca invente uma marca que não aparece.
+linha 2: o tipo de tela e a plataforma, em até 5 palavras, com só a primeira letra maiúscula
+(ex.: Checkout no desktop, Cadastro no celular, Dashboard de vendas).
+Português do Brasil. Nunca use travessão.`;
+
+export const PROMPT_SINTESE =`Você é um(a) líder de produto e design consolidando a revisão de uma tela feita por quatro
 especialistas (usabilidade, acessibilidade, hierarquia & texto, produto & conversão).
 
 Você recebe a lista de achados com IDs. Alguns achados de contraste trazem o resultado de uma medição feita nos pixels

@@ -12,6 +12,7 @@ import { BarraApp } from "./BarraApp";
 import { Canvas } from "./Canvas";
 import { Inspetor } from "./Inspetor";
 import { ListaAnalises } from "./ListaAnalises";
+import { useTextoGerado } from "./useTextoGerado";
 import { PESO_SEVERIDADE, type Aba, type AchadoNumerado, type Atual, type EstadoLente, type EstadoSintese } from "./tipos";
 
 const lentesVazias = (): Record<LenteId, EstadoLente> =>
@@ -53,6 +54,13 @@ export function Crivo() {
   const refs = useRef(new Map<number, HTMLElement>());
   const nomeArquivo = useRef("Print colado");
 
+  // Nome e descrição da tela: gerados pela IA (em stream) até o usuário assumir o campo.
+  const { iniciar: iniciarGeracao, cancelar: cancelarGeracao, ...gerado } = useTextoGerado();
+  const [nomeUsuario, setNomeUsuario] = useState<string | null>(null);
+  const [descricaoUsuario, setDescricaoUsuario] = useState<string | null>(null);
+  const nomeFinal = (nomeUsuario ?? gerado.nome).trim() || nomeArquivo.current;
+  const descricaoFinal = (descricaoUsuario ?? gerado.descricao).trim();
+
   // Achados numerados + verificação por pixel
   const achados: AchadoNumerado[] = useMemo(() => {
     const lista: AchadoNumerado[] = [];
@@ -78,6 +86,7 @@ export function Crivo() {
   const abrirExemplo = useCallback(async (ex: Exemplo) => {
     const id = ++execucao.current;
     limparVista();
+    cancelarGeracao();
     setCarregando(true);
     try {
       const [img, salvo] = await Promise.all([
@@ -97,11 +106,12 @@ export function Crivo() {
     } finally {
       if (execucao.current === id) setCarregando(false);
     }
-  }, []);
+  }, [cancelarGeracao]);
 
   const abrirLocal = useCallback(async (a: AnaliseLocal) => {
     const id = ++execucao.current;
     limparVista();
+    cancelarGeracao();
     setCarregando(true);
     try {
       const img = await prepararImagem(a.imagem.src);
@@ -110,17 +120,18 @@ export function Crivo() {
       setContexto(a.contexto);
       setLentes(lentesDe(a.lentes));
       setSintese(a.sintese ? { estado: "ok", resp: a.sintese } : { estado: "aguardando" });
-      setAtual({ tipo: "local", id: a.id, nome: a.nome, criadoEm: a.criadoEm });
+      setAtual({ tipo: "local", id: a.id, nome: a.nome, descricao: a.descricao ?? "", criadoEm: a.criadoEm });
       setAba(a.sintese ? "prioridades" : "achados");
       history.replaceState(null, "", "/");
     } finally {
       if (execucao.current === id) setCarregando(false);
     }
-  }, []);
+  }, [cancelarGeracao]);
 
   const novaAnalise = useCallback(() => {
     execucao.current++;
     limparVista();
+    cancelarGeracao();
     setImagem(null);
     setContexto("");
     setLentes(lentesVazias());
@@ -128,7 +139,7 @@ export function Crivo() {
     setAtual({ tipo: "vazio" });
     setCarregando(false);
     history.replaceState(null, "", "/");
-  }, []);
+  }, [cancelarGeracao]);
 
   // Primeira visita: abre um exemplo (ou o indicado na URL), como um arquivo de demonstração.
   useEffect(() => {
@@ -153,11 +164,14 @@ export function Crivo() {
       setSintese({ estado: "aguardando" });
       setAtual({ tipo: "vazio" });
       setCarregando(false);
+      setNomeUsuario(null);
+      setDescricaoUsuario(null);
+      iniciarGeracao(img);
       history.replaceState(null, "", "/");
     } catch (e) {
       setErro((e as Error).message);
     }
-  }, []);
+  }, [iniciarGeracao]);
 
   // Colar com Ctrl+V em qualquer lugar (menos dentro do campo de texto).
   useEffect(() => {
@@ -200,14 +214,21 @@ export function Crivo() {
       setAtual({
         tipo: "local",
         id: `a${Date.now().toString(36)}`,
-        nome: contexto.trim() ? contexto.trim().split(/[,.]/)[0].slice(0, 40) : nomeArquivo.current,
+        nome: nomeFinal,
+        descricao: descricaoFinal,
         criadoEm: new Date().toISOString(),
       });
+      cancelarGeracao();
     } else if (atual.tipo === "exemplo") {
       setAtual({ ...atual, salvo: false });
     }
     LENTES.forEach((l) => rodarLente(l, imagem, contexto, id));
-  }, [imagem, contexto, atual, rodarLente]);
+  }, [imagem, contexto, atual, rodarLente, nomeFinal, descricaoFinal, cancelarGeracao]);
+
+  /** Renomear uma análise própria. O efeito de histórico abaixo persiste a mudança. */
+  const renomear = (campo: "nome" | "descricao", valor: string) => {
+    if (atual.tipo === "local") setAtual({ ...atual, [campo]: valor });
+  };
 
   // Quando as quatro lentes terminam, o agente de síntese entra.
   useEffect(() => {
@@ -243,6 +264,7 @@ export function Crivo() {
       salvarNoHistorico({
         id: atual.id,
         nome: atual.nome,
+        descricao: atual.descricao,
         criadoEm: atual.criadoEm,
         contexto,
         imagem: { src: `data:${imagem.mediaType};base64,${imagem.base64}`, largura: imagem.largura, altura: imagem.altura },
@@ -348,6 +370,16 @@ export function Crivo() {
             contexto={contexto}
             onContexto={setContexto}
             onAnalisar={analisar}
+            identidade={{
+              gerado,
+              nome: nomeUsuario ?? gerado.nome,
+              descricao: descricaoUsuario ?? gerado.descricao,
+              nomeManual: nomeUsuario !== null,
+              descricaoManual: descricaoUsuario !== null,
+              onNome: setNomeUsuario,
+              onDescricao: setDescricaoUsuario,
+            }}
+            onRenomear={renomear}
             lentes={lentes}
             sintese={sintese}
             achados={achados}

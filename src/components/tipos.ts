@@ -17,7 +17,7 @@ export type Aba = "prioridades" | "achados" | "limites";
 export type Atual =
   | { tipo: "vazio" }
   | { tipo: "exemplo"; exemplo: Exemplo; geradoEm?: string; salvo: boolean }
-  | { tipo: "local"; id: string; nome: string; criadoEm: string };
+  | { tipo: "local"; id: string; nome: string; descricao: string; criadoEm: string };
 
 export const ROTULO_SEVERIDADE: Record<Achado["severidade"], string> = {
   critica: "Crítica",

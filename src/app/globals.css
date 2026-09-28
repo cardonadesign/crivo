@@ -170,9 +170,53 @@ p {
   animation: pulso 1.4s ease-in-out infinite;
 }
 
+/* Texto sendo escrito pela IA: cursor piscando e um brilho cobalto que varre o texto. */
+@keyframes cursor-ia {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+.cursor-ia {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: -0.15em;
+  background: var(--acento);
+  animation: cursor-ia 0.9s steps(1) infinite;
+}
+
+@keyframes brilho-ia {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0% 0;
+  }
+}
+.brilho-ia {
+  background-image: linear-gradient(90deg, var(--tinta) 0%, var(--tinta) 35%, var(--acento) 50%, var(--tinta) 65%, var(--tinta) 100%);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: brilho-ia 1.4s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .esqueleto,
-  .pulso {
+  .pulso,
+  .cursor-ia,
+  .brilho-ia {
     animation: none;
+  }
+  .brilho-ia {
+    color: var(--tinta);
+    background: none;
   }
 }

@@ -28,6 +28,9 @@ import {
   type EstadoSintese,
 } from "./tipos";
 import { corLente, IconeLente } from "./ui";
+import { CampoEditavel } from "./CampoEditavel";
+import { CaixaGerando, RotuloIA } from "./TextoGerado";
+import type { TextoGerado } from "./useTextoGerado";
 
 function Ajuda() {
   return (
@@ -72,12 +75,64 @@ function Ajuda() {
   );
 }
 
+export type Identidade = {
+  gerado: TextoGerado;
+  nome: string;
+  descricao: string;
+  nomeManual: boolean;
+  descricaoManual: boolean;
+  onNome: (v: string) => void;
+  onDescricao: (v: string) => void;
+};
+
+const ESTILO_INPUT =
+  "mt-1.5 w-full rounded-controle border border-linha-forte bg-superficie px-3 py-2.5 text-[14px] font-medium outline-none transition-colors placeholder:font-normal placeholder:text-tinta-3 focus:border-acento";
+
+/** Um campo de identidade: enquanto a IA escreve, mostra o texto nascendo; depois vira input editável. */
+function CampoIdentidade(props: {
+  id: string;
+  rotulo: string;
+  valor: string;
+  manual: boolean;
+  gerando: boolean;
+  aguardando: boolean;
+  falhou: boolean;
+  placeholder: string;
+  maximo: number;
+  onMudar: (v: string) => void;
+}) {
+  const emGeracao = !props.manual && (props.gerando || props.aguardando);
+  const estado = props.manual || props.falhou ? "manual" : props.gerando ? "gerando" : props.aguardando ? "espera" : "sugerido";
+  return (
+    <div>
+      <RotuloIA htmlFor={props.id} rotulo={props.rotulo} estado={estado} />
+      {emGeracao ? (
+        <CaixaGerando id={props.id} texto={props.valor} escrevendo={props.gerando} onAssumir={() => props.onMudar(props.valor)} />
+      ) : (
+        <input
+          id={props.id}
+          value={props.valor}
+          maxLength={props.maximo}
+          placeholder={props.placeholder}
+          onChange={(e) => props.onMudar(e.target.value)}
+          autoFocus={props.manual && props.valor === ""}
+          className={ESTILO_INPUT}
+        />
+      )}
+    </div>
+  );
+}
+
 function Preparar(props: {
   imagem: ImagemPreparada;
   contexto: string;
   onContexto: (v: string) => void;
   onAnalisar: () => void;
+  identidade: Identidade;
 }) {
+  const { identidade: id } = props;
+  const fase = id.gerado.fase;
+  const falhou = fase === "erro" || fase === "parado";
   return (
     <div className="flex flex-col p-5">
       <h2 className="text-[15px] font-semibold">Pronto para analisar</h2>
@@ -87,6 +142,39 @@ function Preparar(props: {
         </span>{" "}
         px enviados ao modelo. A imagem fica só neste navegador.
       </p>
+
+      <div className="mt-6 space-y-4">
+        <CampoIdentidade
+          id="nome-tela"
+          rotulo="Nome"
+          valor={id.nome}
+          manual={id.nomeManual}
+          gerando={fase === "gerando-nome"}
+          aguardando={fase === "esperando"}
+          falhou={falhou}
+          placeholder="Dê um nome à tela"
+          maximo={40}
+          onMudar={id.onNome}
+        />
+        <CampoIdentidade
+          id="descricao-tela"
+          rotulo="Descrição"
+          valor={id.descricao}
+          manual={id.descricaoManual}
+          gerando={fase === "gerando-descricao"}
+          aguardando={fase === "esperando" || fase === "gerando-nome"}
+          falhou={falhou}
+          placeholder="Ex.: Checkout no desktop"
+          maximo={60}
+          onMudar={id.onDescricao}
+        />
+        {fase === "erro" && !id.nomeManual && (
+          <p className="text-[12px] text-tinta-3">Não consegui identificar a tela. Dê um nome você mesmo.</p>
+        )}
+        <p className="sr-only" aria-live="polite">
+          {fase === "pronto" ? `Sugestão da IA: ${id.gerado.nome}, ${id.gerado.descricao}.` : ""}
+        </p>
+      </div>
 
       <label htmlFor="contexto" className="mt-6 text-[13px] font-medium">
         Contexto da tela <span className="font-normal text-tinta-3">(opcional)</span>
@@ -133,6 +221,8 @@ export function Inspetor(props: {
   onRodarAoVivo: () => void;
   onTentarLente: (l: LenteId) => void;
   onSalvarExemplo: () => void;
+  identidade: Identidade;
+  onRenomear: (campo: "nome" | "descricao", valor: string) => void;
 }) {
   const { atual, imagem, lentes, sintese, achados, aba } = props;
   const [agora, setAgora] = useState(() => Date.now());
@@ -150,7 +240,15 @@ export function Inspetor(props: {
 
   if (!imagem) return <Ajuda />;
   if (!iniciada)
-    return <Preparar imagem={imagem} contexto={props.contexto} onContexto={props.onContexto} onAnalisar={props.onAnalisar} />;
+    return (
+      <Preparar
+        imagem={imagem}
+        contexto={props.contexto}
+        onContexto={props.onContexto}
+        onAnalisar={props.onAnalisar}
+        identidade={props.identidade}
+      />
+    );
 
   const respostas = LENTES.map((l) => lentes[l].resp).filter(Boolean) as RespostaLente[];
   const custo = respostas.reduce((s, r) => s + r.uso.custoUsd, 0) + (sintese.resp?.uso.custoUsd ?? 0);
@@ -165,7 +263,7 @@ export function Inspetor(props: {
     atual.tipo === "exemplo"
       ? atual.exemplo.tipo
       : atual.tipo === "local"
-        ? new Date(atual.criadoEm).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })
+        ? atual.descricao || new Date(atual.criadoEm).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })
         : "";
 
   const copiarRelatorio = async () => {
@@ -199,8 +297,27 @@ export function Inspetor(props: {
       <div className="border-b border-linha p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <h1 className="truncate text-[16px] font-semibold tracking-tight">{titulo}</h1>
-            {subtitulo && <p className="truncate text-[13px] text-tinta-3">{subtitulo}</p>}
+            {atual.tipo === "local" ? (
+              <>
+                <h1 className="text-[16px] font-semibold tracking-tight">
+                  <CampoEditavel valor={atual.nome} rotulo="Nome da análise" maximo={40} onSalvar={(v) => props.onRenomear("nome", v)} />
+                </h1>
+                <div className="text-[13px] text-tinta-3">
+                  <CampoEditavel
+                    valor={atual.descricao}
+                    rotulo="Descrição da análise"
+                    placeholder="Adicionar descrição"
+                    maximo={60}
+                    onSalvar={(v) => props.onRenomear("descricao", v)}
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <h1 className="truncate text-[16px] font-semibold tracking-tight">{titulo}</h1>
+                {subtitulo && <p className="truncate text-[13px] text-tinta-3">{subtitulo}</p>}
+              </>
+            )}
           </div>
           {terminou && (
             <button type="button" onClick={copiarRelatorio} className={`${BOTAO.secundario} px-2.5 py-1.5 text-[13px]`}>

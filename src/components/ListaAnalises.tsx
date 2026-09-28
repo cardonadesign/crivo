@@ -10,6 +10,7 @@ function Item(props: {
   thumb: string;
   titulo: string;
   sub: string;
+  dica?: string;
   onClick: () => void;
   onRemover?: () => void;
 }) {
@@ -18,6 +19,7 @@ function Item(props: {
       <button
         type="button"
         onClick={props.onClick}
+        title={props.dica}
         aria-current={props.ativo ? "true" : undefined}
         className={`flex w-full items-center gap-3 rounded-controle px-2 py-2 text-left transition-colors ${
           props.ativo ? "bg-superficie-2 text-tinta" : "text-tinta-2 hover:bg-superficie-2 hover:text-tinta"
@@ -72,7 +74,8 @@ export function ListaAnalises(props: {
                 ativo={atual.tipo === "local" && atual.id === a.id}
                 thumb={a.imagem.src}
                 titulo={a.nome}
-                sub={new Date(a.criadoEm).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}
+                sub={a.descricao || new Date(a.criadoEm).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}
+                dica={`Analisada em ${new Date(a.criadoEm).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}`}
                 onClick={() => props.onLocal(a)}
                 onRemover={() => props.onRemover(a.id)}
               />

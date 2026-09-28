@@ -6,6 +6,8 @@ import type { LenteId, RespostaLente, RespostaSintese } from "./schema";
 export type AnaliseLocal = {
   id: string;
   nome: string;
+  /** Tipo de tela e plataforma (gerado pela IA ou editado). Opcional: análises antigas não têm. */
+  descricao?: string;
   criadoEm: string;
   contexto: string;
   imagem: { src: string; largura: number; altura: number };
